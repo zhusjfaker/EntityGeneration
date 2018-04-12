@@ -21,6 +21,60 @@ fun GetListAll():ArrayList<app_act_cms_data_favorite_dto>
         
 
 
+@Results(
+   Result(property = "ID", column = "ID"),
+   Result(property = "DATAID", column = "DATAID"),
+   Result(property = "CREATEUSER", column = "CREATEUSER"),
+   Result(property = "CREATETIME", column = "CREATETIME")
+)
+@Select("""<script>
+   SELECT * FROM app_act_cms_data_favorite
+   <where>
+   <if test="ID!=null">
+      ID=#{ID}
+   </if> 
+   <if test="DATAID!=null">
+      DATAID=#{DATAID}
+   </if> 
+   <if test="CREATEUSER!=null">
+      CREATEUSER=#{CREATEUSER}
+   </if> 
+   <if test="CREATETIME!=null">
+      CREATETIME=#{CREATETIME}
+   </if> 
+   </where>
+</script>""")
+fun ConditionalQuery(model:app_act_cms_data_favorite_dto):ArrayList<app_act_cms_data_favorite_dto>
+                
+
+
+@Results(
+   Result(property = "ID", column = "ID"),
+   Result(property = "DATAID", column = "DATAID"),
+   Result(property = "CREATEUSER", column = "CREATEUSER"),
+   Result(property = "CREATETIME", column = "CREATETIME")
+)
+@Select("""<script>
+   SELECT * FROM app_act_cms_data_favorite
+   <where>
+   <if test="ID!=null">
+      ID=#{ID}
+   </if> 
+   </where>
+</script>""")
+fun ConditionalQueryByKey(model:app_act_cms_data_favorite_dto):app_act_cms_data_favorite_dto?
+                
+
+
+@Insert("""<script>
+    insert into TStudent
+    (ID,DATAID,CREATEUSER,CREATETIME)
+    values
+    (#{ID},#{DATAID},#{CREATEUSER},#{CREATETIME})
+</script>""")
+fun insert(model:app_act_cms_data_favorite_dto):Unit
+                
+
 }
 
         

@@ -142,6 +142,11 @@ interface ${it.table_name}{
 
 ${DataManipulation.GetListALLContent(it)}
 
+${DataManipulation.ConditionalQueryContent(it)}
+
+${if (!IsHasPrimarykey(it)) "" else DataManipulation.ConditionalQueryByKey(it)}
+
+${DataManipulation.insertContent(it)}
 
 }
 
@@ -241,4 +246,13 @@ fun TypeConvert(typelens: String): String {
 
 }
 
+
+fun IsHasPrimarykey(table: TableEntity): Boolean {
+    table.ColumnList?.forEach {
+        if (it.COLUMN_KEY?.trim() == "PRI") {
+            return true;
+        }
+    }
+    return false
+}
 

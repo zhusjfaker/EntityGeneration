@@ -28,6 +28,95 @@ fun GetListAll():ArrayList<app_act_pat_todo_dto>
         
 
 
+@Results(
+   Result(property = "ID", column = "ID"),
+   Result(property = "TODONAME", column = "TODONAME"),
+   Result(property = "TESTCASEID", column = "TESTCASEID"),
+   Result(property = "BATCHPLANID", column = "BATCHPLANID"),
+   Result(property = "PLANID", column = "PLANID"),
+   Result(property = "PLANPATHID", column = "PLANPATHID"),
+   Result(property = "STYLE", column = "STYLE"),
+   Result(property = "CREATEUSER", column = "CREATEUSER"),
+   Result(property = "CREATETIME", column = "CREATETIME"),
+   Result(property = "STATUS", column = "STATUS"),
+   Result(property = "PROCESSDEFID", column = "PROCESSDEFID")
+)
+@Select("""<script>
+   SELECT * FROM app_act_pat_todo
+   <where>
+   <if test="ID!=null">
+      ID=#{ID}
+   </if> 
+   <if test="TODONAME!=null">
+      TODONAME=#{TODONAME}
+   </if> 
+   <if test="TESTCASEID!=null">
+      TESTCASEID=#{TESTCASEID}
+   </if> 
+   <if test="BATCHPLANID!=null">
+      BATCHPLANID=#{BATCHPLANID}
+   </if> 
+   <if test="PLANID!=null">
+      PLANID=#{PLANID}
+   </if> 
+   <if test="PLANPATHID!=null">
+      PLANPATHID=#{PLANPATHID}
+   </if> 
+   <if test="STYLE!=null">
+      STYLE=#{STYLE}
+   </if> 
+   <if test="CREATEUSER!=null">
+      CREATEUSER=#{CREATEUSER}
+   </if> 
+   <if test="CREATETIME!=null">
+      CREATETIME=#{CREATETIME}
+   </if> 
+   <if test="STATUS!=null">
+      STATUS=#{STATUS}
+   </if> 
+   <if test="PROCESSDEFID!=null">
+      PROCESSDEFID=#{PROCESSDEFID}
+   </if> 
+   </where>
+</script>""")
+fun ConditionalQuery(model:app_act_pat_todo_dto):ArrayList<app_act_pat_todo_dto>
+                
+
+
+@Results(
+   Result(property = "ID", column = "ID"),
+   Result(property = "TODONAME", column = "TODONAME"),
+   Result(property = "TESTCASEID", column = "TESTCASEID"),
+   Result(property = "BATCHPLANID", column = "BATCHPLANID"),
+   Result(property = "PLANID", column = "PLANID"),
+   Result(property = "PLANPATHID", column = "PLANPATHID"),
+   Result(property = "STYLE", column = "STYLE"),
+   Result(property = "CREATEUSER", column = "CREATEUSER"),
+   Result(property = "CREATETIME", column = "CREATETIME"),
+   Result(property = "STATUS", column = "STATUS"),
+   Result(property = "PROCESSDEFID", column = "PROCESSDEFID")
+)
+@Select("""<script>
+   SELECT * FROM app_act_pat_todo
+   <where>
+   <if test="ID!=null">
+      ID=#{ID}
+   </if> 
+   </where>
+</script>""")
+fun ConditionalQueryByKey(model:app_act_pat_todo_dto):app_act_pat_todo_dto?
+                
+
+
+@Insert("""<script>
+    insert into TStudent
+    (ID,TODONAME,TESTCASEID,BATCHPLANID,PLANID,PLANPATHID,STYLE,CREATEUSER,CREATETIME,STATUS,PROCESSDEFID)
+    values
+    (#{ID},#{TODONAME},#{TESTCASEID},#{BATCHPLANID},#{PLANID},#{PLANPATHID},#{STYLE},#{CREATEUSER},#{CREATETIME},#{STATUS},#{PROCESSDEFID})
+</script>""")
+fun insert(model:app_act_pat_todo_dto):Unit
+                
+
 }
 
         

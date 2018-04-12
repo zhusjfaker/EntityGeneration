@@ -32,6 +32,115 @@ fun GetListAll():ArrayList<sys_nav_directory_dto>
         
 
 
+@Results(
+   Result(property = "ID", column = "ID"),
+   Result(property = "SYSTEMID", column = "SYSTEMID"),
+   Result(property = "DIRECTORYNAME", column = "DIRECTORYNAME"),
+   Result(property = "ORDERINDEX", column = "ORDERINDEX"),
+   Result(property = "LINKURL", column = "LINKURL"),
+   Result(property = "LINKTARGET", column = "LINKTARGET"),
+   Result(property = "ICON16", column = "ICON16"),
+   Result(property = "ICON64", column = "ICON64"),
+   Result(property = "ICON96", column = "ICON96"),
+   Result(property = "NAVDESC", column = "NAVDESC"),
+   Result(property = "APPID", column = "APPID"),
+   Result(property = "ISACTIVITY", column = "ISACTIVITY"),
+   Result(property = "NOTIFIER", column = "NOTIFIER"),
+   Result(property = "EXT1", column = "EXT1"),
+   Result(property = "EXT2", column = "EXT2")
+)
+@Select("""<script>
+   SELECT * FROM sys_nav_directory
+   <where>
+   <if test="ID!=null">
+      ID=#{ID}
+   </if> 
+   <if test="SYSTEMID!=null">
+      SYSTEMID=#{SYSTEMID}
+   </if> 
+   <if test="DIRECTORYNAME!=null">
+      DIRECTORYNAME=#{DIRECTORYNAME}
+   </if> 
+   <if test="ORDERINDEX!=null">
+      ORDERINDEX=#{ORDERINDEX}
+   </if> 
+   <if test="LINKURL!=null">
+      LINKURL=#{LINKURL}
+   </if> 
+   <if test="LINKTARGET!=null">
+      LINKTARGET=#{LINKTARGET}
+   </if> 
+   <if test="ICON16!=null">
+      ICON16=#{ICON16}
+   </if> 
+   <if test="ICON64!=null">
+      ICON64=#{ICON64}
+   </if> 
+   <if test="ICON96!=null">
+      ICON96=#{ICON96}
+   </if> 
+   <if test="NAVDESC!=null">
+      NAVDESC=#{NAVDESC}
+   </if> 
+   <if test="APPID!=null">
+      APPID=#{APPID}
+   </if> 
+   <if test="ISACTIVITY!=null">
+      ISACTIVITY=#{ISACTIVITY}
+   </if> 
+   <if test="NOTIFIER!=null">
+      NOTIFIER=#{NOTIFIER}
+   </if> 
+   <if test="EXT1!=null">
+      EXT1=#{EXT1}
+   </if> 
+   <if test="EXT2!=null">
+      EXT2=#{EXT2}
+   </if> 
+   </where>
+</script>""")
+fun ConditionalQuery(model:sys_nav_directory_dto):ArrayList<sys_nav_directory_dto>
+                
+
+
+@Results(
+   Result(property = "ID", column = "ID"),
+   Result(property = "SYSTEMID", column = "SYSTEMID"),
+   Result(property = "DIRECTORYNAME", column = "DIRECTORYNAME"),
+   Result(property = "ORDERINDEX", column = "ORDERINDEX"),
+   Result(property = "LINKURL", column = "LINKURL"),
+   Result(property = "LINKTARGET", column = "LINKTARGET"),
+   Result(property = "ICON16", column = "ICON16"),
+   Result(property = "ICON64", column = "ICON64"),
+   Result(property = "ICON96", column = "ICON96"),
+   Result(property = "NAVDESC", column = "NAVDESC"),
+   Result(property = "APPID", column = "APPID"),
+   Result(property = "ISACTIVITY", column = "ISACTIVITY"),
+   Result(property = "NOTIFIER", column = "NOTIFIER"),
+   Result(property = "EXT1", column = "EXT1"),
+   Result(property = "EXT2", column = "EXT2")
+)
+@Select("""<script>
+   SELECT * FROM sys_nav_directory
+   <where>
+   <if test="ID!=null">
+      ID=#{ID}
+   </if> 
+   </where>
+</script>""")
+fun ConditionalQueryByKey(model:sys_nav_directory_dto):sys_nav_directory_dto?
+                
+
+
+@Insert("""<script>
+    insert into TStudent
+    (ID,SYSTEMID,DIRECTORYNAME,ORDERINDEX,LINKURL,LINKTARGET,ICON16,ICON64,ICON96,NAVDESC,APPID,ISACTIVITY,NOTIFIER,EXT1,EXT2)
+    values
+    (#{ID},#{SYSTEMID},#{DIRECTORYNAME},#{ORDERINDEX},#{LINKURL},#{LINKTARGET},#{ICON16},#{ICON64},#{ICON96},#{NAVDESC},#{APPID},#{ISACTIVITY},#{NOTIFIER},#{EXT1},#{EXT2})
+</script>""")
+fun insert(model:sys_nav_directory_dto):Unit
+                
+
 }
 
         
