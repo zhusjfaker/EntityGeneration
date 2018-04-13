@@ -10,18 +10,38 @@ open class CoreLoader {
 
     companion object {
 
-        fun GenerateFile(path: String, list: ArrayList<TableEntity>, packagename: String): Unit {
+        fun GenerateFile(
+                projectpath: String,
+                driver: String,
+                databasename: String,
+                url: String,
+                username: String,
+                password: String,
+                packagename: String
+        ): Unit {
+
+            /* 获取数据库 oop描述 */
+            var factory = EntiyFactory.factory
+            var session = factory!!.openSession(true)
+            var table_excute = session.getMapper(Table::class.java)
+
+            var list = table_excute.GetAllTable(databasename)
+            list.forEach {
+                val col_list = table_excute.GetColumns(it.table_name, databasename)
+                it.ColumnList = col_list
+            }
+
             /* 初始化文件夹内容 */
-            deleteFoldFiles(path)
+            deleteFoldFiles(projectpath)
             /* 生成实体类 */
-            createEntityFile(path, list, packagename)
+            createEntityFile(projectpath, list, packagename)
             /* 生成数据扩展类 */
 
             /* 生成工厂类 */
-            createFactoryFile(path, packagename)
+            createFactoryFile(projectpath, packagename)
 
             /* 创建mapper repository */
-            createMapperFile(path, list, packagename)
+            createMapperFile(projectpath, list, packagename)
         }
 
         /*
