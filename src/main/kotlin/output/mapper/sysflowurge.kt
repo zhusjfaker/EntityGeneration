@@ -91,12 +91,67 @@ fun ConditionalQueryByKey(model:sysflowurge_dto):sysflowurge_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sysflowurge
     (ID,BIND_ID,STEP_NO,STEP_TONO,URGE_CONTENT,ARCHIVES,ISDISPLAY,FLOW_ID)
     values
     (#{ID},#{BIND_ID},#{STEP_NO},#{STEP_TONO},#{URGE_CONTENT},#{ARCHIVES},#{ISDISPLAY},#{FLOW_ID})
 </script>""")
-fun insert(model:sysflowurge_dto):Unit
+fun Insert(model:sysflowurge_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sysflowurge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='BIND_ID!= null'> 
+           BIND_ID,
+        </if>
+        <if test='STEP_NO!= null'> 
+           STEP_NO,
+        </if>
+        <if test='STEP_TONO!= null'> 
+           STEP_TONO,
+        </if>
+        <if test='URGE_CONTENT!= null'> 
+           URGE_CONTENT,
+        </if>
+        <if test='ARCHIVES!= null'> 
+           ARCHIVES,
+        </if>
+        <if test='ISDISPLAY!= null'> 
+           ISDISPLAY,
+        </if>
+        <if test='FLOW_ID!= null'> 
+           FLOW_ID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=decimal}，
+        <if test='BIND_ID!= null'> 
+           #{BIND_ID,jdbcType=decimal}，
+        </if>
+        <if test='STEP_NO!= null'> 
+           #{STEP_NO,jdbcType=decimal}，
+        </if>
+        <if test='STEP_TONO!= null'> 
+           #{STEP_TONO,jdbcType=decimal}，
+        </if>
+        <if test='URGE_CONTENT!= null'> 
+           #{URGE_CONTENT,jdbcType=text}，
+        </if>
+        <if test='ARCHIVES!= null'> 
+           #{ARCHIVES,jdbcType=text}，
+        </if>
+        <if test='ISDISPLAY!= null'> 
+           #{ISDISPLAY,jdbcType=decimal}，
+        </if>
+        <if test='FLOW_ID!= null'> 
+           #{FLOW_ID,jdbcType=decimal}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sysflowurge_dto):Unit
                 
 
 }

@@ -91,12 +91,67 @@ fun ConditionalQueryByKey(model:sys_coe_pal_usergroup_dto):sys_coe_pal_usergroup
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_usergroup
     (ID,WSID,GROUPCODE,CATEGORY,GROUPNAME,GROUPDESC,CREATEUSER,CREATEDATE)
     values
     (#{ID},#{WSID},#{GROUPCODE},#{CATEGORY},#{GROUPNAME},#{GROUPDESC},#{CREATEUSER},#{CREATEDATE})
 </script>""")
-fun insert(model:sys_coe_pal_usergroup_dto):Unit
+fun Insert(model:sys_coe_pal_usergroup_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_usergroup
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='WSID!= null'> 
+           WSID,
+        </if>
+        <if test='GROUPCODE!= null'> 
+           GROUPCODE,
+        </if>
+        <if test='CATEGORY!= null'> 
+           CATEGORY,
+        </if>
+        <if test='GROUPNAME!= null'> 
+           GROUPNAME,
+        </if>
+        <if test='GROUPDESC!= null'> 
+           GROUPDESC,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='WSID!= null'> 
+           #{WSID,jdbcType=char}，
+        </if>
+        <if test='GROUPCODE!= null'> 
+           #{GROUPCODE,jdbcType=varchar}，
+        </if>
+        <if test='CATEGORY!= null'> 
+           #{CATEGORY,jdbcType=varchar}，
+        </if>
+        <if test='GROUPNAME!= null'> 
+           #{GROUPNAME,jdbcType=varchar}，
+        </if>
+        <if test='GROUPDESC!= null'> 
+           #{GROUPDESC,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_usergroup_dto):Unit
                 
 
 }

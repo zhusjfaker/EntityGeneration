@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:sys_coe_pal_property_dto):sys_coe_pal_property_d
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_property
     (ID,PLID,PROPERTYID,PROPERTYNAME,PROPERTYVALUE,ORDERINDEX)
     values
     (#{ID},#{PLID},#{PROPERTYID},#{PROPERTYNAME},#{PROPERTYVALUE},#{ORDERINDEX})
 </script>""")
-fun insert(model:sys_coe_pal_property_dto):Unit
+fun Insert(model:sys_coe_pal_property_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_property
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PLID!= null'> 
+           PLID,
+        </if>
+        <if test='PROPERTYID!= null'> 
+           PROPERTYID,
+        </if>
+        <if test='PROPERTYNAME!= null'> 
+           PROPERTYNAME,
+        </if>
+        <if test='PROPERTYVALUE!= null'> 
+           PROPERTYVALUE,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PLID!= null'> 
+           #{PLID,jdbcType=char}，
+        </if>
+        <if test='PROPERTYID!= null'> 
+           #{PROPERTYID,jdbcType=varchar}，
+        </if>
+        <if test='PROPERTYNAME!= null'> 
+           #{PROPERTYNAME,jdbcType=varchar}，
+        </if>
+        <if test='PROPERTYVALUE!= null'> 
+           #{PROPERTYVALUE,jdbcType=text}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_property_dto):Unit
                 
 
 }

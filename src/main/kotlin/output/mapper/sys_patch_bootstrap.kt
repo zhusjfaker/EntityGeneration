@@ -103,12 +103,79 @@ fun ConditionalQueryByKey(model:sys_patch_bootstrap_dto):sys_patch_bootstrap_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_patch_bootstrap
     (ID,CLASSNAME,PATCHNAME,PATCHDESC,PATCHDATE,BEGINTIME,ENDTIME,PATCHSTATE,ERRLOG,INSTNAME)
     values
     (#{ID},#{CLASSNAME},#{PATCHNAME},#{PATCHDESC},#{PATCHDATE},#{BEGINTIME},#{ENDTIME},#{PATCHSTATE},#{ERRLOG},#{INSTNAME})
 </script>""")
-fun insert(model:sys_patch_bootstrap_dto):Unit
+fun Insert(model:sys_patch_bootstrap_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_patch_bootstrap
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='CLASSNAME!= null'> 
+           CLASSNAME,
+        </if>
+        <if test='PATCHNAME!= null'> 
+           PATCHNAME,
+        </if>
+        <if test='PATCHDESC!= null'> 
+           PATCHDESC,
+        </if>
+        <if test='PATCHDATE!= null'> 
+           PATCHDATE,
+        </if>
+        <if test='BEGINTIME!= null'> 
+           BEGINTIME,
+        </if>
+        <if test='ENDTIME!= null'> 
+           ENDTIME,
+        </if>
+        <if test='PATCHSTATE!= null'> 
+           PATCHSTATE,
+        </if>
+        <if test='ERRLOG!= null'> 
+           ERRLOG,
+        </if>
+        <if test='INSTNAME!= null'> 
+           INSTNAME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='CLASSNAME!= null'> 
+           #{CLASSNAME,jdbcType=varchar}，
+        </if>
+        <if test='PATCHNAME!= null'> 
+           #{PATCHNAME,jdbcType=varchar}，
+        </if>
+        <if test='PATCHDESC!= null'> 
+           #{PATCHDESC,jdbcType=varchar}，
+        </if>
+        <if test='PATCHDATE!= null'> 
+           #{PATCHDATE,jdbcType=varchar}，
+        </if>
+        <if test='BEGINTIME!= null'> 
+           #{BEGINTIME,jdbcType=datetime}，
+        </if>
+        <if test='ENDTIME!= null'> 
+           #{ENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='PATCHSTATE!= null'> 
+           #{PATCHSTATE,jdbcType=smallint}，
+        </if>
+        <if test='ERRLOG!= null'> 
+           #{ERRLOG,jdbcType=text}，
+        </if>
+        <if test='INSTNAME!= null'> 
+           #{INSTNAME,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_patch_bootstrap_dto):Unit
                 
 
 }

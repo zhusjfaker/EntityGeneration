@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:app_act_iweboffice_tem_dto):app_act_iweboffice_t
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_iweboffice_tem
     (ID,TYPEID,TEMPLATENAME,CREATEUSER,CREATETIME,ISPAUSE)
     values
     (#{ID},#{TYPEID},#{TEMPLATENAME},#{CREATEUSER},#{CREATETIME},#{ISPAUSE})
 </script>""")
-fun insert(model:app_act_iweboffice_tem_dto):Unit
+fun Insert(model:app_act_iweboffice_tem_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_iweboffice_tem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TYPEID!= null'> 
+           TYPEID,
+        </if>
+        <if test='TEMPLATENAME!= null'> 
+           TEMPLATENAME,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='ISPAUSE!= null'> 
+           ISPAUSE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='TYPEID!= null'> 
+           #{TYPEID,jdbcType=varchar}，
+        </if>
+        <if test='TEMPLATENAME!= null'> 
+           #{TEMPLATENAME,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='ISPAUSE!= null'> 
+           #{ISPAUSE,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_iweboffice_tem_dto):Unit
                 
 
 }

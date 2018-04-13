@@ -109,12 +109,85 @@ fun ConditionalQueryByKey(model:sys_coe_pal_publish_dto):sys_coe_pal_publish_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_publish
     (ID,PROCESSINSTID,WSID,USERID,AUDITORID,PUBLISHDATE,PUBLISHDESC,PUBLISHN,PUBLISHC,PUBLISHS,TEAMID)
     values
     (#{ID},#{PROCESSINSTID},#{WSID},#{USERID},#{AUDITORID},#{PUBLISHDATE},#{PUBLISHDESC},#{PUBLISHN},#{PUBLISHC},#{PUBLISHS},#{TEAMID})
 </script>""")
-fun insert(model:sys_coe_pal_publish_dto):Unit
+fun Insert(model:sys_coe_pal_publish_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_publish
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='WSID!= null'> 
+           WSID,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='AUDITORID!= null'> 
+           AUDITORID,
+        </if>
+        <if test='PUBLISHDATE!= null'> 
+           PUBLISHDATE,
+        </if>
+        <if test='PUBLISHDESC!= null'> 
+           PUBLISHDESC,
+        </if>
+        <if test='PUBLISHN!= null'> 
+           PUBLISHN,
+        </if>
+        <if test='PUBLISHC!= null'> 
+           PUBLISHC,
+        </if>
+        <if test='PUBLISHS!= null'> 
+           PUBLISHS,
+        </if>
+        <if test='TEAMID!= null'> 
+           TEAMID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=varchar}，
+        </if>
+        <if test='WSID!= null'> 
+           #{WSID,jdbcType=char}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='AUDITORID!= null'> 
+           #{AUDITORID,jdbcType=varchar}，
+        </if>
+        <if test='PUBLISHDATE!= null'> 
+           #{PUBLISHDATE,jdbcType=datetime}，
+        </if>
+        <if test='PUBLISHDESC!= null'> 
+           #{PUBLISHDESC,jdbcType=text}，
+        </if>
+        <if test='PUBLISHN!= null'> 
+           #{PUBLISHN,jdbcType=decimal}，
+        </if>
+        <if test='PUBLISHC!= null'> 
+           #{PUBLISHC,jdbcType=decimal}，
+        </if>
+        <if test='PUBLISHS!= null'> 
+           #{PUBLISHS,jdbcType=decimal}，
+        </if>
+        <if test='TEAMID!= null'> 
+           #{TEAMID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_publish_dto):Unit
                 
 
 }

@@ -241,12 +241,205 @@ fun ConditionalQueryByKey(model:orguser_bk_dto):orguser_bk_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into orguser_bk
     (ID,USERNO,USERID,USERNAME,ORDERINDEX,PASSWORD,CLOSED,DEPARTMENTID,ROLEID,ISMANAGER,WORKCANLENDAR,POSITION_NO,POSITION_NAME,POSITION_LAYER,OFFICETEL,OFFICEFAX,MOBILE,EMAIL,USERIP,ISSINGLELOGIN,WORK_STATUS,SESSIONTIME,OUTERID,WECHAT,EXT1,EXT2,EXT3,EXT4,EXT5,REPORTTO,CLOSEDATE,CREATEDATE,UPDATEDATE)
     values
     (#{ID},#{USERNO},#{USERID},#{USERNAME},#{ORDERINDEX},#{PASSWORD},#{CLOSED},#{DEPARTMENTID},#{ROLEID},#{ISMANAGER},#{WORKCANLENDAR},#{POSITION_NO},#{POSITION_NAME},#{POSITION_LAYER},#{OFFICETEL},#{OFFICEFAX},#{MOBILE},#{EMAIL},#{USERIP},#{ISSINGLELOGIN},#{WORK_STATUS},#{SESSIONTIME},#{OUTERID},#{WECHAT},#{EXT1},#{EXT2},#{EXT3},#{EXT4},#{EXT5},#{REPORTTO},#{CLOSEDATE},#{CREATEDATE},#{UPDATEDATE})
 </script>""")
-fun insert(model:orguser_bk_dto):Unit
+fun Insert(model:orguser_bk_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into orguser_bk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='USERNO!= null'> 
+           USERNO,
+        </if>
+           USERID,
+        <if test='USERNAME!= null'> 
+           USERNAME,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX,
+        </if>
+           PASSWORD,
+           CLOSED,
+        <if test='DEPARTMENTID!= null'> 
+           DEPARTMENTID,
+        </if>
+        <if test='ROLEID!= null'> 
+           ROLEID,
+        </if>
+        <if test='ISMANAGER!= null'> 
+           ISMANAGER,
+        </if>
+        <if test='WORKCANLENDAR!= null'> 
+           WORKCANLENDAR,
+        </if>
+        <if test='POSITION_NO!= null'> 
+           POSITION_NO,
+        </if>
+        <if test='POSITION_NAME!= null'> 
+           POSITION_NAME,
+        </if>
+        <if test='POSITION_LAYER!= null'> 
+           POSITION_LAYER,
+        </if>
+        <if test='OFFICETEL!= null'> 
+           OFFICETEL,
+        </if>
+        <if test='OFFICEFAX!= null'> 
+           OFFICEFAX,
+        </if>
+        <if test='MOBILE!= null'> 
+           MOBILE,
+        </if>
+        <if test='EMAIL!= null'> 
+           EMAIL,
+        </if>
+        <if test='USERIP!= null'> 
+           USERIP,
+        </if>
+        <if test='ISSINGLELOGIN!= null'> 
+           ISSINGLELOGIN,
+        </if>
+        <if test='WORK_STATUS!= null'> 
+           WORK_STATUS,
+        </if>
+        <if test='SESSIONTIME!= null'> 
+           SESSIONTIME,
+        </if>
+        <if test='OUTERID!= null'> 
+           OUTERID,
+        </if>
+        <if test='WECHAT!= null'> 
+           WECHAT,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5,
+        </if>
+        <if test='REPORTTO!= null'> 
+           REPORTTO,
+        </if>
+        <if test='CLOSEDATE!= null'> 
+           CLOSEDATE,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='USERNO!= null'> 
+           #{USERNO,jdbcType=varchar}，
+        </if>
+           #{USERID,jdbcType=varchar}，
+        <if test='USERNAME!= null'> 
+           #{USERNAME,jdbcType=varchar}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=decimal}，
+        </if>
+           #{PASSWORD,jdbcType=varchar}，
+           #{CLOSED,jdbcType=smallint}，
+        <if test='DEPARTMENTID!= null'> 
+           #{DEPARTMENTID,jdbcType=varchar}，
+        </if>
+        <if test='ROLEID!= null'> 
+           #{ROLEID,jdbcType=varchar}，
+        </if>
+        <if test='ISMANAGER!= null'> 
+           #{ISMANAGER,jdbcType=smallint}，
+        </if>
+        <if test='WORKCANLENDAR!= null'> 
+           #{WORKCANLENDAR,jdbcType=varchar}，
+        </if>
+        <if test='POSITION_NO!= null'> 
+           #{POSITION_NO,jdbcType=varchar}，
+        </if>
+        <if test='POSITION_NAME!= null'> 
+           #{POSITION_NAME,jdbcType=varchar}，
+        </if>
+        <if test='POSITION_LAYER!= null'> 
+           #{POSITION_LAYER,jdbcType=varchar}，
+        </if>
+        <if test='OFFICETEL!= null'> 
+           #{OFFICETEL,jdbcType=varchar}，
+        </if>
+        <if test='OFFICEFAX!= null'> 
+           #{OFFICEFAX,jdbcType=varchar}，
+        </if>
+        <if test='MOBILE!= null'> 
+           #{MOBILE,jdbcType=varchar}，
+        </if>
+        <if test='EMAIL!= null'> 
+           #{EMAIL,jdbcType=varchar}，
+        </if>
+        <if test='USERIP!= null'> 
+           #{USERIP,jdbcType=varchar}，
+        </if>
+        <if test='ISSINGLELOGIN!= null'> 
+           #{ISSINGLELOGIN,jdbcType=smallint}，
+        </if>
+        <if test='WORK_STATUS!= null'> 
+           #{WORK_STATUS,jdbcType=varchar}，
+        </if>
+        <if test='SESSIONTIME!= null'> 
+           #{SESSIONTIME,jdbcType=decimal}，
+        </if>
+        <if test='OUTERID!= null'> 
+           #{OUTERID,jdbcType=text}，
+        </if>
+        <if test='WECHAT!= null'> 
+           #{WECHAT,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=varchar}，
+        </if>
+        <if test='REPORTTO!= null'> 
+           #{REPORTTO,jdbcType=varchar}，
+        </if>
+        <if test='CLOSEDATE!= null'> 
+           #{CLOSEDATE,jdbcType=datetime}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=datetime}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:orguser_bk_dto):Unit
                 
 
 }

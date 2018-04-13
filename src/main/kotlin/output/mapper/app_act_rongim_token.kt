@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:app_act_rongim_token_dto):app_act_rongim_token_d
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_rongim_token
     (ID,TOKEN,CREATETIME)
     values
     (#{ID},#{TOKEN},#{CREATETIME})
 </script>""")
-fun insert(model:app_act_rongim_token_dto):Unit
+fun Insert(model:app_act_rongim_token_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_rongim_token
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TOKEN!= null'> 
+           TOKEN,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='TOKEN!= null'> 
+           #{TOKEN,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_rongim_token_dto):Unit
                 
 
 }

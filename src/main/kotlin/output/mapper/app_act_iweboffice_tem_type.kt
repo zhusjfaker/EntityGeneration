@@ -73,12 +73,49 @@ fun ConditionalQueryByKey(model:app_act_iweboffice_tem_type_dto):app_act_iweboff
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_iweboffice_tem_type
     (ID,TYPENAME,TYPEDESC,POSTFIX,ISPAUSE)
     values
     (#{ID},#{TYPENAME},#{TYPEDESC},#{POSTFIX},#{ISPAUSE})
 </script>""")
-fun insert(model:app_act_iweboffice_tem_type_dto):Unit
+fun Insert(model:app_act_iweboffice_tem_type_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_iweboffice_tem_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TYPENAME!= null'> 
+           TYPENAME,
+        </if>
+        <if test='TYPEDESC!= null'> 
+           TYPEDESC,
+        </if>
+        <if test='POSTFIX!= null'> 
+           POSTFIX,
+        </if>
+        <if test='ISPAUSE!= null'> 
+           ISPAUSE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='TYPENAME!= null'> 
+           #{TYPENAME,jdbcType=varchar}，
+        </if>
+        <if test='TYPEDESC!= null'> 
+           #{TYPEDESC,jdbcType=varchar}，
+        </if>
+        <if test='POSTFIX!= null'> 
+           #{POSTFIX,jdbcType=varchar}，
+        </if>
+        <if test='ISPAUSE!= null'> 
+           #{ISPAUSE,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_iweboffice_tem_type_dto):Unit
                 
 
 }

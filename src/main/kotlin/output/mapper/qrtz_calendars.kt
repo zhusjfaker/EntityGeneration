@@ -61,12 +61,29 @@ fun ConditionalQueryByKey(model:qrtz_calendars_dto):qrtz_calendars_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_calendars
     (SCHED_NAME,CALENDAR_NAME,CALENDAR)
     values
     (#{SCHED_NAME},#{CALENDAR_NAME},#{CALENDAR})
 </script>""")
-fun insert(model:qrtz_calendars_dto):Unit
+fun Insert(model:qrtz_calendars_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_calendars
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           CALENDAR_NAME,
+           CALENDAR
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{CALENDAR_NAME,jdbcType=varchar}，
+           #{CALENDAR,jdbcType=blob}
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_calendars_dto):Unit
                 
 
 }

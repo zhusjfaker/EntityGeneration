@@ -199,12 +199,171 @@ fun ConditionalQueryByKey(model:bo_act_fin_fee_hk_apply_dto):bo_act_fin_fee_hk_a
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_act_fin_fee_hk_apply
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,HKNO,STATUS,PAYDATE,APPLYDATE,JKNO,JKAMOUNT,JKBALANCE,APPLYUID,APPLYUSER,APPLYDEPTID,APPLYDEPT,PAYTYPE,AMOUNT,AMOUNTBIG,MEMO,CURRENCY,RATE)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{HKNO},#{STATUS},#{PAYDATE},#{APPLYDATE},#{JKNO},#{JKAMOUNT},#{JKBALANCE},#{APPLYUID},#{APPLYUSER},#{APPLYDEPTID},#{APPLYDEPT},#{PAYTYPE},#{AMOUNT},#{AMOUNTBIG},#{MEMO},#{CURRENCY},#{RATE})
 </script>""")
-fun insert(model:bo_act_fin_fee_hk_apply_dto):Unit
+fun Insert(model:bo_act_fin_fee_hk_apply_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_act_fin_fee_hk_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='HKNO!= null'> 
+           HKNO,
+        </if>
+        <if test='STATUS!= null'> 
+           STATUS,
+        </if>
+        <if test='PAYDATE!= null'> 
+           PAYDATE,
+        </if>
+        <if test='APPLYDATE!= null'> 
+           APPLYDATE,
+        </if>
+        <if test='JKNO!= null'> 
+           JKNO,
+        </if>
+        <if test='JKAMOUNT!= null'> 
+           JKAMOUNT,
+        </if>
+        <if test='JKBALANCE!= null'> 
+           JKBALANCE,
+        </if>
+        <if test='APPLYUID!= null'> 
+           APPLYUID,
+        </if>
+        <if test='APPLYUSER!= null'> 
+           APPLYUSER,
+        </if>
+        <if test='APPLYDEPTID!= null'> 
+           APPLYDEPTID,
+        </if>
+        <if test='APPLYDEPT!= null'> 
+           APPLYDEPT,
+        </if>
+        <if test='PAYTYPE!= null'> 
+           PAYTYPE,
+        </if>
+        <if test='AMOUNT!= null'> 
+           AMOUNT,
+        </if>
+        <if test='AMOUNTBIG!= null'> 
+           AMOUNTBIG,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO,
+        </if>
+        <if test='CURRENCY!= null'> 
+           CURRENCY,
+        </if>
+        <if test='RATE!= null'> 
+           RATE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='HKNO!= null'> 
+           #{HKNO,jdbcType=varchar}，
+        </if>
+        <if test='STATUS!= null'> 
+           #{STATUS,jdbcType=decimal}，
+        </if>
+        <if test='PAYDATE!= null'> 
+           #{PAYDATE,jdbcType=datetime}，
+        </if>
+        <if test='APPLYDATE!= null'> 
+           #{APPLYDATE,jdbcType=datetime}，
+        </if>
+        <if test='JKNO!= null'> 
+           #{JKNO,jdbcType=varchar}，
+        </if>
+        <if test='JKAMOUNT!= null'> 
+           #{JKAMOUNT,jdbcType=decimal}，
+        </if>
+        <if test='JKBALANCE!= null'> 
+           #{JKBALANCE,jdbcType=decimal}，
+        </if>
+        <if test='APPLYUID!= null'> 
+           #{APPLYUID,jdbcType=varchar}，
+        </if>
+        <if test='APPLYUSER!= null'> 
+           #{APPLYUSER,jdbcType=varchar}，
+        </if>
+        <if test='APPLYDEPTID!= null'> 
+           #{APPLYDEPTID,jdbcType=varchar}，
+        </if>
+        <if test='APPLYDEPT!= null'> 
+           #{APPLYDEPT,jdbcType=varchar}，
+        </if>
+        <if test='PAYTYPE!= null'> 
+           #{PAYTYPE,jdbcType=varchar}，
+        </if>
+        <if test='AMOUNT!= null'> 
+           #{AMOUNT,jdbcType=decimal}，
+        </if>
+        <if test='AMOUNTBIG!= null'> 
+           #{AMOUNTBIG,jdbcType=varchar}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=text}，
+        </if>
+        <if test='CURRENCY!= null'> 
+           #{CURRENCY,jdbcType=varchar}，
+        </if>
+        <if test='RATE!= null'> 
+           #{RATE,jdbcType=decimal}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_act_fin_fee_hk_apply_dto):Unit
                 
 
 }

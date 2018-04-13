@@ -91,12 +91,67 @@ fun ConditionalQueryByKey(model:app_act_pat_report_dto):app_act_pat_report_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_pat_report
     (ID,REPORTNAME,TESTCASEID,BATCHPLANID,CREATEUSER,CREATETIME,DCINFO,PROCESSDEFID)
     values
     (#{ID},#{REPORTNAME},#{TESTCASEID},#{BATCHPLANID},#{CREATEUSER},#{CREATETIME},#{DCINFO},#{PROCESSDEFID})
 </script>""")
-fun insert(model:app_act_pat_report_dto):Unit
+fun Insert(model:app_act_pat_report_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_pat_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='REPORTNAME!= null'> 
+           REPORTNAME,
+        </if>
+        <if test='TESTCASEID!= null'> 
+           TESTCASEID,
+        </if>
+        <if test='BATCHPLANID!= null'> 
+           BATCHPLANID,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='DCINFO!= null'> 
+           DCINFO,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='REPORTNAME!= null'> 
+           #{REPORTNAME,jdbcType=varchar}，
+        </if>
+        <if test='TESTCASEID!= null'> 
+           #{TESTCASEID,jdbcType=char}，
+        </if>
+        <if test='BATCHPLANID!= null'> 
+           #{BATCHPLANID,jdbcType=char}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='DCINFO!= null'> 
+           #{DCINFO,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_pat_report_dto):Unit
                 
 
 }

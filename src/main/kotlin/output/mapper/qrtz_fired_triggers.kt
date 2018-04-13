@@ -121,12 +121,65 @@ fun ConditionalQueryByKey(model:qrtz_fired_triggers_dto):qrtz_fired_triggers_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_fired_triggers
     (SCHED_NAME,ENTRY_ID,TRIGGER_NAME,TRIGGER_GROUP,INSTANCE_NAME,FIRED_TIME,SCHED_TIME,PRIORITY,STATE,JOB_NAME,JOB_GROUP,IS_NONCONCURRENT,REQUESTS_RECOVERY)
     values
     (#{SCHED_NAME},#{ENTRY_ID},#{TRIGGER_NAME},#{TRIGGER_GROUP},#{INSTANCE_NAME},#{FIRED_TIME},#{SCHED_TIME},#{PRIORITY},#{STATE},#{JOB_NAME},#{JOB_GROUP},#{IS_NONCONCURRENT},#{REQUESTS_RECOVERY})
 </script>""")
-fun insert(model:qrtz_fired_triggers_dto):Unit
+fun Insert(model:qrtz_fired_triggers_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_fired_triggers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           ENTRY_ID,
+           TRIGGER_NAME,
+           TRIGGER_GROUP,
+           INSTANCE_NAME,
+           FIRED_TIME,
+           SCHED_TIME,
+           PRIORITY,
+           STATE,
+        <if test='JOB_NAME!= null'> 
+           JOB_NAME,
+        </if>
+        <if test='JOB_GROUP!= null'> 
+           JOB_GROUP,
+        </if>
+        <if test='IS_NONCONCURRENT!= null'> 
+           IS_NONCONCURRENT,
+        </if>
+        <if test='REQUESTS_RECOVERY!= null'> 
+           REQUESTS_RECOVERY
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{ENTRY_ID,jdbcType=varchar}，
+           #{TRIGGER_NAME,jdbcType=varchar}，
+           #{TRIGGER_GROUP,jdbcType=varchar}，
+           #{INSTANCE_NAME,jdbcType=varchar}，
+           #{FIRED_TIME,jdbcType=bigint}，
+           #{SCHED_TIME,jdbcType=bigint}，
+           #{PRIORITY,jdbcType=int}，
+           #{STATE,jdbcType=varchar}，
+        <if test='JOB_NAME!= null'> 
+           #{JOB_NAME,jdbcType=varchar}，
+        </if>
+        <if test='JOB_GROUP!= null'> 
+           #{JOB_GROUP,jdbcType=varchar}，
+        </if>
+        <if test='IS_NONCONCURRENT!= null'> 
+           #{IS_NONCONCURRENT,jdbcType=varchar}，
+        </if>
+        <if test='REQUESTS_RECOVERY!= null'> 
+           #{REQUESTS_RECOVERY,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_fired_triggers_dto):Unit
                 
 
 }

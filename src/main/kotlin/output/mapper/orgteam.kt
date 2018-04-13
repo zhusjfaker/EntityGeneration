@@ -139,12 +139,111 @@ fun ConditionalQueryByKey(model:orgteam_dto):orgteam_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into orgteam
     (ID,TEAMNAME,ORDERINDEX,TEAMTYPE,CLOSED,CREATEUSER,PARENTID,ISGROUP,TEAMDESC,EXT1,EXT2,EXT3,EXT4,EXT5,CREATEDATE,UPDATEDATE)
     values
     (#{ID},#{TEAMNAME},#{ORDERINDEX},#{TEAMTYPE},#{CLOSED},#{CREATEUSER},#{PARENTID},#{ISGROUP},#{TEAMDESC},#{EXT1},#{EXT2},#{EXT3},#{EXT4},#{EXT5},#{CREATEDATE},#{UPDATEDATE})
 </script>""")
-fun insert(model:orgteam_dto):Unit
+fun Insert(model:orgteam_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into orgteam
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           TEAMNAME,
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX,
+        </if>
+        <if test='TEAMTYPE!= null'> 
+           TEAMTYPE,
+        </if>
+        <if test='CLOSED!= null'> 
+           CLOSED,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='PARENTID!= null'> 
+           PARENTID,
+        </if>
+        <if test='ISGROUP!= null'> 
+           ISGROUP,
+        </if>
+        <if test='TEAMDESC!= null'> 
+           TEAMDESC,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+           #{TEAMNAME,jdbcType=varchar}，
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=decimal}，
+        </if>
+        <if test='TEAMTYPE!= null'> 
+           #{TEAMTYPE,jdbcType=smallint}，
+        </if>
+        <if test='CLOSED!= null'> 
+           #{CLOSED,jdbcType=smallint}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PARENTID!= null'> 
+           #{PARENTID,jdbcType=varchar}，
+        </if>
+        <if test='ISGROUP!= null'> 
+           #{ISGROUP,jdbcType=smallint}，
+        </if>
+        <if test='TEAMDESC!= null'> 
+           #{TEAMDESC,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=varchar}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=datetime}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:orgteam_dto):Unit
                 
 
 }

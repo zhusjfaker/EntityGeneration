@@ -193,12 +193,165 @@ fun ConditionalQueryByKey(model:bo_ss_whdayreport_dto):bo_ss_whdayreport_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_ss_whdayreport
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,BIZDATE,WHID,DPTID1,COMID,UNITID,BUID,GOODSID,NO,BILLTYPE,BIZTYPE,MEMO,QUANIN,QUANOUT,PRICE,AMOUNT,BIZTYPEID)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{BIZDATE},#{WHID},#{DPTID1},#{COMID},#{UNITID},#{BUID},#{GOODSID},#{NO},#{BILLTYPE},#{BIZTYPE},#{MEMO},#{QUANIN},#{QUANOUT},#{PRICE},#{AMOUNT},#{BIZTYPEID})
 </script>""")
-fun insert(model:bo_ss_whdayreport_dto):Unit
+fun Insert(model:bo_ss_whdayreport_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_ss_whdayreport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='BIZDATE!= null'> 
+           BIZDATE,
+        </if>
+        <if test='WHID!= null'> 
+           WHID,
+        </if>
+        <if test='DPTID1!= null'> 
+           DPTID1,
+        </if>
+        <if test='COMID!= null'> 
+           COMID,
+        </if>
+        <if test='UNITID!= null'> 
+           UNITID,
+        </if>
+        <if test='BUID!= null'> 
+           BUID,
+        </if>
+        <if test='GOODSID!= null'> 
+           GOODSID,
+        </if>
+        <if test='NO!= null'> 
+           NO,
+        </if>
+        <if test='BILLTYPE!= null'> 
+           BILLTYPE,
+        </if>
+        <if test='BIZTYPE!= null'> 
+           BIZTYPE,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO,
+        </if>
+        <if test='QUANIN!= null'> 
+           QUANIN,
+        </if>
+        <if test='QUANOUT!= null'> 
+           QUANOUT,
+        </if>
+        <if test='PRICE!= null'> 
+           PRICE,
+        </if>
+        <if test='AMOUNT!= null'> 
+           AMOUNT,
+        </if>
+        <if test='BIZTYPEID!= null'> 
+           BIZTYPEID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='BIZDATE!= null'> 
+           #{BIZDATE,jdbcType=datetime}，
+        </if>
+        <if test='WHID!= null'> 
+           #{WHID,jdbcType=varchar}，
+        </if>
+        <if test='DPTID1!= null'> 
+           #{DPTID1,jdbcType=varchar}，
+        </if>
+        <if test='COMID!= null'> 
+           #{COMID,jdbcType=varchar}，
+        </if>
+        <if test='UNITID!= null'> 
+           #{UNITID,jdbcType=varchar}，
+        </if>
+        <if test='BUID!= null'> 
+           #{BUID,jdbcType=varchar}，
+        </if>
+        <if test='GOODSID!= null'> 
+           #{GOODSID,jdbcType=varchar}，
+        </if>
+        <if test='NO!= null'> 
+           #{NO,jdbcType=varchar}，
+        </if>
+        <if test='BILLTYPE!= null'> 
+           #{BILLTYPE,jdbcType=varchar}，
+        </if>
+        <if test='BIZTYPE!= null'> 
+           #{BIZTYPE,jdbcType=varchar}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=varchar}，
+        </if>
+        <if test='QUANIN!= null'> 
+           #{QUANIN,jdbcType=decimal}，
+        </if>
+        <if test='QUANOUT!= null'> 
+           #{QUANOUT,jdbcType=decimal}，
+        </if>
+        <if test='PRICE!= null'> 
+           #{PRICE,jdbcType=decimal}，
+        </if>
+        <if test='AMOUNT!= null'> 
+           #{AMOUNT,jdbcType=decimal}，
+        </if>
+        <if test='BIZTYPEID!= null'> 
+           #{BIZTYPEID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_ss_whdayreport_dto):Unit
                 
 
 }

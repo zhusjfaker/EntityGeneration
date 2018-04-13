@@ -103,12 +103,51 @@ fun ConditionalQueryByKey(model:qrtz_job_details_dto):qrtz_job_details_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_job_details
     (SCHED_NAME,JOB_NAME,JOB_GROUP,DESCRIPTION,JOB_CLASS_NAME,IS_DURABLE,IS_NONCONCURRENT,IS_UPDATE_DATA,REQUESTS_RECOVERY,JOB_DATA)
     values
     (#{SCHED_NAME},#{JOB_NAME},#{JOB_GROUP},#{DESCRIPTION},#{JOB_CLASS_NAME},#{IS_DURABLE},#{IS_NONCONCURRENT},#{IS_UPDATE_DATA},#{REQUESTS_RECOVERY},#{JOB_DATA})
 </script>""")
-fun insert(model:qrtz_job_details_dto):Unit
+fun Insert(model:qrtz_job_details_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_job_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           JOB_NAME,
+           JOB_GROUP,
+        <if test='DESCRIPTION!= null'> 
+           DESCRIPTION,
+        </if>
+           JOB_CLASS_NAME,
+           IS_DURABLE,
+           IS_NONCONCURRENT,
+           IS_UPDATE_DATA,
+           REQUESTS_RECOVERY,
+        <if test='JOB_DATA!= null'> 
+           JOB_DATA
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{JOB_NAME,jdbcType=varchar}，
+           #{JOB_GROUP,jdbcType=varchar}，
+        <if test='DESCRIPTION!= null'> 
+           #{DESCRIPTION,jdbcType=varchar}，
+        </if>
+           #{JOB_CLASS_NAME,jdbcType=varchar}，
+           #{IS_DURABLE,jdbcType=varchar}，
+           #{IS_NONCONCURRENT,jdbcType=varchar}，
+           #{IS_UPDATE_DATA,jdbcType=varchar}，
+           #{REQUESTS_RECOVERY,jdbcType=varchar}，
+        <if test='JOB_DATA!= null'> 
+           #{JOB_DATA,jdbcType=blob}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_job_details_dto):Unit
                 
 
 }

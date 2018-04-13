@@ -169,12 +169,141 @@ fun ConditionalQueryByKey(model:bo_ss_gsort_dto):bo_ss_gsort_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_ss_gsort
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,GSCODE,GSNAME,UPCODE,ISEND1,MEMO,GTYPE,PARENTID,STATUS1,EXT1,EXT2,EXT3,EXT4)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{GSCODE},#{GSNAME},#{UPCODE},#{ISEND1},#{MEMO},#{GTYPE},#{PARENTID},#{STATUS1},#{EXT1},#{EXT2},#{EXT3},#{EXT4})
 </script>""")
-fun insert(model:bo_ss_gsort_dto):Unit
+fun Insert(model:bo_ss_gsort_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_ss_gsort
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='GSCODE!= null'> 
+           GSCODE,
+        </if>
+        <if test='GSNAME!= null'> 
+           GSNAME,
+        </if>
+        <if test='UPCODE!= null'> 
+           UPCODE,
+        </if>
+        <if test='ISEND1!= null'> 
+           ISEND1,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO,
+        </if>
+        <if test='GTYPE!= null'> 
+           GTYPE,
+        </if>
+        <if test='PARENTID!= null'> 
+           PARENTID,
+        </if>
+        <if test='STATUS1!= null'> 
+           STATUS1,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='GSCODE!= null'> 
+           #{GSCODE,jdbcType=varchar}，
+        </if>
+        <if test='GSNAME!= null'> 
+           #{GSNAME,jdbcType=varchar}，
+        </if>
+        <if test='UPCODE!= null'> 
+           #{UPCODE,jdbcType=varchar}，
+        </if>
+        <if test='ISEND1!= null'> 
+           #{ISEND1,jdbcType=varchar}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=varchar}，
+        </if>
+        <if test='GTYPE!= null'> 
+           #{GTYPE,jdbcType=varchar}，
+        </if>
+        <if test='PARENTID!= null'> 
+           #{PARENTID,jdbcType=varchar}，
+        </if>
+        <if test='STATUS1!= null'> 
+           #{STATUS1,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_ss_gsort_dto):Unit
                 
 
 }

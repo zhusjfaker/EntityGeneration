@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:sys_ac_dto):sys_ac_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_ac
     (ID,RESOURCETYPE,RESOURCEID,ASSIGNMENTTYPE,ASSIGNMENTID,ACCESSMODE)
     values
     (#{ID},#{RESOURCETYPE},#{RESOURCEID},#{ASSIGNMENTTYPE},#{ASSIGNMENTID},#{ACCESSMODE})
 </script>""")
-fun insert(model:sys_ac_dto):Unit
+fun Insert(model:sys_ac_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_ac
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='RESOURCETYPE!= null'> 
+           RESOURCETYPE,
+        </if>
+        <if test='RESOURCEID!= null'> 
+           RESOURCEID,
+        </if>
+        <if test='ASSIGNMENTTYPE!= null'> 
+           ASSIGNMENTTYPE,
+        </if>
+        <if test='ASSIGNMENTID!= null'> 
+           ASSIGNMENTID,
+        </if>
+        <if test='ACCESSMODE!= null'> 
+           ACCESSMODE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='RESOURCETYPE!= null'> 
+           #{RESOURCETYPE,jdbcType=varchar}，
+        </if>
+        <if test='RESOURCEID!= null'> 
+           #{RESOURCEID,jdbcType=varchar}，
+        </if>
+        <if test='ASSIGNMENTTYPE!= null'> 
+           #{ASSIGNMENTTYPE,jdbcType=varchar}，
+        </if>
+        <if test='ASSIGNMENTID!= null'> 
+           #{ASSIGNMENTID,jdbcType=varchar}，
+        </if>
+        <if test='ACCESSMODE!= null'> 
+           #{ACCESSMODE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_ac_dto):Unit
                 
 
 }

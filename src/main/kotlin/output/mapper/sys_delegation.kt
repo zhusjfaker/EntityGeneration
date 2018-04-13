@@ -97,12 +97,73 @@ fun ConditionalQueryByKey(model:sys_delegation_dto):sys_delegation_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_delegation
     (ID,APPLICANTUSER,DELEGATEUSER,SCOPETYPE,DELEGATEREASON,BEGINTIME,ENDTIME,CREATETIME,PROCESSINSTID)
     values
     (#{ID},#{APPLICANTUSER},#{DELEGATEUSER},#{SCOPETYPE},#{DELEGATEREASON},#{BEGINTIME},#{ENDTIME},#{CREATETIME},#{PROCESSINSTID})
 </script>""")
-fun insert(model:sys_delegation_dto):Unit
+fun Insert(model:sys_delegation_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_delegation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='APPLICANTUSER!= null'> 
+           APPLICANTUSER,
+        </if>
+        <if test='DELEGATEUSER!= null'> 
+           DELEGATEUSER,
+        </if>
+        <if test='SCOPETYPE!= null'> 
+           SCOPETYPE,
+        </if>
+        <if test='DELEGATEREASON!= null'> 
+           DELEGATEREASON,
+        </if>
+        <if test='BEGINTIME!= null'> 
+           BEGINTIME,
+        </if>
+        <if test='ENDTIME!= null'> 
+           ENDTIME,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='APPLICANTUSER!= null'> 
+           #{APPLICANTUSER,jdbcType=varchar}，
+        </if>
+        <if test='DELEGATEUSER!= null'> 
+           #{DELEGATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='SCOPETYPE!= null'> 
+           #{SCOPETYPE,jdbcType=char}，
+        </if>
+        <if test='DELEGATEREASON!= null'> 
+           #{DELEGATEREASON,jdbcType=varchar}，
+        </if>
+        <if test='BEGINTIME!= null'> 
+           #{BEGINTIME,jdbcType=datetime}，
+        </if>
+        <if test='ENDTIME!= null'> 
+           #{ENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_delegation_dto):Unit
                 
 
 }

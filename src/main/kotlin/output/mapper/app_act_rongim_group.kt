@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:app_act_rongim_group_dto):app_act_rongim_group_d
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_rongim_group
     (ID,GROUPNAME,GROUPDESC,CREATEUSER,CREATETIME,UPDATETIME)
     values
     (#{ID},#{GROUPNAME},#{GROUPDESC},#{CREATEUSER},#{CREATETIME},#{UPDATETIME})
 </script>""")
-fun insert(model:app_act_rongim_group_dto):Unit
+fun Insert(model:app_act_rongim_group_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_rongim_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='GROUPNAME!= null'> 
+           GROUPNAME,
+        </if>
+        <if test='GROUPDESC!= null'> 
+           GROUPDESC,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='UPDATETIME!= null'> 
+           UPDATETIME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='GROUPNAME!= null'> 
+           #{GROUPNAME,jdbcType=varchar}，
+        </if>
+        <if test='GROUPDESC!= null'> 
+           #{GROUPDESC,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='UPDATETIME!= null'> 
+           #{UPDATETIME,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_rongim_group_dto):Unit
                 
 
 }

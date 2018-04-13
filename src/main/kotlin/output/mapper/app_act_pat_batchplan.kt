@@ -115,12 +115,91 @@ fun ConditionalQueryByKey(model:app_act_pat_batchplan_dto):app_act_pat_batchplan
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_pat_batchplan
     (ID,BATCHPLANNAME,TESTCASEID,CREATEUSER,CREATETIME,BATCHPLANSTATUS,ENDSTYLE,TESTUSER,STARTTIME,ENDTIME,BATCHPLANID,PROCESSDEFID)
     values
     (#{ID},#{BATCHPLANNAME},#{TESTCASEID},#{CREATEUSER},#{CREATETIME},#{BATCHPLANSTATUS},#{ENDSTYLE},#{TESTUSER},#{STARTTIME},#{ENDTIME},#{BATCHPLANID},#{PROCESSDEFID})
 </script>""")
-fun insert(model:app_act_pat_batchplan_dto):Unit
+fun Insert(model:app_act_pat_batchplan_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_pat_batchplan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='BATCHPLANNAME!= null'> 
+           BATCHPLANNAME,
+        </if>
+        <if test='TESTCASEID!= null'> 
+           TESTCASEID,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='BATCHPLANSTATUS!= null'> 
+           BATCHPLANSTATUS,
+        </if>
+        <if test='ENDSTYLE!= null'> 
+           ENDSTYLE,
+        </if>
+        <if test='TESTUSER!= null'> 
+           TESTUSER,
+        </if>
+        <if test='STARTTIME!= null'> 
+           STARTTIME,
+        </if>
+        <if test='ENDTIME!= null'> 
+           ENDTIME,
+        </if>
+        <if test='BATCHPLANID!= null'> 
+           BATCHPLANID,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='BATCHPLANNAME!= null'> 
+           #{BATCHPLANNAME,jdbcType=varchar}，
+        </if>
+        <if test='TESTCASEID!= null'> 
+           #{TESTCASEID,jdbcType=char}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='BATCHPLANSTATUS!= null'> 
+           #{BATCHPLANSTATUS,jdbcType=smallint}，
+        </if>
+        <if test='ENDSTYLE!= null'> 
+           #{ENDSTYLE,jdbcType=smallint}，
+        </if>
+        <if test='TESTUSER!= null'> 
+           #{TESTUSER,jdbcType=varchar}，
+        </if>
+        <if test='STARTTIME!= null'> 
+           #{STARTTIME,jdbcType=datetime}，
+        </if>
+        <if test='ENDTIME!= null'> 
+           #{ENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='BATCHPLANID!= null'> 
+           #{BATCHPLANID,jdbcType=char}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_pat_batchplan_dto):Unit
                 
 
 }

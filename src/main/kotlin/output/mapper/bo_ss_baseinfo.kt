@@ -151,12 +151,123 @@ fun ConditionalQueryByKey(model:bo_ss_baseinfo_dto):bo_ss_baseinfo_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_ss_baseinfo
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,TYPE,NAME,MEMO,GTYPE,SN,TYPEID,CNNAME,ENNAME,BIG5NAME)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{TYPE},#{NAME},#{MEMO},#{GTYPE},#{SN},#{TYPEID},#{CNNAME},#{ENNAME},#{BIG5NAME})
 </script>""")
-fun insert(model:bo_ss_baseinfo_dto):Unit
+fun Insert(model:bo_ss_baseinfo_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_ss_baseinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='TYPE!= null'> 
+           TYPE,
+        </if>
+        <if test='NAME!= null'> 
+           NAME,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO,
+        </if>
+        <if test='GTYPE!= null'> 
+           GTYPE,
+        </if>
+        <if test='SN!= null'> 
+           SN,
+        </if>
+        <if test='TYPEID!= null'> 
+           TYPEID,
+        </if>
+        <if test='CNNAME!= null'> 
+           CNNAME,
+        </if>
+        <if test='ENNAME!= null'> 
+           ENNAME,
+        </if>
+        <if test='BIG5NAME!= null'> 
+           BIG5NAME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='TYPE!= null'> 
+           #{TYPE,jdbcType=varchar}，
+        </if>
+        <if test='NAME!= null'> 
+           #{NAME,jdbcType=varchar}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=varchar}，
+        </if>
+        <if test='GTYPE!= null'> 
+           #{GTYPE,jdbcType=varchar}，
+        </if>
+        <if test='SN!= null'> 
+           #{SN,jdbcType=decimal}，
+        </if>
+        <if test='TYPEID!= null'> 
+           #{TYPEID,jdbcType=varchar}，
+        </if>
+        <if test='CNNAME!= null'> 
+           #{CNNAME,jdbcType=varchar}，
+        </if>
+        <if test='ENNAME!= null'> 
+           #{ENNAME,jdbcType=varchar}，
+        </if>
+        <if test='BIG5NAME!= null'> 
+           #{BIG5NAME,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_ss_baseinfo_dto):Unit
                 
 
 }

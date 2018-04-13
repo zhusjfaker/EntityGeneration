@@ -103,12 +103,75 @@ fun ConditionalQueryByKey(model:bo_act_org_ext_team_dto):bo_act_org_ext_team_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_act_org_ext_team
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,TEAMID)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{TEAMID})
 </script>""")
-fun insert(model:bo_act_org_ext_team_dto):Unit
+fun Insert(model:bo_act_org_ext_team_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_act_org_ext_team
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='TEAMID!= null'> 
+           TEAMID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='TEAMID!= null'> 
+           #{TEAMID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_act_org_ext_team_dto):Unit
                 
 
 }

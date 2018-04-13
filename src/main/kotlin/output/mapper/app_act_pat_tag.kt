@@ -73,12 +73,49 @@ fun ConditionalQueryByKey(model:app_act_pat_tag_dto):app_act_pat_tag_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_pat_tag
     (ID,TAGNAME,TESTCASEID,CREATEUSER,CREATETIME)
     values
     (#{ID},#{TAGNAME},#{TESTCASEID},#{CREATEUSER},#{CREATETIME})
 </script>""")
-fun insert(model:app_act_pat_tag_dto):Unit
+fun Insert(model:app_act_pat_tag_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_pat_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TAGNAME!= null'> 
+           TAGNAME,
+        </if>
+        <if test='TESTCASEID!= null'> 
+           TESTCASEID,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='TAGNAME!= null'> 
+           #{TAGNAME,jdbcType=varchar}，
+        </if>
+        <if test='TESTCASEID!= null'> 
+           #{TESTCASEID,jdbcType=char}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_pat_tag_dto):Unit
                 
 
 }

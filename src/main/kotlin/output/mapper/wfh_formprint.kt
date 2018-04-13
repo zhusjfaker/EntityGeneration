@@ -85,12 +85,61 @@ fun ConditionalQueryByKey(model:wfh_formprint_dto):wfh_formprint_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfh_formprint
     (ID,PROCESSINSTID,TASKINSTID,PRINTTIME,USERID,USERNAME,IPADD)
     values
     (#{ID},#{PROCESSINSTID},#{TASKINSTID},#{PRINTTIME},#{USERID},#{USERNAME},#{IPADD})
 </script>""")
-fun insert(model:wfh_formprint_dto):Unit
+fun Insert(model:wfh_formprint_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfh_formprint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='PRINTTIME!= null'> 
+           PRINTTIME,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='USERNAME!= null'> 
+           USERNAME,
+        </if>
+        <if test='IPADD!= null'> 
+           IPADD
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='PRINTTIME!= null'> 
+           #{PRINTTIME,jdbcType=datetime}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='USERNAME!= null'> 
+           #{USERNAME,jdbcType=varchar}，
+        </if>
+        <if test='IPADD!= null'> 
+           #{IPADD,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfh_formprint_dto):Unit
                 
 
 }

@@ -97,12 +97,61 @@ fun ConditionalQueryByKey(model:sys_sla_dim_h_dto):sys_sla_dim_h_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_sla_dim_h
     (ID,INSTNAME,METRICID,VAVG,VMAX,VMIN,VCOUNT,VTIME,ISPROCESSING)
     values
     (#{ID},#{INSTNAME},#{METRICID},#{VAVG},#{VMAX},#{VMIN},#{VCOUNT},#{VTIME},#{ISPROCESSING})
 </script>""")
-fun insert(model:sys_sla_dim_h_dto):Unit
+fun Insert(model:sys_sla_dim_h_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_sla_dim_h
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           INSTNAME,
+           METRICID,
+        <if test='VAVG!= null'> 
+           VAVG,
+        </if>
+        <if test='VMAX!= null'> 
+           VMAX,
+        </if>
+        <if test='VMIN!= null'> 
+           VMIN,
+        </if>
+        <if test='VCOUNT!= null'> 
+           VCOUNT,
+        </if>
+           VTIME,
+        <if test='ISPROCESSING!= null'> 
+           ISPROCESSING
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+           #{INSTNAME,jdbcType=varchar}，
+           #{METRICID,jdbcType=varchar}，
+        <if test='VAVG!= null'> 
+           #{VAVG,jdbcType=decimal}，
+        </if>
+        <if test='VMAX!= null'> 
+           #{VMAX,jdbcType=decimal}，
+        </if>
+        <if test='VMIN!= null'> 
+           #{VMIN,jdbcType=decimal}，
+        </if>
+        <if test='VCOUNT!= null'> 
+           #{VCOUNT,jdbcType=decimal}，
+        </if>
+           #{VTIME,jdbcType=char}，
+        <if test='ISPROCESSING!= null'> 
+           #{ISPROCESSING,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_sla_dim_h_dto):Unit
                 
 
 }

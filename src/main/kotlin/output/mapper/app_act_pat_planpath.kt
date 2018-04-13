@@ -193,12 +193,169 @@ fun ConditionalQueryByKey(model:app_act_pat_planpath_dto):app_act_pat_planpath_d
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_pat_planpath
     (ID,PLANPATHTYPE,BATCHPLANID,PLANID,PROCESSDEFID,PROCESSTITLE,PROCESSINSTID,PROCESSCREATEUSER,NODEID,TASKTITLE,TASKINSTID,OWNER,OWNERUSERNAME,OWNERDEPTID,OWNERDEPTNAME,OWNERDEPTFULLNAME,TARGET,TARGETUSERNAME,TARGETDEPTID,TARGETDEPTNAME,TARGETDEPTFULLNAME,TARGETROLEID,TARGETROLENAME,SEQNUMBER,EXCEPTIONMSG)
     values
     (#{ID},#{PLANPATHTYPE},#{BATCHPLANID},#{PLANID},#{PROCESSDEFID},#{PROCESSTITLE},#{PROCESSINSTID},#{PROCESSCREATEUSER},#{NODEID},#{TASKTITLE},#{TASKINSTID},#{OWNER},#{OWNERUSERNAME},#{OWNERDEPTID},#{OWNERDEPTNAME},#{OWNERDEPTFULLNAME},#{TARGET},#{TARGETUSERNAME},#{TARGETDEPTID},#{TARGETDEPTNAME},#{TARGETDEPTFULLNAME},#{TARGETROLEID},#{TARGETROLENAME},#{SEQNUMBER},#{EXCEPTIONMSG})
 </script>""")
-fun insert(model:app_act_pat_planpath_dto):Unit
+fun Insert(model:app_act_pat_planpath_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_pat_planpath
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PLANPATHTYPE!= null'> 
+           PLANPATHTYPE,
+        </if>
+        <if test='BATCHPLANID!= null'> 
+           BATCHPLANID,
+        </if>
+        <if test='PLANID!= null'> 
+           PLANID,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+        <if test='PROCESSTITLE!= null'> 
+           PROCESSTITLE,
+        </if>
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='PROCESSCREATEUSER!= null'> 
+           PROCESSCREATEUSER,
+        </if>
+        <if test='NODEID!= null'> 
+           NODEID,
+        </if>
+        <if test='TASKTITLE!= null'> 
+           TASKTITLE,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='OWNER!= null'> 
+           OWNER,
+        </if>
+        <if test='OWNERUSERNAME!= null'> 
+           OWNERUSERNAME,
+        </if>
+        <if test='OWNERDEPTID!= null'> 
+           OWNERDEPTID,
+        </if>
+        <if test='OWNERDEPTNAME!= null'> 
+           OWNERDEPTNAME,
+        </if>
+        <if test='OWNERDEPTFULLNAME!= null'> 
+           OWNERDEPTFULLNAME,
+        </if>
+        <if test='TARGET!= null'> 
+           TARGET,
+        </if>
+        <if test='TARGETUSERNAME!= null'> 
+           TARGETUSERNAME,
+        </if>
+        <if test='TARGETDEPTID!= null'> 
+           TARGETDEPTID,
+        </if>
+        <if test='TARGETDEPTNAME!= null'> 
+           TARGETDEPTNAME,
+        </if>
+        <if test='TARGETDEPTFULLNAME!= null'> 
+           TARGETDEPTFULLNAME,
+        </if>
+        <if test='TARGETROLEID!= null'> 
+           TARGETROLEID,
+        </if>
+        <if test='TARGETROLENAME!= null'> 
+           TARGETROLENAME,
+        </if>
+        <if test='SEQNUMBER!= null'> 
+           SEQNUMBER,
+        </if>
+        <if test='EXCEPTIONMSG!= null'> 
+           EXCEPTIONMSG
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PLANPATHTYPE!= null'> 
+           #{PLANPATHTYPE,jdbcType=varchar}，
+        </if>
+        <if test='BATCHPLANID!= null'> 
+           #{BATCHPLANID,jdbcType=char}，
+        </if>
+        <if test='PLANID!= null'> 
+           #{PLANID,jdbcType=char}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+        <if test='PROCESSTITLE!= null'> 
+           #{PROCESSTITLE,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='PROCESSCREATEUSER!= null'> 
+           #{PROCESSCREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='NODEID!= null'> 
+           #{NODEID,jdbcType=char}，
+        </if>
+        <if test='TASKTITLE!= null'> 
+           #{TASKTITLE,jdbcType=varchar}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='OWNER!= null'> 
+           #{OWNER,jdbcType=varchar}，
+        </if>
+        <if test='OWNERUSERNAME!= null'> 
+           #{OWNERUSERNAME,jdbcType=varchar}，
+        </if>
+        <if test='OWNERDEPTID!= null'> 
+           #{OWNERDEPTID,jdbcType=char}，
+        </if>
+        <if test='OWNERDEPTNAME!= null'> 
+           #{OWNERDEPTNAME,jdbcType=varchar}，
+        </if>
+        <if test='OWNERDEPTFULLNAME!= null'> 
+           #{OWNERDEPTFULLNAME,jdbcType=varchar}，
+        </if>
+        <if test='TARGET!= null'> 
+           #{TARGET,jdbcType=varchar}，
+        </if>
+        <if test='TARGETUSERNAME!= null'> 
+           #{TARGETUSERNAME,jdbcType=varchar}，
+        </if>
+        <if test='TARGETDEPTID!= null'> 
+           #{TARGETDEPTID,jdbcType=char}，
+        </if>
+        <if test='TARGETDEPTNAME!= null'> 
+           #{TARGETDEPTNAME,jdbcType=varchar}，
+        </if>
+        <if test='TARGETDEPTFULLNAME!= null'> 
+           #{TARGETDEPTFULLNAME,jdbcType=varchar}，
+        </if>
+        <if test='TARGETROLEID!= null'> 
+           #{TARGETROLEID,jdbcType=char}，
+        </if>
+        <if test='TARGETROLENAME!= null'> 
+           #{TARGETROLENAME,jdbcType=varchar}，
+        </if>
+        <if test='SEQNUMBER!= null'> 
+           #{SEQNUMBER,jdbcType=smallint}，
+        </if>
+        <if test='EXCEPTIONMSG!= null'> 
+           #{EXCEPTIONMSG,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_pat_planpath_dto):Unit
                 
 
 }

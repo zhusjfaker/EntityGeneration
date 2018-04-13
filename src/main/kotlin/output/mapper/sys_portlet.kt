@@ -115,12 +115,91 @@ fun ConditionalQueryByKey(model:sys_portlet_dto):sys_portlet_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_portlet
     (ID,CATEGORYNAME,PORTLETTITLE,PORTLETHEIGHT,LINKURL,ICON16,ICON64,ICON96,APPID,ISACTIVITY,NOTIFIER,PORTLETCFG)
     values
     (#{ID},#{CATEGORYNAME},#{PORTLETTITLE},#{PORTLETHEIGHT},#{LINKURL},#{ICON16},#{ICON64},#{ICON96},#{APPID},#{ISACTIVITY},#{NOTIFIER},#{PORTLETCFG})
 </script>""")
-fun insert(model:sys_portlet_dto):Unit
+fun Insert(model:sys_portlet_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_portlet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='CATEGORYNAME!= null'> 
+           CATEGORYNAME,
+        </if>
+        <if test='PORTLETTITLE!= null'> 
+           PORTLETTITLE,
+        </if>
+        <if test='PORTLETHEIGHT!= null'> 
+           PORTLETHEIGHT,
+        </if>
+        <if test='LINKURL!= null'> 
+           LINKURL,
+        </if>
+        <if test='ICON16!= null'> 
+           ICON16,
+        </if>
+        <if test='ICON64!= null'> 
+           ICON64,
+        </if>
+        <if test='ICON96!= null'> 
+           ICON96,
+        </if>
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='ISACTIVITY!= null'> 
+           ISACTIVITY,
+        </if>
+        <if test='NOTIFIER!= null'> 
+           NOTIFIER,
+        </if>
+        <if test='PORTLETCFG!= null'> 
+           PORTLETCFG
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='CATEGORYNAME!= null'> 
+           #{CATEGORYNAME,jdbcType=varchar}，
+        </if>
+        <if test='PORTLETTITLE!= null'> 
+           #{PORTLETTITLE,jdbcType=varchar}，
+        </if>
+        <if test='PORTLETHEIGHT!= null'> 
+           #{PORTLETHEIGHT,jdbcType=varchar}，
+        </if>
+        <if test='LINKURL!= null'> 
+           #{LINKURL,jdbcType=varchar}，
+        </if>
+        <if test='ICON16!= null'> 
+           #{ICON16,jdbcType=varchar}，
+        </if>
+        <if test='ICON64!= null'> 
+           #{ICON64,jdbcType=varchar}，
+        </if>
+        <if test='ICON96!= null'> 
+           #{ICON96,jdbcType=varchar}，
+        </if>
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='ISACTIVITY!= null'> 
+           #{ISACTIVITY,jdbcType=smallint}，
+        </if>
+        <if test='NOTIFIER!= null'> 
+           #{NOTIFIER,jdbcType=varchar}，
+        </if>
+        <if test='PORTLETCFG!= null'> 
+           #{PORTLETCFG,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_portlet_dto):Unit
                 
 
 }

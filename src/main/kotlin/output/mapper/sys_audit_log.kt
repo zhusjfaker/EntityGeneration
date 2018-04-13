@@ -115,12 +115,91 @@ fun ConditionalQueryByKey(model:sys_audit_log_dto):sys_audit_log_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_audit_log
     (ID,LOG_CHANNEL,LOG_CATALOG,LOG_OBJECT,OP,OP_TIME,OP_IP,OP_INFO,OP_LEVEL,AUDIT_ROLE,OP_USER,EXT1)
     values
     (#{ID},#{LOG_CHANNEL},#{LOG_CATALOG},#{LOG_OBJECT},#{OP},#{OP_TIME},#{OP_IP},#{OP_INFO},#{OP_LEVEL},#{AUDIT_ROLE},#{OP_USER},#{EXT1})
 </script>""")
-fun insert(model:sys_audit_log_dto):Unit
+fun Insert(model:sys_audit_log_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_audit_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='LOG_CHANNEL!= null'> 
+           LOG_CHANNEL,
+        </if>
+        <if test='LOG_CATALOG!= null'> 
+           LOG_CATALOG,
+        </if>
+        <if test='LOG_OBJECT!= null'> 
+           LOG_OBJECT,
+        </if>
+        <if test='OP!= null'> 
+           OP,
+        </if>
+        <if test='OP_TIME!= null'> 
+           OP_TIME,
+        </if>
+        <if test='OP_IP!= null'> 
+           OP_IP,
+        </if>
+        <if test='OP_INFO!= null'> 
+           OP_INFO,
+        </if>
+        <if test='OP_LEVEL!= null'> 
+           OP_LEVEL,
+        </if>
+        <if test='AUDIT_ROLE!= null'> 
+           AUDIT_ROLE,
+        </if>
+        <if test='OP_USER!= null'> 
+           OP_USER,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='LOG_CHANNEL!= null'> 
+           #{LOG_CHANNEL,jdbcType=varchar}，
+        </if>
+        <if test='LOG_CATALOG!= null'> 
+           #{LOG_CATALOG,jdbcType=varchar}，
+        </if>
+        <if test='LOG_OBJECT!= null'> 
+           #{LOG_OBJECT,jdbcType=varchar}，
+        </if>
+        <if test='OP!= null'> 
+           #{OP,jdbcType=varchar}，
+        </if>
+        <if test='OP_TIME!= null'> 
+           #{OP_TIME,jdbcType=datetime}，
+        </if>
+        <if test='OP_IP!= null'> 
+           #{OP_IP,jdbcType=varchar}，
+        </if>
+        <if test='OP_INFO!= null'> 
+           #{OP_INFO,jdbcType=text}，
+        </if>
+        <if test='OP_LEVEL!= null'> 
+           #{OP_LEVEL,jdbcType=smallint}，
+        </if>
+        <if test='AUDIT_ROLE!= null'> 
+           #{AUDIT_ROLE,jdbcType=smallint}，
+        </if>
+        <if test='OP_USER!= null'> 
+           #{OP_USER,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_audit_log_dto):Unit
                 
 
 }

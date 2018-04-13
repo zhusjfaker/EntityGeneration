@@ -109,12 +109,85 @@ fun ConditionalQueryByKey(model:sys_coe_pal_comment_dto):sys_coe_pal_comment_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_comment
     (ID,PID,STREAMID,WSID,TARGETTYPE,TARGETID,TEAMID,USERID,USERCOMMENT,COMMENTDATE,INFOTYPE)
     values
     (#{ID},#{PID},#{STREAMID},#{WSID},#{TARGETTYPE},#{TARGETID},#{TEAMID},#{USERID},#{USERCOMMENT},#{COMMENTDATE},#{INFOTYPE})
 </script>""")
-fun insert(model:sys_coe_pal_comment_dto):Unit
+fun Insert(model:sys_coe_pal_comment_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PID!= null'> 
+           PID,
+        </if>
+        <if test='STREAMID!= null'> 
+           STREAMID,
+        </if>
+        <if test='WSID!= null'> 
+           WSID,
+        </if>
+        <if test='TARGETTYPE!= null'> 
+           TARGETTYPE,
+        </if>
+        <if test='TARGETID!= null'> 
+           TARGETID,
+        </if>
+        <if test='TEAMID!= null'> 
+           TEAMID,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='USERCOMMENT!= null'> 
+           USERCOMMENT,
+        </if>
+        <if test='COMMENTDATE!= null'> 
+           COMMENTDATE,
+        </if>
+        <if test='INFOTYPE!= null'> 
+           INFOTYPE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PID!= null'> 
+           #{PID,jdbcType=char}，
+        </if>
+        <if test='STREAMID!= null'> 
+           #{STREAMID,jdbcType=char}，
+        </if>
+        <if test='WSID!= null'> 
+           #{WSID,jdbcType=char}，
+        </if>
+        <if test='TARGETTYPE!= null'> 
+           #{TARGETTYPE,jdbcType=smallint}，
+        </if>
+        <if test='TARGETID!= null'> 
+           #{TARGETID,jdbcType=char}，
+        </if>
+        <if test='TEAMID!= null'> 
+           #{TEAMID,jdbcType=char}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='USERCOMMENT!= null'> 
+           #{USERCOMMENT,jdbcType=text}，
+        </if>
+        <if test='COMMENTDATE!= null'> 
+           #{COMMENTDATE,jdbcType=datetime}，
+        </if>
+        <if test='INFOTYPE!= null'> 
+           #{INFOTYPE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_comment_dto):Unit
                 
 
 }

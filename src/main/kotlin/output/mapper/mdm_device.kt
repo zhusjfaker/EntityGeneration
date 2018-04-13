@@ -139,12 +139,115 @@ fun ConditionalQueryByKey(model:mdm_device_dto):mdm_device_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mdm_device
     (ID,DEVICEMODEL,DEVICEBRAND,OSTYPE,OSNAME,DEVICETYPE,DEVICESTATUS,SECURITYSTATUS,ROOTED,PHONENUMBER,REGISTERTIME,REGISTERUSERID,ASSETTYPE,USERID,LASTLOGINTIME,UNREGISTERED)
     values
     (#{ID},#{DEVICEMODEL},#{DEVICEBRAND},#{OSTYPE},#{OSNAME},#{DEVICETYPE},#{DEVICESTATUS},#{SECURITYSTATUS},#{ROOTED},#{PHONENUMBER},#{REGISTERTIME},#{REGISTERUSERID},#{ASSETTYPE},#{USERID},#{LASTLOGINTIME},#{UNREGISTERED})
 </script>""")
-fun insert(model:mdm_device_dto):Unit
+fun Insert(model:mdm_device_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mdm_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='DEVICEMODEL!= null'> 
+           DEVICEMODEL,
+        </if>
+        <if test='DEVICEBRAND!= null'> 
+           DEVICEBRAND,
+        </if>
+        <if test='OSTYPE!= null'> 
+           OSTYPE,
+        </if>
+        <if test='OSNAME!= null'> 
+           OSNAME,
+        </if>
+        <if test='DEVICETYPE!= null'> 
+           DEVICETYPE,
+        </if>
+        <if test='DEVICESTATUS!= null'> 
+           DEVICESTATUS,
+        </if>
+        <if test='SECURITYSTATUS!= null'> 
+           SECURITYSTATUS,
+        </if>
+        <if test='ROOTED!= null'> 
+           ROOTED,
+        </if>
+        <if test='PHONENUMBER!= null'> 
+           PHONENUMBER,
+        </if>
+        <if test='REGISTERTIME!= null'> 
+           REGISTERTIME,
+        </if>
+        <if test='REGISTERUSERID!= null'> 
+           REGISTERUSERID,
+        </if>
+        <if test='ASSETTYPE!= null'> 
+           ASSETTYPE,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='LASTLOGINTIME!= null'> 
+           LASTLOGINTIME,
+        </if>
+        <if test='UNREGISTERED!= null'> 
+           UNREGISTERED
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='DEVICEMODEL!= null'> 
+           #{DEVICEMODEL,jdbcType=varchar}，
+        </if>
+        <if test='DEVICEBRAND!= null'> 
+           #{DEVICEBRAND,jdbcType=varchar}，
+        </if>
+        <if test='OSTYPE!= null'> 
+           #{OSTYPE,jdbcType=smallint}，
+        </if>
+        <if test='OSNAME!= null'> 
+           #{OSNAME,jdbcType=varchar}，
+        </if>
+        <if test='DEVICETYPE!= null'> 
+           #{DEVICETYPE,jdbcType=smallint}，
+        </if>
+        <if test='DEVICESTATUS!= null'> 
+           #{DEVICESTATUS,jdbcType=smallint}，
+        </if>
+        <if test='SECURITYSTATUS!= null'> 
+           #{SECURITYSTATUS,jdbcType=smallint}，
+        </if>
+        <if test='ROOTED!= null'> 
+           #{ROOTED,jdbcType=smallint}，
+        </if>
+        <if test='PHONENUMBER!= null'> 
+           #{PHONENUMBER,jdbcType=varchar}，
+        </if>
+        <if test='REGISTERTIME!= null'> 
+           #{REGISTERTIME,jdbcType=datetime}，
+        </if>
+        <if test='REGISTERUSERID!= null'> 
+           #{REGISTERUSERID,jdbcType=varchar}，
+        </if>
+        <if test='ASSETTYPE!= null'> 
+           #{ASSETTYPE,jdbcType=smallint}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='LASTLOGINTIME!= null'> 
+           #{LASTLOGINTIME,jdbcType=datetime}，
+        </if>
+        <if test='UNREGISTERED!= null'> 
+           #{UNREGISTERED,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mdm_device_dto):Unit
                 
 
 }

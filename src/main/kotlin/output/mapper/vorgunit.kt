@@ -115,12 +115,91 @@ fun ConditionalQueryByKey(model:vorgunit_dto):vorgunit_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into vorgunit
     (ID,RDEPTID,UNITNAME,ADMINISTRATORS,UNITGROUP,UNITDESC,STATUS,EXT1,EXT2,EXT3,EXT4,EXT5)
     values
     (#{ID},#{RDEPTID},#{UNITNAME},#{ADMINISTRATORS},#{UNITGROUP},#{UNITDESC},#{STATUS},#{EXT1},#{EXT2},#{EXT3},#{EXT4},#{EXT5})
 </script>""")
-fun insert(model:vorgunit_dto):Unit
+fun Insert(model:vorgunit_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into vorgunit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='RDEPTID!= null'> 
+           RDEPTID,
+        </if>
+        <if test='UNITNAME!= null'> 
+           UNITNAME,
+        </if>
+        <if test='ADMINISTRATORS!= null'> 
+           ADMINISTRATORS,
+        </if>
+        <if test='UNITGROUP!= null'> 
+           UNITGROUP,
+        </if>
+        <if test='UNITDESC!= null'> 
+           UNITDESC,
+        </if>
+        <if test='STATUS!= null'> 
+           STATUS,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='RDEPTID!= null'> 
+           #{RDEPTID,jdbcType=varchar}，
+        </if>
+        <if test='UNITNAME!= null'> 
+           #{UNITNAME,jdbcType=varchar}，
+        </if>
+        <if test='ADMINISTRATORS!= null'> 
+           #{ADMINISTRATORS,jdbcType=varchar}，
+        </if>
+        <if test='UNITGROUP!= null'> 
+           #{UNITGROUP,jdbcType=varchar}，
+        </if>
+        <if test='UNITDESC!= null'> 
+           #{UNITDESC,jdbcType=varchar}，
+        </if>
+        <if test='STATUS!= null'> 
+           #{STATUS,jdbcType=smallint}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:vorgunit_dto):Unit
                 
 
 }

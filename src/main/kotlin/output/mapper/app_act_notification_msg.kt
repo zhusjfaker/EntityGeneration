@@ -121,12 +121,97 @@ fun ConditionalQueryByKey(model:app_act_notification_msg_dto):app_act_notificati
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_notification_msg
     (ID,REGISTERID,APPID,OWNERID,TARGETID,NOTIFYCONTENT,NOTIFYLEVEL,ISCLOSE,CREATETIME,ISSTORE,READTIME,READED,SOURCEID)
     values
     (#{ID},#{REGISTERID},#{APPID},#{OWNERID},#{TARGETID},#{NOTIFYCONTENT},#{NOTIFYLEVEL},#{ISCLOSE},#{CREATETIME},#{ISSTORE},#{READTIME},#{READED},#{SOURCEID})
 </script>""")
-fun insert(model:app_act_notification_msg_dto):Unit
+fun Insert(model:app_act_notification_msg_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_notification_msg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='REGISTERID!= null'> 
+           REGISTERID,
+        </if>
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='OWNERID!= null'> 
+           OWNERID,
+        </if>
+        <if test='TARGETID!= null'> 
+           TARGETID,
+        </if>
+        <if test='NOTIFYCONTENT!= null'> 
+           NOTIFYCONTENT,
+        </if>
+        <if test='NOTIFYLEVEL!= null'> 
+           NOTIFYLEVEL,
+        </if>
+        <if test='ISCLOSE!= null'> 
+           ISCLOSE,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='ISSTORE!= null'> 
+           ISSTORE,
+        </if>
+        <if test='READTIME!= null'> 
+           READTIME,
+        </if>
+        <if test='READED!= null'> 
+           READED,
+        </if>
+        <if test='SOURCEID!= null'> 
+           SOURCEID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='REGISTERID!= null'> 
+           #{REGISTERID,jdbcType=varchar}，
+        </if>
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='OWNERID!= null'> 
+           #{OWNERID,jdbcType=varchar}，
+        </if>
+        <if test='TARGETID!= null'> 
+           #{TARGETID,jdbcType=varchar}，
+        </if>
+        <if test='NOTIFYCONTENT!= null'> 
+           #{NOTIFYCONTENT,jdbcType=text}，
+        </if>
+        <if test='NOTIFYLEVEL!= null'> 
+           #{NOTIFYLEVEL,jdbcType=char}，
+        </if>
+        <if test='ISCLOSE!= null'> 
+           #{ISCLOSE,jdbcType=char}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='ISSTORE!= null'> 
+           #{ISSTORE,jdbcType=char}，
+        </if>
+        <if test='READTIME!= null'> 
+           #{READTIME,jdbcType=datetime}，
+        </if>
+        <if test='READED!= null'> 
+           #{READED,jdbcType=char}，
+        </if>
+        <if test='SOURCEID!= null'> 
+           #{SOURCEID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_notification_msg_dto):Unit
                 
 
 }

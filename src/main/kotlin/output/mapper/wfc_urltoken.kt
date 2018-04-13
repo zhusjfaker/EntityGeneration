@@ -85,12 +85,61 @@ fun ConditionalQueryByKey(model:wfc_urltoken_dto):wfc_urltoken_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfc_urltoken
     (TOKENID,PROCESSINSTID,TASKINSTID,AWSUID,TOKENSTATE,ACCESSTIME,MEMO)
     values
     (#{TOKENID},#{PROCESSINSTID},#{TASKINSTID},#{AWSUID},#{TOKENSTATE},#{ACCESSTIME},#{MEMO})
 </script>""")
-fun insert(model:wfc_urltoken_dto):Unit
+fun Insert(model:wfc_urltoken_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfc_urltoken
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           TOKENID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='AWSUID!= null'> 
+           AWSUID,
+        </if>
+        <if test='TOKENSTATE!= null'> 
+           TOKENSTATE,
+        </if>
+        <if test='ACCESSTIME!= null'> 
+           ACCESSTIME,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{TOKENID,jdbcType=varchar}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='AWSUID!= null'> 
+           #{AWSUID,jdbcType=varchar}，
+        </if>
+        <if test='TOKENSTATE!= null'> 
+           #{TOKENSTATE,jdbcType=smallint}，
+        </if>
+        <if test='ACCESSTIME!= null'> 
+           #{ACCESSTIME,jdbcType=datetime}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfc_urltoken_dto):Unit
                 
 
 }

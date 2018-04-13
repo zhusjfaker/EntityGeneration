@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:sys_iox_dto):sys_iox_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_iox
     (ID,ADVANCETYPE,ORDERINDEX)
     values
     (#{ID},#{ADVANCETYPE},#{ORDERINDEX})
 </script>""")
-fun insert(model:sys_iox_dto):Unit
+fun Insert(model:sys_iox_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_iox
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ADVANCETYPE!= null'> 
+           ADVANCETYPE,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ADVANCETYPE!= null'> 
+           #{ADVANCETYPE,jdbcType=varchar}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_iox_dto):Unit
                 
 
 }

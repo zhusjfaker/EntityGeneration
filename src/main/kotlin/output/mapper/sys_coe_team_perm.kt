@@ -73,12 +73,49 @@ fun ConditionalQueryByKey(model:sys_coe_team_perm_dto):sys_coe_team_perm_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_team_perm
     (ID,TEAMID,WSID,PERMTYPE,RESOURCEID)
     values
     (#{ID},#{TEAMID},#{WSID},#{PERMTYPE},#{RESOURCEID})
 </script>""")
-fun insert(model:sys_coe_team_perm_dto):Unit
+fun Insert(model:sys_coe_team_perm_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_team_perm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TEAMID!= null'> 
+           TEAMID,
+        </if>
+        <if test='WSID!= null'> 
+           WSID,
+        </if>
+        <if test='PERMTYPE!= null'> 
+           PERMTYPE,
+        </if>
+        <if test='RESOURCEID!= null'> 
+           RESOURCEID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='TEAMID!= null'> 
+           #{TEAMID,jdbcType=char}，
+        </if>
+        <if test='WSID!= null'> 
+           #{WSID,jdbcType=char}，
+        </if>
+        <if test='PERMTYPE!= null'> 
+           #{PERMTYPE,jdbcType=smallint}，
+        </if>
+        <if test='RESOURCEID!= null'> 
+           #{RESOURCEID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_team_perm_dto):Unit
                 
 
 }

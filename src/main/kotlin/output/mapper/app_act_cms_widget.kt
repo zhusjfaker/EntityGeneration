@@ -235,12 +235,211 @@ fun ConditionalQueryByKey(model:app_act_cms_widget_dto):app_act_cms_widget_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_cms_widget
     (ID,SITEID,BOARDID,WIDGETNAME,WIDGETDESC,WIDGETSORT,WIDGETWIDTH,USEFLAG,SHOWTITLEBARFLAG,TITLEBARCOLOR,TITLEBARCONTENT,TABFLAG,CONTENTFLAG,FONTCOLOR,FONTSIZE,BORDERFLAG,BORDERCOLOR,BGCOLOR,TOPRULEFLAG,TOPNUM,MODULEFORTOP,SYSTEMSTYLE,TITLEBARICON,FONTFAMILY,SHOWLISTICONFLAG,LISTICON,UNDERLINEFLAG,SHOWEXT,TITLEBARFONTCOLOR,TITLEBARFONTSIZE,CUSTOMURL,BORDERSHADOWFLAG)
     values
     (#{ID},#{SITEID},#{BOARDID},#{WIDGETNAME},#{WIDGETDESC},#{WIDGETSORT},#{WIDGETWIDTH},#{USEFLAG},#{SHOWTITLEBARFLAG},#{TITLEBARCOLOR},#{TITLEBARCONTENT},#{TABFLAG},#{CONTENTFLAG},#{FONTCOLOR},#{FONTSIZE},#{BORDERFLAG},#{BORDERCOLOR},#{BGCOLOR},#{TOPRULEFLAG},#{TOPNUM},#{MODULEFORTOP},#{SYSTEMSTYLE},#{TITLEBARICON},#{FONTFAMILY},#{SHOWLISTICONFLAG},#{LISTICON},#{UNDERLINEFLAG},#{SHOWEXT},#{TITLEBARFONTCOLOR},#{TITLEBARFONTSIZE},#{CUSTOMURL},#{BORDERSHADOWFLAG})
 </script>""")
-fun insert(model:app_act_cms_widget_dto):Unit
+fun Insert(model:app_act_cms_widget_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_cms_widget
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='SITEID!= null'> 
+           SITEID,
+        </if>
+        <if test='BOARDID!= null'> 
+           BOARDID,
+        </if>
+        <if test='WIDGETNAME!= null'> 
+           WIDGETNAME,
+        </if>
+        <if test='WIDGETDESC!= null'> 
+           WIDGETDESC,
+        </if>
+        <if test='WIDGETSORT!= null'> 
+           WIDGETSORT,
+        </if>
+        <if test='WIDGETWIDTH!= null'> 
+           WIDGETWIDTH,
+        </if>
+        <if test='USEFLAG!= null'> 
+           USEFLAG,
+        </if>
+        <if test='SHOWTITLEBARFLAG!= null'> 
+           SHOWTITLEBARFLAG,
+        </if>
+        <if test='TITLEBARCOLOR!= null'> 
+           TITLEBARCOLOR,
+        </if>
+        <if test='TITLEBARCONTENT!= null'> 
+           TITLEBARCONTENT,
+        </if>
+        <if test='TABFLAG!= null'> 
+           TABFLAG,
+        </if>
+        <if test='CONTENTFLAG!= null'> 
+           CONTENTFLAG,
+        </if>
+        <if test='FONTCOLOR!= null'> 
+           FONTCOLOR,
+        </if>
+        <if test='FONTSIZE!= null'> 
+           FONTSIZE,
+        </if>
+        <if test='BORDERFLAG!= null'> 
+           BORDERFLAG,
+        </if>
+        <if test='BORDERCOLOR!= null'> 
+           BORDERCOLOR,
+        </if>
+        <if test='BGCOLOR!= null'> 
+           BGCOLOR,
+        </if>
+        <if test='TOPRULEFLAG!= null'> 
+           TOPRULEFLAG,
+        </if>
+        <if test='TOPNUM!= null'> 
+           TOPNUM,
+        </if>
+        <if test='MODULEFORTOP!= null'> 
+           MODULEFORTOP,
+        </if>
+        <if test='SYSTEMSTYLE!= null'> 
+           SYSTEMSTYLE,
+        </if>
+        <if test='TITLEBARICON!= null'> 
+           TITLEBARICON,
+        </if>
+        <if test='FONTFAMILY!= null'> 
+           FONTFAMILY,
+        </if>
+        <if test='SHOWLISTICONFLAG!= null'> 
+           SHOWLISTICONFLAG,
+        </if>
+        <if test='LISTICON!= null'> 
+           LISTICON,
+        </if>
+        <if test='UNDERLINEFLAG!= null'> 
+           UNDERLINEFLAG,
+        </if>
+        <if test='SHOWEXT!= null'> 
+           SHOWEXT,
+        </if>
+        <if test='TITLEBARFONTCOLOR!= null'> 
+           TITLEBARFONTCOLOR,
+        </if>
+        <if test='TITLEBARFONTSIZE!= null'> 
+           TITLEBARFONTSIZE,
+        </if>
+        <if test='CUSTOMURL!= null'> 
+           CUSTOMURL,
+        </if>
+        <if test='BORDERSHADOWFLAG!= null'> 
+           BORDERSHADOWFLAG
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='SITEID!= null'> 
+           #{SITEID,jdbcType=char}，
+        </if>
+        <if test='BOARDID!= null'> 
+           #{BOARDID,jdbcType=char}，
+        </if>
+        <if test='WIDGETNAME!= null'> 
+           #{WIDGETNAME,jdbcType=varchar}，
+        </if>
+        <if test='WIDGETDESC!= null'> 
+           #{WIDGETDESC,jdbcType=varchar}，
+        </if>
+        <if test='WIDGETSORT!= null'> 
+           #{WIDGETSORT,jdbcType=varchar}，
+        </if>
+        <if test='WIDGETWIDTH!= null'> 
+           #{WIDGETWIDTH,jdbcType=varchar}，
+        </if>
+        <if test='USEFLAG!= null'> 
+           #{USEFLAG,jdbcType=char}，
+        </if>
+        <if test='SHOWTITLEBARFLAG!= null'> 
+           #{SHOWTITLEBARFLAG,jdbcType=char}，
+        </if>
+        <if test='TITLEBARCOLOR!= null'> 
+           #{TITLEBARCOLOR,jdbcType=varchar}，
+        </if>
+        <if test='TITLEBARCONTENT!= null'> 
+           #{TITLEBARCONTENT,jdbcType=varchar}，
+        </if>
+        <if test='TABFLAG!= null'> 
+           #{TABFLAG,jdbcType=char}，
+        </if>
+        <if test='CONTENTFLAG!= null'> 
+           #{CONTENTFLAG,jdbcType=char}，
+        </if>
+        <if test='FONTCOLOR!= null'> 
+           #{FONTCOLOR,jdbcType=varchar}，
+        </if>
+        <if test='FONTSIZE!= null'> 
+           #{FONTSIZE,jdbcType=varchar}，
+        </if>
+        <if test='BORDERFLAG!= null'> 
+           #{BORDERFLAG,jdbcType=char}，
+        </if>
+        <if test='BORDERCOLOR!= null'> 
+           #{BORDERCOLOR,jdbcType=varchar}，
+        </if>
+        <if test='BGCOLOR!= null'> 
+           #{BGCOLOR,jdbcType=varchar}，
+        </if>
+        <if test='TOPRULEFLAG!= null'> 
+           #{TOPRULEFLAG,jdbcType=char}，
+        </if>
+        <if test='TOPNUM!= null'> 
+           #{TOPNUM,jdbcType=varchar}，
+        </if>
+        <if test='MODULEFORTOP!= null'> 
+           #{MODULEFORTOP,jdbcType=text}，
+        </if>
+        <if test='SYSTEMSTYLE!= null'> 
+           #{SYSTEMSTYLE,jdbcType=varchar}，
+        </if>
+        <if test='TITLEBARICON!= null'> 
+           #{TITLEBARICON,jdbcType=varchar}，
+        </if>
+        <if test='FONTFAMILY!= null'> 
+           #{FONTFAMILY,jdbcType=varchar}，
+        </if>
+        <if test='SHOWLISTICONFLAG!= null'> 
+           #{SHOWLISTICONFLAG,jdbcType=char}，
+        </if>
+        <if test='LISTICON!= null'> 
+           #{LISTICON,jdbcType=varchar}，
+        </if>
+        <if test='UNDERLINEFLAG!= null'> 
+           #{UNDERLINEFLAG,jdbcType=char}，
+        </if>
+        <if test='SHOWEXT!= null'> 
+           #{SHOWEXT,jdbcType=varchar}，
+        </if>
+        <if test='TITLEBARFONTCOLOR!= null'> 
+           #{TITLEBARFONTCOLOR,jdbcType=varchar}，
+        </if>
+        <if test='TITLEBARFONTSIZE!= null'> 
+           #{TITLEBARFONTSIZE,jdbcType=varchar}，
+        </if>
+        <if test='CUSTOMURL!= null'> 
+           #{CUSTOMURL,jdbcType=varchar}，
+        </if>
+        <if test='BORDERSHADOWFLAG!= null'> 
+           #{BORDERSHADOWFLAG,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_cms_widget_dto):Unit
                 
 
 }

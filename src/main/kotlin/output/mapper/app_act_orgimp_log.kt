@@ -115,12 +115,87 @@ fun ConditionalQueryByKey(model:app_act_orgimp_log_dto):app_act_orgimp_log_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_orgimp_log
     (ID,OPTYPE,ORGTYPE,LOGFILE,XLSFILE,STARTTIME,ENDTIME,STATUS,REMARK,OPTUSER,IP,LOGDOWNLOAD)
     values
     (#{ID},#{OPTYPE},#{ORGTYPE},#{LOGFILE},#{XLSFILE},#{STARTTIME},#{ENDTIME},#{STATUS},#{REMARK},#{OPTUSER},#{IP},#{LOGDOWNLOAD})
 </script>""")
-fun insert(model:app_act_orgimp_log_dto):Unit
+fun Insert(model:app_act_orgimp_log_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_orgimp_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='OPTYPE!= null'> 
+           OPTYPE,
+        </if>
+        <if test='ORGTYPE!= null'> 
+           ORGTYPE,
+        </if>
+        <if test='LOGFILE!= null'> 
+           LOGFILE,
+        </if>
+        <if test='XLSFILE!= null'> 
+           XLSFILE,
+        </if>
+           STARTTIME,
+        <if test='ENDTIME!= null'> 
+           ENDTIME,
+        </if>
+        <if test='STATUS!= null'> 
+           STATUS,
+        </if>
+        <if test='REMARK!= null'> 
+           REMARK,
+        </if>
+        <if test='OPTUSER!= null'> 
+           OPTUSER,
+        </if>
+        <if test='IP!= null'> 
+           IP,
+        </if>
+        <if test='LOGDOWNLOAD!= null'> 
+           LOGDOWNLOAD
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='OPTYPE!= null'> 
+           #{OPTYPE,jdbcType=smallint}，
+        </if>
+        <if test='ORGTYPE!= null'> 
+           #{ORGTYPE,jdbcType=smallint}，
+        </if>
+        <if test='LOGFILE!= null'> 
+           #{LOGFILE,jdbcType=varchar}，
+        </if>
+        <if test='XLSFILE!= null'> 
+           #{XLSFILE,jdbcType=varchar}，
+        </if>
+           #{STARTTIME,jdbcType=datetime}，
+        <if test='ENDTIME!= null'> 
+           #{ENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='STATUS!= null'> 
+           #{STATUS,jdbcType=smallint}，
+        </if>
+        <if test='REMARK!= null'> 
+           #{REMARK,jdbcType=varchar}，
+        </if>
+        <if test='OPTUSER!= null'> 
+           #{OPTUSER,jdbcType=varchar}，
+        </if>
+        <if test='IP!= null'> 
+           #{IP,jdbcType=varchar}，
+        </if>
+        <if test='LOGDOWNLOAD!= null'> 
+           #{LOGDOWNLOAD,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_orgimp_log_dto):Unit
                 
 
 }

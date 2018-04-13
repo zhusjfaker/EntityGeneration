@@ -145,12 +145,121 @@ fun ConditionalQueryByKey(model:app_act_pat_plan_dto):app_act_pat_plan_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_pat_plan
     (ID,BATCHPLANID,PLANNAME,STARTUSER,STARTUSERDEPTID,STARTUSERROLEID,CREATETIME,CREATEUSER,PLANSTATUS,ENDSTYLE,STARTTIME,ENDTIME,PLANID,SEQNUMBER,PROCESSINSTID,PROCESSDEFID,ROWINDEX)
     values
     (#{ID},#{BATCHPLANID},#{PLANNAME},#{STARTUSER},#{STARTUSERDEPTID},#{STARTUSERROLEID},#{CREATETIME},#{CREATEUSER},#{PLANSTATUS},#{ENDSTYLE},#{STARTTIME},#{ENDTIME},#{PLANID},#{SEQNUMBER},#{PROCESSINSTID},#{PROCESSDEFID},#{ROWINDEX})
 </script>""")
-fun insert(model:app_act_pat_plan_dto):Unit
+fun Insert(model:app_act_pat_plan_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_pat_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='BATCHPLANID!= null'> 
+           BATCHPLANID,
+        </if>
+        <if test='PLANNAME!= null'> 
+           PLANNAME,
+        </if>
+        <if test='STARTUSER!= null'> 
+           STARTUSER,
+        </if>
+        <if test='STARTUSERDEPTID!= null'> 
+           STARTUSERDEPTID,
+        </if>
+        <if test='STARTUSERROLEID!= null'> 
+           STARTUSERROLEID,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='PLANSTATUS!= null'> 
+           PLANSTATUS,
+        </if>
+        <if test='ENDSTYLE!= null'> 
+           ENDSTYLE,
+        </if>
+        <if test='STARTTIME!= null'> 
+           STARTTIME,
+        </if>
+        <if test='ENDTIME!= null'> 
+           ENDTIME,
+        </if>
+        <if test='PLANID!= null'> 
+           PLANID,
+        </if>
+        <if test='SEQNUMBER!= null'> 
+           SEQNUMBER,
+        </if>
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+        <if test='ROWINDEX!= null'> 
+           ROWINDEX
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='BATCHPLANID!= null'> 
+           #{BATCHPLANID,jdbcType=char}，
+        </if>
+        <if test='PLANNAME!= null'> 
+           #{PLANNAME,jdbcType=varchar}，
+        </if>
+        <if test='STARTUSER!= null'> 
+           #{STARTUSER,jdbcType=varchar}，
+        </if>
+        <if test='STARTUSERDEPTID!= null'> 
+           #{STARTUSERDEPTID,jdbcType=varchar}，
+        </if>
+        <if test='STARTUSERROLEID!= null'> 
+           #{STARTUSERROLEID,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PLANSTATUS!= null'> 
+           #{PLANSTATUS,jdbcType=smallint}，
+        </if>
+        <if test='ENDSTYLE!= null'> 
+           #{ENDSTYLE,jdbcType=smallint}，
+        </if>
+        <if test='STARTTIME!= null'> 
+           #{STARTTIME,jdbcType=datetime}，
+        </if>
+        <if test='ENDTIME!= null'> 
+           #{ENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='PLANID!= null'> 
+           #{PLANID,jdbcType=char}，
+        </if>
+        <if test='SEQNUMBER!= null'> 
+           #{SEQNUMBER,jdbcType=decimal}，
+        </if>
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+        <if test='ROWINDEX!= null'> 
+           #{ROWINDEX,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_pat_plan_dto):Unit
                 
 
 }

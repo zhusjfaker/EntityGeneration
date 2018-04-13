@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:wfc_commenttemp_dto):wfc_commenttemp_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfc_commenttemp
     (ID,PROCESSINSTID,TASKINSTID,ACTIONNAME,MSG,FILES)
     values
     (#{ID},#{PROCESSINSTID},#{TASKINSTID},#{ACTIONNAME},#{MSG},#{FILES})
 </script>""")
-fun insert(model:wfc_commenttemp_dto):Unit
+fun Insert(model:wfc_commenttemp_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfc_commenttemp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='ACTIONNAME!= null'> 
+           ACTIONNAME,
+        </if>
+        <if test='MSG!= null'> 
+           MSG,
+        </if>
+        <if test='FILES!= null'> 
+           FILES
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='ACTIONNAME!= null'> 
+           #{ACTIONNAME,jdbcType=varchar}，
+        </if>
+        <if test='MSG!= null'> 
+           #{MSG,jdbcType=text}，
+        </if>
+        <if test='FILES!= null'> 
+           #{FILES,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfc_commenttemp_dto):Unit
                 
 
 }

@@ -97,12 +97,73 @@ fun ConditionalQueryByKey(model:app_act_mportal_nav_used_dto):app_act_mportal_na
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_mportal_nav_used
     (ID,NAME,URL,TARGET,ICON64,APPID,NAVID,USERID,FUNNAVID)
     values
     (#{ID},#{NAME},#{URL},#{TARGET},#{ICON64},#{APPID},#{NAVID},#{USERID},#{FUNNAVID})
 </script>""")
-fun insert(model:app_act_mportal_nav_used_dto):Unit
+fun Insert(model:app_act_mportal_nav_used_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_mportal_nav_used
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='NAME!= null'> 
+           NAME,
+        </if>
+        <if test='URL!= null'> 
+           URL,
+        </if>
+        <if test='TARGET!= null'> 
+           TARGET,
+        </if>
+        <if test='ICON64!= null'> 
+           ICON64,
+        </if>
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='NAVID!= null'> 
+           NAVID,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='FUNNAVID!= null'> 
+           FUNNAVID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='NAME!= null'> 
+           #{NAME,jdbcType=varchar}，
+        </if>
+        <if test='URL!= null'> 
+           #{URL,jdbcType=varchar}，
+        </if>
+        <if test='TARGET!= null'> 
+           #{TARGET,jdbcType=varchar}，
+        </if>
+        <if test='ICON64!= null'> 
+           #{ICON64,jdbcType=varchar}，
+        </if>
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='NAVID!= null'> 
+           #{NAVID,jdbcType=varchar}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='FUNNAVID!= null'> 
+           #{FUNNAVID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_mportal_nav_used_dto):Unit
                 
 
 }

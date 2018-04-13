@@ -67,12 +67,31 @@ fun ConditionalQueryByKey(model:qrtz_scheduler_state_dto):qrtz_scheduler_state_d
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_scheduler_state
     (SCHED_NAME,INSTANCE_NAME,LAST_CHECKIN_TIME,CHECKIN_INTERVAL)
     values
     (#{SCHED_NAME},#{INSTANCE_NAME},#{LAST_CHECKIN_TIME},#{CHECKIN_INTERVAL})
 </script>""")
-fun insert(model:qrtz_scheduler_state_dto):Unit
+fun Insert(model:qrtz_scheduler_state_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_scheduler_state
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           INSTANCE_NAME,
+           LAST_CHECKIN_TIME,
+           CHECKIN_INTERVAL
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{INSTANCE_NAME,jdbcType=varchar}，
+           #{LAST_CHECKIN_TIME,jdbcType=bigint}，
+           #{CHECKIN_INTERVAL,jdbcType=bigint}
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_scheduler_state_dto):Unit
                 
 
 }

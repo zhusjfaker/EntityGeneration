@@ -325,12 +325,301 @@ fun ConditionalQueryByKey(model:app_act_cms_data_dto):app_act_cms_data_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_cms_data
     (ID,MODULEID,MSGTITLE,BOLDFLAG,TITLECOLOR,MSGTITLEPIC,MSGSUMMARY,MSGCONTENT,MSGTYPE,MSGSOURCE,CREATEUSER,CREATETIME,UPDATEUSER,UPDATETIME,READFLAG,READNUM,REPLYFLAG,REPLYNUM,COPYFLAG,ZDFLAG,ZDFLAGNOW,ZDBEGINTIME,ZDENDTIME,ISCLOSE,ATTACHMENTNAME,OUTERURL,PIID,BOID,READSCOPEDESC,GJC,PLATFORMFLAG,SUBMODULE,SUBTITLE,OVERLINE,AUTHOR,PHOTOGRAPHER,FILENAME,FILEDESC,VIDEOFILE,DELETEFLAG,RELEASEDEPARTMENT,RELEASETIME,SORTTIME,PLATFORMPIID,WORDCOUNT,RECOMMENDFLAG,USEOUTERURL)
     values
     (#{ID},#{MODULEID},#{MSGTITLE},#{BOLDFLAG},#{TITLECOLOR},#{MSGTITLEPIC},#{MSGSUMMARY},#{MSGCONTENT},#{MSGTYPE},#{MSGSOURCE},#{CREATEUSER},#{CREATETIME},#{UPDATEUSER},#{UPDATETIME},#{READFLAG},#{READNUM},#{REPLYFLAG},#{REPLYNUM},#{COPYFLAG},#{ZDFLAG},#{ZDFLAGNOW},#{ZDBEGINTIME},#{ZDENDTIME},#{ISCLOSE},#{ATTACHMENTNAME},#{OUTERURL},#{PIID},#{BOID},#{READSCOPEDESC},#{GJC},#{PLATFORMFLAG},#{SUBMODULE},#{SUBTITLE},#{OVERLINE},#{AUTHOR},#{PHOTOGRAPHER},#{FILENAME},#{FILEDESC},#{VIDEOFILE},#{DELETEFLAG},#{RELEASEDEPARTMENT},#{RELEASETIME},#{SORTTIME},#{PLATFORMPIID},#{WORDCOUNT},#{RECOMMENDFLAG},#{USEOUTERURL})
 </script>""")
-fun insert(model:app_act_cms_data_dto):Unit
+fun Insert(model:app_act_cms_data_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_cms_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='MODULEID!= null'> 
+           MODULEID,
+        </if>
+        <if test='MSGTITLE!= null'> 
+           MSGTITLE,
+        </if>
+        <if test='BOLDFLAG!= null'> 
+           BOLDFLAG,
+        </if>
+        <if test='TITLECOLOR!= null'> 
+           TITLECOLOR,
+        </if>
+        <if test='MSGTITLEPIC!= null'> 
+           MSGTITLEPIC,
+        </if>
+        <if test='MSGSUMMARY!= null'> 
+           MSGSUMMARY,
+        </if>
+        <if test='MSGCONTENT!= null'> 
+           MSGCONTENT,
+        </if>
+        <if test='MSGTYPE!= null'> 
+           MSGTYPE,
+        </if>
+        <if test='MSGSOURCE!= null'> 
+           MSGSOURCE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='UPDATETIME!= null'> 
+           UPDATETIME,
+        </if>
+        <if test='READFLAG!= null'> 
+           READFLAG,
+        </if>
+        <if test='READNUM!= null'> 
+           READNUM,
+        </if>
+        <if test='REPLYFLAG!= null'> 
+           REPLYFLAG,
+        </if>
+        <if test='REPLYNUM!= null'> 
+           REPLYNUM,
+        </if>
+        <if test='COPYFLAG!= null'> 
+           COPYFLAG,
+        </if>
+        <if test='ZDFLAG!= null'> 
+           ZDFLAG,
+        </if>
+        <if test='ZDFLAGNOW!= null'> 
+           ZDFLAGNOW,
+        </if>
+        <if test='ZDBEGINTIME!= null'> 
+           ZDBEGINTIME,
+        </if>
+        <if test='ZDENDTIME!= null'> 
+           ZDENDTIME,
+        </if>
+        <if test='ISCLOSE!= null'> 
+           ISCLOSE,
+        </if>
+        <if test='ATTACHMENTNAME!= null'> 
+           ATTACHMENTNAME,
+        </if>
+        <if test='OUTERURL!= null'> 
+           OUTERURL,
+        </if>
+        <if test='PIID!= null'> 
+           PIID,
+        </if>
+        <if test='BOID!= null'> 
+           BOID,
+        </if>
+        <if test='READSCOPEDESC!= null'> 
+           READSCOPEDESC,
+        </if>
+        <if test='GJC!= null'> 
+           GJC,
+        </if>
+        <if test='PLATFORMFLAG!= null'> 
+           PLATFORMFLAG,
+        </if>
+        <if test='SUBMODULE!= null'> 
+           SUBMODULE,
+        </if>
+        <if test='SUBTITLE!= null'> 
+           SUBTITLE,
+        </if>
+        <if test='OVERLINE!= null'> 
+           OVERLINE,
+        </if>
+        <if test='AUTHOR!= null'> 
+           AUTHOR,
+        </if>
+        <if test='PHOTOGRAPHER!= null'> 
+           PHOTOGRAPHER,
+        </if>
+        <if test='FILENAME!= null'> 
+           FILENAME,
+        </if>
+        <if test='FILEDESC!= null'> 
+           FILEDESC,
+        </if>
+        <if test='VIDEOFILE!= null'> 
+           VIDEOFILE,
+        </if>
+        <if test='DELETEFLAG!= null'> 
+           DELETEFLAG,
+        </if>
+        <if test='RELEASEDEPARTMENT!= null'> 
+           RELEASEDEPARTMENT,
+        </if>
+        <if test='RELEASETIME!= null'> 
+           RELEASETIME,
+        </if>
+        <if test='SORTTIME!= null'> 
+           SORTTIME,
+        </if>
+        <if test='PLATFORMPIID!= null'> 
+           PLATFORMPIID,
+        </if>
+        <if test='WORDCOUNT!= null'> 
+           WORDCOUNT,
+        </if>
+        <if test='RECOMMENDFLAG!= null'> 
+           RECOMMENDFLAG,
+        </if>
+        <if test='USEOUTERURL!= null'> 
+           USEOUTERURL
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='MODULEID!= null'> 
+           #{MODULEID,jdbcType=char}，
+        </if>
+        <if test='MSGTITLE!= null'> 
+           #{MSGTITLE,jdbcType=varchar}，
+        </if>
+        <if test='BOLDFLAG!= null'> 
+           #{BOLDFLAG,jdbcType=char}，
+        </if>
+        <if test='TITLECOLOR!= null'> 
+           #{TITLECOLOR,jdbcType=varchar}，
+        </if>
+        <if test='MSGTITLEPIC!= null'> 
+           #{MSGTITLEPIC,jdbcType=varchar}，
+        </if>
+        <if test='MSGSUMMARY!= null'> 
+           #{MSGSUMMARY,jdbcType=text}，
+        </if>
+        <if test='MSGCONTENT!= null'> 
+           #{MSGCONTENT,jdbcType=text}，
+        </if>
+        <if test='MSGTYPE!= null'> 
+           #{MSGTYPE,jdbcType=char}，
+        </if>
+        <if test='MSGSOURCE!= null'> 
+           #{MSGSOURCE,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATETIME!= null'> 
+           #{UPDATETIME,jdbcType=datetime}，
+        </if>
+        <if test='READFLAG!= null'> 
+           #{READFLAG,jdbcType=char}，
+        </if>
+        <if test='READNUM!= null'> 
+           #{READNUM,jdbcType=int}，
+        </if>
+        <if test='REPLYFLAG!= null'> 
+           #{REPLYFLAG,jdbcType=char}，
+        </if>
+        <if test='REPLYNUM!= null'> 
+           #{REPLYNUM,jdbcType=int}，
+        </if>
+        <if test='COPYFLAG!= null'> 
+           #{COPYFLAG,jdbcType=char}，
+        </if>
+        <if test='ZDFLAG!= null'> 
+           #{ZDFLAG,jdbcType=char}，
+        </if>
+        <if test='ZDFLAGNOW!= null'> 
+           #{ZDFLAGNOW,jdbcType=char}，
+        </if>
+        <if test='ZDBEGINTIME!= null'> 
+           #{ZDBEGINTIME,jdbcType=datetime}，
+        </if>
+        <if test='ZDENDTIME!= null'> 
+           #{ZDENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='ISCLOSE!= null'> 
+           #{ISCLOSE,jdbcType=char}，
+        </if>
+        <if test='ATTACHMENTNAME!= null'> 
+           #{ATTACHMENTNAME,jdbcType=varchar}，
+        </if>
+        <if test='OUTERURL!= null'> 
+           #{OUTERURL,jdbcType=varchar}，
+        </if>
+        <if test='PIID!= null'> 
+           #{PIID,jdbcType=char}，
+        </if>
+        <if test='BOID!= null'> 
+           #{BOID,jdbcType=char}，
+        </if>
+        <if test='READSCOPEDESC!= null'> 
+           #{READSCOPEDESC,jdbcType=varchar}，
+        </if>
+        <if test='GJC!= null'> 
+           #{GJC,jdbcType=varchar}，
+        </if>
+        <if test='PLATFORMFLAG!= null'> 
+           #{PLATFORMFLAG,jdbcType=char}，
+        </if>
+        <if test='SUBMODULE!= null'> 
+           #{SUBMODULE,jdbcType=varchar}，
+        </if>
+        <if test='SUBTITLE!= null'> 
+           #{SUBTITLE,jdbcType=varchar}，
+        </if>
+        <if test='OVERLINE!= null'> 
+           #{OVERLINE,jdbcType=varchar}，
+        </if>
+        <if test='AUTHOR!= null'> 
+           #{AUTHOR,jdbcType=varchar}，
+        </if>
+        <if test='PHOTOGRAPHER!= null'> 
+           #{PHOTOGRAPHER,jdbcType=varchar}，
+        </if>
+        <if test='FILENAME!= null'> 
+           #{FILENAME,jdbcType=varchar}，
+        </if>
+        <if test='FILEDESC!= null'> 
+           #{FILEDESC,jdbcType=varchar}，
+        </if>
+        <if test='VIDEOFILE!= null'> 
+           #{VIDEOFILE,jdbcType=varchar}，
+        </if>
+        <if test='DELETEFLAG!= null'> 
+           #{DELETEFLAG,jdbcType=char}，
+        </if>
+        <if test='RELEASEDEPARTMENT!= null'> 
+           #{RELEASEDEPARTMENT,jdbcType=varchar}，
+        </if>
+        <if test='RELEASETIME!= null'> 
+           #{RELEASETIME,jdbcType=datetime}，
+        </if>
+        <if test='SORTTIME!= null'> 
+           #{SORTTIME,jdbcType=datetime}，
+        </if>
+        <if test='PLATFORMPIID!= null'> 
+           #{PLATFORMPIID,jdbcType=char}，
+        </if>
+        <if test='WORDCOUNT!= null'> 
+           #{WORDCOUNT,jdbcType=varchar}，
+        </if>
+        <if test='RECOMMENDFLAG!= null'> 
+           #{RECOMMENDFLAG,jdbcType=varchar}，
+        </if>
+        <if test='USEOUTERURL!= null'> 
+           #{USEOUTERURL,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_cms_data_dto):Unit
                 
 
 }

@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:mdm_hw_push_dto):mdm_hw_push_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mdm_hw_push
     (ID,HUAWEITOKEN,ISONLINE)
     values
     (#{ID},#{HUAWEITOKEN},#{ISONLINE})
 </script>""")
-fun insert(model:mdm_hw_push_dto):Unit
+fun Insert(model:mdm_hw_push_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mdm_hw_push
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='HUAWEITOKEN!= null'> 
+           HUAWEITOKEN,
+        </if>
+        <if test='ISONLINE!= null'> 
+           ISONLINE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='HUAWEITOKEN!= null'> 
+           #{HUAWEITOKEN,jdbcType=varchar}，
+        </if>
+        <if test='ISONLINE!= null'> 
+           #{ISONLINE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mdm_hw_push_dto):Unit
                 
 
 }

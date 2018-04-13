@@ -247,12 +247,215 @@ fun ConditionalQueryByKey(model:app_act_personaladdress_dto):app_act_personaladd
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_personaladdress
     (ID,USERID,EMAIL,GROUPNAME,FAMILYNAME,SUFFIXNAME,FULLNAME,PY,PYINDEX,BCOMPANY,BWWW,BDEPT,BPOSITION,BADDRESS,BPOSTCODE,BCOUNTRY,BCITY,BTEL,BFAX,PPOSTCODE,PADDRESS,PTEL,PFAX,PMOB,PQQ,PWEIBO,PWEIXIN,PSKYPE,PLIKE,MEMO,CREATEUSER,CREATETIME,UPDATETIME,SHARETO)
     values
     (#{ID},#{USERID},#{EMAIL},#{GROUPNAME},#{FAMILYNAME},#{SUFFIXNAME},#{FULLNAME},#{PY},#{PYINDEX},#{BCOMPANY},#{BWWW},#{BDEPT},#{BPOSITION},#{BADDRESS},#{BPOSTCODE},#{BCOUNTRY},#{BCITY},#{BTEL},#{BFAX},#{PPOSTCODE},#{PADDRESS},#{PTEL},#{PFAX},#{PMOB},#{PQQ},#{PWEIBO},#{PWEIXIN},#{PSKYPE},#{PLIKE},#{MEMO},#{CREATEUSER},#{CREATETIME},#{UPDATETIME},#{SHARETO})
 </script>""")
-fun insert(model:app_act_personaladdress_dto):Unit
+fun Insert(model:app_act_personaladdress_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_personaladdress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           USERID,
+        <if test='EMAIL!= null'> 
+           EMAIL,
+        </if>
+        <if test='GROUPNAME!= null'> 
+           GROUPNAME,
+        </if>
+        <if test='FAMILYNAME!= null'> 
+           FAMILYNAME,
+        </if>
+        <if test='SUFFIXNAME!= null'> 
+           SUFFIXNAME,
+        </if>
+        <if test='FULLNAME!= null'> 
+           FULLNAME,
+        </if>
+        <if test='PY!= null'> 
+           PY,
+        </if>
+        <if test='PYINDEX!= null'> 
+           PYINDEX,
+        </if>
+        <if test='BCOMPANY!= null'> 
+           BCOMPANY,
+        </if>
+        <if test='BWWW!= null'> 
+           BWWW,
+        </if>
+        <if test='BDEPT!= null'> 
+           BDEPT,
+        </if>
+        <if test='BPOSITION!= null'> 
+           BPOSITION,
+        </if>
+        <if test='BADDRESS!= null'> 
+           BADDRESS,
+        </if>
+        <if test='BPOSTCODE!= null'> 
+           BPOSTCODE,
+        </if>
+        <if test='BCOUNTRY!= null'> 
+           BCOUNTRY,
+        </if>
+        <if test='BCITY!= null'> 
+           BCITY,
+        </if>
+        <if test='BTEL!= null'> 
+           BTEL,
+        </if>
+        <if test='BFAX!= null'> 
+           BFAX,
+        </if>
+        <if test='PPOSTCODE!= null'> 
+           PPOSTCODE,
+        </if>
+        <if test='PADDRESS!= null'> 
+           PADDRESS,
+        </if>
+        <if test='PTEL!= null'> 
+           PTEL,
+        </if>
+        <if test='PFAX!= null'> 
+           PFAX,
+        </if>
+        <if test='PMOB!= null'> 
+           PMOB,
+        </if>
+        <if test='PQQ!= null'> 
+           PQQ,
+        </if>
+        <if test='PWEIBO!= null'> 
+           PWEIBO,
+        </if>
+        <if test='PWEIXIN!= null'> 
+           PWEIXIN,
+        </if>
+        <if test='PSKYPE!= null'> 
+           PSKYPE,
+        </if>
+        <if test='PLIKE!= null'> 
+           PLIKE,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO,
+        </if>
+           CREATEUSER,
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='UPDATETIME!= null'> 
+           UPDATETIME,
+        </if>
+        <if test='SHARETO!= null'> 
+           SHARETO
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+           #{USERID,jdbcType=varchar}，
+        <if test='EMAIL!= null'> 
+           #{EMAIL,jdbcType=varchar}，
+        </if>
+        <if test='GROUPNAME!= null'> 
+           #{GROUPNAME,jdbcType=varchar}，
+        </if>
+        <if test='FAMILYNAME!= null'> 
+           #{FAMILYNAME,jdbcType=varchar}，
+        </if>
+        <if test='SUFFIXNAME!= null'> 
+           #{SUFFIXNAME,jdbcType=varchar}，
+        </if>
+        <if test='FULLNAME!= null'> 
+           #{FULLNAME,jdbcType=varchar}，
+        </if>
+        <if test='PY!= null'> 
+           #{PY,jdbcType=varchar}，
+        </if>
+        <if test='PYINDEX!= null'> 
+           #{PYINDEX,jdbcType=varchar}，
+        </if>
+        <if test='BCOMPANY!= null'> 
+           #{BCOMPANY,jdbcType=varchar}，
+        </if>
+        <if test='BWWW!= null'> 
+           #{BWWW,jdbcType=varchar}，
+        </if>
+        <if test='BDEPT!= null'> 
+           #{BDEPT,jdbcType=varchar}，
+        </if>
+        <if test='BPOSITION!= null'> 
+           #{BPOSITION,jdbcType=varchar}，
+        </if>
+        <if test='BADDRESS!= null'> 
+           #{BADDRESS,jdbcType=varchar}，
+        </if>
+        <if test='BPOSTCODE!= null'> 
+           #{BPOSTCODE,jdbcType=char}，
+        </if>
+        <if test='BCOUNTRY!= null'> 
+           #{BCOUNTRY,jdbcType=varchar}，
+        </if>
+        <if test='BCITY!= null'> 
+           #{BCITY,jdbcType=varchar}，
+        </if>
+        <if test='BTEL!= null'> 
+           #{BTEL,jdbcType=varchar}，
+        </if>
+        <if test='BFAX!= null'> 
+           #{BFAX,jdbcType=varchar}，
+        </if>
+        <if test='PPOSTCODE!= null'> 
+           #{PPOSTCODE,jdbcType=char}，
+        </if>
+        <if test='PADDRESS!= null'> 
+           #{PADDRESS,jdbcType=varchar}，
+        </if>
+        <if test='PTEL!= null'> 
+           #{PTEL,jdbcType=varchar}，
+        </if>
+        <if test='PFAX!= null'> 
+           #{PFAX,jdbcType=varchar}，
+        </if>
+        <if test='PMOB!= null'> 
+           #{PMOB,jdbcType=varchar}，
+        </if>
+        <if test='PQQ!= null'> 
+           #{PQQ,jdbcType=varchar}，
+        </if>
+        <if test='PWEIBO!= null'> 
+           #{PWEIBO,jdbcType=varchar}，
+        </if>
+        <if test='PWEIXIN!= null'> 
+           #{PWEIXIN,jdbcType=varchar}，
+        </if>
+        <if test='PSKYPE!= null'> 
+           #{PSKYPE,jdbcType=varchar}，
+        </if>
+        <if test='PLIKE!= null'> 
+           #{PLIKE,jdbcType=varchar}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=text}，
+        </if>
+           #{CREATEUSER,jdbcType=varchar}，
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='UPDATETIME!= null'> 
+           #{UPDATETIME,jdbcType=datetime}，
+        </if>
+        <if test='SHARETO!= null'> 
+           #{SHARETO,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_personaladdress_dto):Unit
                 
 
 }

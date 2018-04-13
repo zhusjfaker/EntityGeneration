@@ -73,12 +73,37 @@ fun ConditionalQueryByKey(model:qrtz_cron_triggers_dto):qrtz_cron_triggers_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_cron_triggers
     (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,CRON_EXPRESSION,TIME_ZONE_ID)
     values
     (#{SCHED_NAME},#{TRIGGER_NAME},#{TRIGGER_GROUP},#{CRON_EXPRESSION},#{TIME_ZONE_ID})
 </script>""")
-fun insert(model:qrtz_cron_triggers_dto):Unit
+fun Insert(model:qrtz_cron_triggers_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_cron_triggers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           TRIGGER_NAME,
+           TRIGGER_GROUP,
+           CRON_EXPRESSION,
+        <if test='TIME_ZONE_ID!= null'> 
+           TIME_ZONE_ID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{TRIGGER_NAME,jdbcType=varchar}，
+           #{TRIGGER_GROUP,jdbcType=varchar}，
+           #{CRON_EXPRESSION,jdbcType=varchar}，
+        <if test='TIME_ZONE_ID!= null'> 
+           #{TIME_ZONE_ID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_cron_triggers_dto):Unit
                 
 
 }

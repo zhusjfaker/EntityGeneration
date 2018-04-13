@@ -73,12 +73,49 @@ fun ConditionalQueryByKey(model:sys_coe_pal_publish_list_dto):sys_coe_pal_publis
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_publish_list
     (ID,PID,PALREPOSITORYID,ACTIONTYPE,PUBLISHDESC)
     values
     (#{ID},#{PID},#{PALREPOSITORYID},#{ACTIONTYPE},#{PUBLISHDESC})
 </script>""")
-fun insert(model:sys_coe_pal_publish_list_dto):Unit
+fun Insert(model:sys_coe_pal_publish_list_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_publish_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PID!= null'> 
+           PID,
+        </if>
+        <if test='PALREPOSITORYID!= null'> 
+           PALREPOSITORYID,
+        </if>
+        <if test='ACTIONTYPE!= null'> 
+           ACTIONTYPE,
+        </if>
+        <if test='PUBLISHDESC!= null'> 
+           PUBLISHDESC
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PID!= null'> 
+           #{PID,jdbcType=char}，
+        </if>
+        <if test='PALREPOSITORYID!= null'> 
+           #{PALREPOSITORYID,jdbcType=char}，
+        </if>
+        <if test='ACTIONTYPE!= null'> 
+           #{ACTIONTYPE,jdbcType=char}，
+        </if>
+        <if test='PUBLISHDESC!= null'> 
+           #{PUBLISHDESC,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_publish_list_dto):Unit
                 
 
 }

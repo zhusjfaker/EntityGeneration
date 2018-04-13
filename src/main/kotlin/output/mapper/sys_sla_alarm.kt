@@ -109,12 +109,81 @@ fun ConditionalQueryByKey(model:sys_sla_alarm_dto):sys_sla_alarm_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_sla_alarm
     (ID,INSTNAME,ALARMNAME,EVENTTIME,ALARMLEVEL,METRICID,TAKEVALUE,TAKEDETAIL,APPID,RESOURCEID,ISREAD)
     values
     (#{ID},#{INSTNAME},#{ALARMNAME},#{EVENTTIME},#{ALARMLEVEL},#{METRICID},#{TAKEVALUE},#{TAKEDETAIL},#{APPID},#{RESOURCEID},#{ISREAD})
 </script>""")
-fun insert(model:sys_sla_alarm_dto):Unit
+fun Insert(model:sys_sla_alarm_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_sla_alarm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           INSTNAME,
+        <if test='ALARMNAME!= null'> 
+           ALARMNAME,
+        </if>
+        <if test='EVENTTIME!= null'> 
+           EVENTTIME,
+        </if>
+        <if test='ALARMLEVEL!= null'> 
+           ALARMLEVEL,
+        </if>
+        <if test='METRICID!= null'> 
+           METRICID,
+        </if>
+        <if test='TAKEVALUE!= null'> 
+           TAKEVALUE,
+        </if>
+        <if test='TAKEDETAIL!= null'> 
+           TAKEDETAIL,
+        </if>
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='RESOURCEID!= null'> 
+           RESOURCEID,
+        </if>
+        <if test='ISREAD!= null'> 
+           ISREAD
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+           #{INSTNAME,jdbcType=varchar}，
+        <if test='ALARMNAME!= null'> 
+           #{ALARMNAME,jdbcType=varchar}，
+        </if>
+        <if test='EVENTTIME!= null'> 
+           #{EVENTTIME,jdbcType=datetime}，
+        </if>
+        <if test='ALARMLEVEL!= null'> 
+           #{ALARMLEVEL,jdbcType=smallint}，
+        </if>
+        <if test='METRICID!= null'> 
+           #{METRICID,jdbcType=varchar}，
+        </if>
+        <if test='TAKEVALUE!= null'> 
+           #{TAKEVALUE,jdbcType=decimal}，
+        </if>
+        <if test='TAKEDETAIL!= null'> 
+           #{TAKEDETAIL,jdbcType=text}，
+        </if>
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='RESOURCEID!= null'> 
+           #{RESOURCEID,jdbcType=varchar}，
+        </if>
+        <if test='ISREAD!= null'> 
+           #{ISREAD,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_sla_alarm_dto):Unit
                 
 
 }

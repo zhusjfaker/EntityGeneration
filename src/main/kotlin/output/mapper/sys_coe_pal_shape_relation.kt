@@ -91,12 +91,67 @@ fun ConditionalQueryByKey(model:sys_coe_pal_shape_relation_dto):sys_coe_pal_shap
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_shape_relation
     (ID,FILEID,SHAPEID,SHAPETEXT,ATTRID,RELATIONFILEID,RELATIONSHAPEID,RELATIONSHAPETEXT)
     values
     (#{ID},#{FILEID},#{SHAPEID},#{SHAPETEXT},#{ATTRID},#{RELATIONFILEID},#{RELATIONSHAPEID},#{RELATIONSHAPETEXT})
 </script>""")
-fun insert(model:sys_coe_pal_shape_relation_dto):Unit
+fun Insert(model:sys_coe_pal_shape_relation_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_shape_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='FILEID!= null'> 
+           FILEID,
+        </if>
+        <if test='SHAPEID!= null'> 
+           SHAPEID,
+        </if>
+        <if test='SHAPETEXT!= null'> 
+           SHAPETEXT,
+        </if>
+        <if test='ATTRID!= null'> 
+           ATTRID,
+        </if>
+        <if test='RELATIONFILEID!= null'> 
+           RELATIONFILEID,
+        </if>
+        <if test='RELATIONSHAPEID!= null'> 
+           RELATIONSHAPEID,
+        </if>
+        <if test='RELATIONSHAPETEXT!= null'> 
+           RELATIONSHAPETEXT
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='FILEID!= null'> 
+           #{FILEID,jdbcType=varchar}，
+        </if>
+        <if test='SHAPEID!= null'> 
+           #{SHAPEID,jdbcType=varchar}，
+        </if>
+        <if test='SHAPETEXT!= null'> 
+           #{SHAPETEXT,jdbcType=varchar}，
+        </if>
+        <if test='ATTRID!= null'> 
+           #{ATTRID,jdbcType=varchar}，
+        </if>
+        <if test='RELATIONFILEID!= null'> 
+           #{RELATIONFILEID,jdbcType=varchar}，
+        </if>
+        <if test='RELATIONSHAPEID!= null'> 
+           #{RELATIONSHAPEID,jdbcType=varchar}，
+        </if>
+        <if test='RELATIONSHAPETEXT!= null'> 
+           #{RELATIONSHAPETEXT,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_shape_relation_dto):Unit
                 
 
 }

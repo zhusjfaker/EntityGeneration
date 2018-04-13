@@ -91,12 +91,67 @@ fun ConditionalQueryByKey(model:sys_function_access_dto):sys_function_access_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_function_access
     (ID,CATEGORYTYPE,ACCESSUSER,ACCESSTIME,RESOURCETYPE,RESOURCEID,EXT1,EXT2)
     values
     (#{ID},#{CATEGORYTYPE},#{ACCESSUSER},#{ACCESSTIME},#{RESOURCETYPE},#{RESOURCEID},#{EXT1},#{EXT2})
 </script>""")
-fun insert(model:sys_function_access_dto):Unit
+fun Insert(model:sys_function_access_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_function_access
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='CATEGORYTYPE!= null'> 
+           CATEGORYTYPE,
+        </if>
+        <if test='ACCESSUSER!= null'> 
+           ACCESSUSER,
+        </if>
+        <if test='ACCESSTIME!= null'> 
+           ACCESSTIME,
+        </if>
+        <if test='RESOURCETYPE!= null'> 
+           RESOURCETYPE,
+        </if>
+        <if test='RESOURCEID!= null'> 
+           RESOURCEID,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='CATEGORYTYPE!= null'> 
+           #{CATEGORYTYPE,jdbcType=smallint}，
+        </if>
+        <if test='ACCESSUSER!= null'> 
+           #{ACCESSUSER,jdbcType=varchar}，
+        </if>
+        <if test='ACCESSTIME!= null'> 
+           #{ACCESSTIME,jdbcType=datetime}，
+        </if>
+        <if test='RESOURCETYPE!= null'> 
+           #{RESOURCETYPE,jdbcType=smallint}，
+        </if>
+        <if test='RESOURCEID!= null'> 
+           #{RESOURCEID,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_function_access_dto):Unit
                 
 
 }

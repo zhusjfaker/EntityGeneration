@@ -103,12 +103,79 @@ fun ConditionalQueryByKey(model:wfh_formsnapshot_dto):wfh_formsnapshot_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfh_formsnapshot
     (ID,PROCESSINSTID,TASKINSTID,PROCESSDEFID,ACTIVITYDEFID,AUTHORUID,AUTHORNAME,RECORDTIME,FORMID,VNAME)
     values
     (#{ID},#{PROCESSINSTID},#{TASKINSTID},#{PROCESSDEFID},#{ACTIVITYDEFID},#{AUTHORUID},#{AUTHORNAME},#{RECORDTIME},#{FORMID},#{VNAME})
 </script>""")
-fun insert(model:wfh_formsnapshot_dto):Unit
+fun Insert(model:wfh_formsnapshot_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfh_formsnapshot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+        <if test='ACTIVITYDEFID!= null'> 
+           ACTIVITYDEFID,
+        </if>
+        <if test='AUTHORUID!= null'> 
+           AUTHORUID,
+        </if>
+        <if test='AUTHORNAME!= null'> 
+           AUTHORNAME,
+        </if>
+        <if test='RECORDTIME!= null'> 
+           RECORDTIME,
+        </if>
+        <if test='FORMID!= null'> 
+           FORMID,
+        </if>
+        <if test='VNAME!= null'> 
+           VNAME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+        <if test='ACTIVITYDEFID!= null'> 
+           #{ACTIVITYDEFID,jdbcType=char}，
+        </if>
+        <if test='AUTHORUID!= null'> 
+           #{AUTHORUID,jdbcType=varchar}，
+        </if>
+        <if test='AUTHORNAME!= null'> 
+           #{AUTHORNAME,jdbcType=varchar}，
+        </if>
+        <if test='RECORDTIME!= null'> 
+           #{RECORDTIME,jdbcType=datetime}，
+        </if>
+        <if test='FORMID!= null'> 
+           #{FORMID,jdbcType=char}，
+        </if>
+        <if test='VNAME!= null'> 
+           #{VNAME,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfh_formsnapshot_dto):Unit
                 
 
 }

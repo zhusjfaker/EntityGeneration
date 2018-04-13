@@ -5,6 +5,9 @@ import entity.TableEntity
 class DataManipulation {
     companion object {
 
+        /*
+        查询表实体主键名称
+         */
         fun Primarykey(table: TableEntity): String? {
             table.ColumnList?.forEach {
                 if (it.COLUMN_KEY?.trim() == "PRI") {
@@ -117,12 +120,12 @@ fun ConditionalQueryByKey(model:${table.table_name + "_dto"}):${table.table_name
         /*
           全量插入
          */
-        fun insertContent(table: TableEntity): String {
+        fun InsertContent(table: TableEntity): String {
             val key = Primarykey(table)
             if (!key.isNullOrEmpty() && table.ColumnList?.filter { it.COLUMN_NAME == key }?.firstOrNull()?.EXTRA == "auto_increment") {
                 return """
 @Insert(""${'"'}<script>
-    insert into TStudent
+    insert into ${table.table_name}
     (${table.ColumnList?.filter { it.COLUMN_NAME != key }?.map { it.COLUMN_NAME }?.joinToString(separator = ",")})
     values
     (${table.ColumnList?.filter { it.COLUMN_NAME != key }?.map { "#{" + it.COLUMN_NAME + "}" }?.joinToString(separator = ",")})
@@ -133,16 +136,94 @@ fun insert(model:${table.table_name + "_dto"}):${TypeConvert(table.ColumnList?.f
             } else {
                 return """
 @Insert(""${'"'}<script>
-    insert into TStudent
+    insert into ${table.table_name}
     (${table.ColumnList?.map { it.COLUMN_NAME }?.joinToString(separator = ",")})
     values
     (${table.ColumnList?.map { "#{" + it.COLUMN_NAME + "}" }?.joinToString(separator = ",")})
 </script>""${'"'})
-fun insert(model:${table.table_name + "_dto"}):Unit
+fun Insert(model:${table.table_name + "_dto"}):Unit
                 """
             }
         }
 
+
+        /*
+        选择性插入
+         */
+        fun InsertSelectiveContent(table: TableEntity): String {
+            val key = Primarykey(table)
+            if (!key.isNullOrEmpty() && table.ColumnList?.filter { it.COLUMN_NAME == key }?.firstOrNull()?.EXTRA == "auto_increment") {
+
+                return """
+@Insert(""${'"'}<script>
+    insert into ${table.table_name}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        ${table.ColumnList?.filter { it.COLUMN_NAME != key }?.map {
+                    if (it.IS_NULLABLE == "YES") {
+                        "<if test='" + it.COLUMN_NAME + "!= null'> \n" +
+                                "        " + if (table.ColumnList?.last() == it) "   " + it.COLUMN_NAME + "\n" + "        </if>" else "   " + it.COLUMN_NAME + ",\n" + "        </if>"
+                    } else {
+                        if (table.ColumnList?.last() == it) "   " + it.COLUMN_NAME else "   " + it.COLUMN_NAME + ","
+                    }
+                }?.joinToString(separator = "\n        ")}
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        ${table.ColumnList?.filter { it.COLUMN_NAME != key }?.map {
+                    if (it.IS_NULLABLE == "YES") {
+                        "<if test='" + it.COLUMN_NAME + "!= null'> \n" +
+                                "        " + if (table.ColumnList?.last() == it)
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE + "}\n" + "        </if>"
+                        else
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE + "}，\n" + "        </if>"
+                    } else {
+                        if (table.ColumnList?.last() == it)
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE + "}"
+                        else
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE + "}，"
+                    }
+                }?.joinToString(separator = "\n        ")}
+    </trim>
+</script>""${'"'})
+@Options(keyProperty="${key}",useGeneratedKeys=true)
+fun InsertSelective(model:${table.table_name + "_dto"}):${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == key }?.firstOrNull()?.DATA_TYPE!!)}
+                """
+
+            } else {
+
+                return """
+@Insert(""${'"'}<script>
+    insert into ${table.table_name}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        ${table.ColumnList?.map {
+                    if (it.IS_NULLABLE == "YES") {
+                        "<if test='" + it.COLUMN_NAME + "!= null'> \n" +
+                                "        " + if (table.ColumnList?.last() == it) "   " + it.COLUMN_NAME + "\n" + "        </if>" else "   " + it.COLUMN_NAME + ",\n" + "        </if>"
+                    } else {
+                        if (table.ColumnList?.last() == it) "   " + it.COLUMN_NAME else "   " + it.COLUMN_NAME + ","
+                    }
+                }?.joinToString(separator = "\n        ")}
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        ${table.ColumnList?.map {
+                    if (it.IS_NULLABLE == "YES") {
+                        "<if test='" + it.COLUMN_NAME + "!= null'> \n" +
+                                "        " + if (table.ColumnList?.last() == it)
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE + "}\n" + "        </if>"
+                        else
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE + "}，\n" + "        </if>"
+                    } else {
+                        if (table.ColumnList?.last() == it)
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE + "}"
+                        else
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE + "}，"
+                    }
+                }?.joinToString(separator = "\n        ")}
+    </trim>
+</script>""${'"'})
+fun InsertSelective(model:${table.table_name + "_dto"}):Unit
+                """
+            }
+        }
 
     }
 }

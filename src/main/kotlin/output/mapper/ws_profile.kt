@@ -91,12 +91,63 @@ fun ConditionalQueryByKey(model:ws_profile_dto):ws_profile_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into ws_profile
     (ID,UUID,PROFILETYPE,PROFILESOURCE,PROFILENAME,PROFILECONTENT,BEGINDATE,ENDDATE)
     values
     (#{ID},#{UUID},#{PROFILETYPE},#{PROFILESOURCE},#{PROFILENAME},#{PROFILECONTENT},#{BEGINDATE},#{ENDDATE})
 </script>""")
-fun insert(model:ws_profile_dto):Unit
+fun Insert(model:ws_profile_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into ws_profile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='UUID!= null'> 
+           UUID,
+        </if>
+           PROFILETYPE,
+        <if test='PROFILESOURCE!= null'> 
+           PROFILESOURCE,
+        </if>
+        <if test='PROFILENAME!= null'> 
+           PROFILENAME,
+        </if>
+        <if test='PROFILECONTENT!= null'> 
+           PROFILECONTENT,
+        </if>
+        <if test='BEGINDATE!= null'> 
+           BEGINDATE,
+        </if>
+        <if test='ENDDATE!= null'> 
+           ENDDATE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=decimal}，
+        <if test='UUID!= null'> 
+           #{UUID,jdbcType=text}，
+        </if>
+           #{PROFILETYPE,jdbcType=varchar}，
+        <if test='PROFILESOURCE!= null'> 
+           #{PROFILESOURCE,jdbcType=text}，
+        </if>
+        <if test='PROFILENAME!= null'> 
+           #{PROFILENAME,jdbcType=text}，
+        </if>
+        <if test='PROFILECONTENT!= null'> 
+           #{PROFILECONTENT,jdbcType=text}，
+        </if>
+        <if test='BEGINDATE!= null'> 
+           #{BEGINDATE,jdbcType=datetime}，
+        </if>
+        <if test='ENDDATE!= null'> 
+           #{ENDDATE,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:ws_profile_dto):Unit
                 
 
 }

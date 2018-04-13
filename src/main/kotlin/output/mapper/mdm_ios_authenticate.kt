@@ -85,12 +85,61 @@ fun ConditionalQueryByKey(model:mdm_ios_authenticate_dto):mdm_ios_authenticate_d
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mdm_ios_authenticate
     (ID,DEVICEID,TOPIC,AUTHTIME,PUSHMAGIC,TOKEN,UNLOCKTOKEN)
     values
     (#{ID},#{DEVICEID},#{TOPIC},#{AUTHTIME},#{PUSHMAGIC},#{TOKEN},#{UNLOCKTOKEN})
 </script>""")
-fun insert(model:mdm_ios_authenticate_dto):Unit
+fun Insert(model:mdm_ios_authenticate_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mdm_ios_authenticate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='DEVICEID!= null'> 
+           DEVICEID,
+        </if>
+        <if test='TOPIC!= null'> 
+           TOPIC,
+        </if>
+        <if test='AUTHTIME!= null'> 
+           AUTHTIME,
+        </if>
+        <if test='PUSHMAGIC!= null'> 
+           PUSHMAGIC,
+        </if>
+        <if test='TOKEN!= null'> 
+           TOKEN,
+        </if>
+        <if test='UNLOCKTOKEN!= null'> 
+           UNLOCKTOKEN
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='DEVICEID!= null'> 
+           #{DEVICEID,jdbcType=char}，
+        </if>
+        <if test='TOPIC!= null'> 
+           #{TOPIC,jdbcType=varchar}，
+        </if>
+        <if test='AUTHTIME!= null'> 
+           #{AUTHTIME,jdbcType=datetime}，
+        </if>
+        <if test='PUSHMAGIC!= null'> 
+           #{PUSHMAGIC,jdbcType=varchar}，
+        </if>
+        <if test='TOKEN!= null'> 
+           #{TOKEN,jdbcType=varchar}，
+        </if>
+        <if test='UNLOCKTOKEN!= null'> 
+           #{UNLOCKTOKEN,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mdm_ios_authenticate_dto):Unit
                 
 
 }

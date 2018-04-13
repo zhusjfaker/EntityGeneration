@@ -73,12 +73,49 @@ fun ConditionalQueryByKey(model:mam_appuse_dto):mam_appuse_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mam_appuse
     (ID,APPID,DEVICEID,USETIME,APPVERSION)
     values
     (#{ID},#{APPID},#{DEVICEID},#{USETIME},#{APPVERSION})
 </script>""")
-fun insert(model:mam_appuse_dto):Unit
+fun Insert(model:mam_appuse_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mam_appuse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='DEVICEID!= null'> 
+           DEVICEID,
+        </if>
+        <if test='USETIME!= null'> 
+           USETIME,
+        </if>
+        <if test='APPVERSION!= null'> 
+           APPVERSION
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='DEVICEID!= null'> 
+           #{DEVICEID,jdbcType=char}，
+        </if>
+        <if test='USETIME!= null'> 
+           #{USETIME,jdbcType=datetime}，
+        </if>
+        <if test='APPVERSION!= null'> 
+           #{APPVERSION,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mam_appuse_dto):Unit
                 
 
 }

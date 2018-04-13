@@ -55,12 +55,31 @@ fun ConditionalQueryByKey(model:sys_coe_pal_shape_file_dto):sys_coe_pal_shape_fi
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_shape_file
     (ID,PALREPOSITORYID)
     values
     (#{ID},#{PALREPOSITORYID})
 </script>""")
-fun insert(model:sys_coe_pal_shape_file_dto):Unit
+fun Insert(model:sys_coe_pal_shape_file_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_shape_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PALREPOSITORYID!= null'> 
+           PALREPOSITORYID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='PALREPOSITORYID!= null'> 
+           #{PALREPOSITORYID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_shape_file_dto):Unit
                 
 
 }

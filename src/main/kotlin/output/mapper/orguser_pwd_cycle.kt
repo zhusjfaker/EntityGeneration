@@ -73,12 +73,49 @@ fun ConditionalQueryByKey(model:orguser_pwd_cycle_dto):orguser_pwd_cycle_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into orguser_pwd_cycle
     (ID,USERID,PASSWORD,LASTDATE,IP)
     values
     (#{ID},#{USERID},#{PASSWORD},#{LASTDATE},#{IP})
 </script>""")
-fun insert(model:orguser_pwd_cycle_dto):Unit
+fun Insert(model:orguser_pwd_cycle_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into orguser_pwd_cycle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='PASSWORD!= null'> 
+           PASSWORD,
+        </if>
+        <if test='LASTDATE!= null'> 
+           LASTDATE,
+        </if>
+        <if test='IP!= null'> 
+           IP
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='PASSWORD!= null'> 
+           #{PASSWORD,jdbcType=varchar}，
+        </if>
+        <if test='LASTDATE!= null'> 
+           #{LASTDATE,jdbcType=datetime}，
+        </if>
+        <if test='IP!= null'> 
+           #{IP,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:orguser_pwd_cycle_dto):Unit
                 
 
 }

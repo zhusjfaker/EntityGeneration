@@ -157,12 +157,125 @@ fun ConditionalQueryByKey(model:orgcompany_dto):orgcompany_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into orgcompany
     (ID,COMPANYNO,COMPANYNAME,ORDERINDEX,WORKCANLENDAR,COMPANYTYPE,COMPANYDESC,LOOKANDFEEL,EXT1,EXT2,EXT3,EXT4,EXT5,CLOSED,CLOSEDATE,BEGINDATE,ENDDATE,CREATEDATE,UPDATEDATE)
     values
     (#{ID},#{COMPANYNO},#{COMPANYNAME},#{ORDERINDEX},#{WORKCANLENDAR},#{COMPANYTYPE},#{COMPANYDESC},#{LOOKANDFEEL},#{EXT1},#{EXT2},#{EXT3},#{EXT4},#{EXT5},#{CLOSED},#{CLOSEDATE},#{BEGINDATE},#{ENDDATE},#{CREATEDATE},#{UPDATEDATE})
 </script>""")
-fun insert(model:orgcompany_dto):Unit
+fun Insert(model:orgcompany_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into orgcompany
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='COMPANYNO!= null'> 
+           COMPANYNO,
+        </if>
+           COMPANYNAME,
+           ORDERINDEX,
+        <if test='WORKCANLENDAR!= null'> 
+           WORKCANLENDAR,
+        </if>
+        <if test='COMPANYTYPE!= null'> 
+           COMPANYTYPE,
+        </if>
+        <if test='COMPANYDESC!= null'> 
+           COMPANYDESC,
+        </if>
+        <if test='LOOKANDFEEL!= null'> 
+           LOOKANDFEEL,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5,
+        </if>
+        <if test='CLOSED!= null'> 
+           CLOSED,
+        </if>
+        <if test='CLOSEDATE!= null'> 
+           CLOSEDATE,
+        </if>
+        <if test='BEGINDATE!= null'> 
+           BEGINDATE,
+        </if>
+        <if test='ENDDATE!= null'> 
+           ENDDATE,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='COMPANYNO!= null'> 
+           #{COMPANYNO,jdbcType=varchar}，
+        </if>
+           #{COMPANYNAME,jdbcType=varchar}，
+           #{ORDERINDEX,jdbcType=decimal}，
+        <if test='WORKCANLENDAR!= null'> 
+           #{WORKCANLENDAR,jdbcType=varchar}，
+        </if>
+        <if test='COMPANYTYPE!= null'> 
+           #{COMPANYTYPE,jdbcType=varchar}，
+        </if>
+        <if test='COMPANYDESC!= null'> 
+           #{COMPANYDESC,jdbcType=varchar}，
+        </if>
+        <if test='LOOKANDFEEL!= null'> 
+           #{LOOKANDFEEL,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=varchar}，
+        </if>
+        <if test='CLOSED!= null'> 
+           #{CLOSED,jdbcType=smallint}，
+        </if>
+        <if test='CLOSEDATE!= null'> 
+           #{CLOSEDATE,jdbcType=datetime}，
+        </if>
+        <if test='BEGINDATE!= null'> 
+           #{BEGINDATE,jdbcType=datetime}，
+        </if>
+        <if test='ENDDATE!= null'> 
+           #{ENDDATE,jdbcType=datetime}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=datetime}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:orgcompany_dto):Unit
                 
 
 }

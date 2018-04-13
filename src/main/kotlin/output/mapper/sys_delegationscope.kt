@@ -67,12 +67,43 @@ fun ConditionalQueryByKey(model:sys_delegationscope_dto):sys_delegationscope_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_delegationscope
     (ID,PID,RESOURCETYPE,RESOURCEID)
     values
     (#{ID},#{PID},#{RESOURCETYPE},#{RESOURCEID})
 </script>""")
-fun insert(model:sys_delegationscope_dto):Unit
+fun Insert(model:sys_delegationscope_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_delegationscope
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PID!= null'> 
+           PID,
+        </if>
+        <if test='RESOURCETYPE!= null'> 
+           RESOURCETYPE,
+        </if>
+        <if test='RESOURCEID!= null'> 
+           RESOURCEID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PID!= null'> 
+           #{PID,jdbcType=char}，
+        </if>
+        <if test='RESOURCETYPE!= null'> 
+           #{RESOURCETYPE,jdbcType=char}，
+        </if>
+        <if test='RESOURCEID!= null'> 
+           #{RESOURCEID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_delegationscope_dto):Unit
                 
 
 }

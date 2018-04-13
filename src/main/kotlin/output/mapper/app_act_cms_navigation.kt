@@ -91,12 +91,67 @@ fun ConditionalQueryByKey(model:app_act_cms_navigation_dto):app_act_cms_navigati
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_cms_navigation
     (ID,NAVSITEOWNERID,NAVNAME,SITEID,NAVURL,CREATETIME,CREATEUSER,LINKTARGET)
     values
     (#{ID},#{NAVSITEOWNERID},#{NAVNAME},#{SITEID},#{NAVURL},#{CREATETIME},#{CREATEUSER},#{LINKTARGET})
 </script>""")
-fun insert(model:app_act_cms_navigation_dto):Unit
+fun Insert(model:app_act_cms_navigation_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_cms_navigation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='NAVSITEOWNERID!= null'> 
+           NAVSITEOWNERID,
+        </if>
+        <if test='NAVNAME!= null'> 
+           NAVNAME,
+        </if>
+        <if test='SITEID!= null'> 
+           SITEID,
+        </if>
+        <if test='NAVURL!= null'> 
+           NAVURL,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='LINKTARGET!= null'> 
+           LINKTARGET
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='NAVSITEOWNERID!= null'> 
+           #{NAVSITEOWNERID,jdbcType=char}，
+        </if>
+        <if test='NAVNAME!= null'> 
+           #{NAVNAME,jdbcType=varchar}，
+        </if>
+        <if test='SITEID!= null'> 
+           #{SITEID,jdbcType=char}，
+        </if>
+        <if test='NAVURL!= null'> 
+           #{NAVURL,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='LINKTARGET!= null'> 
+           #{LINKTARGET,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_cms_navigation_dto):Unit
                 
 
 }

@@ -97,12 +97,73 @@ fun ConditionalQueryByKey(model:sys_coe_pal_shape_attribute_dto):sys_coe_pal_sha
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_shape_attribute
     (ID,WSID,ATTRID,ATTRNAME,ATTRVALUE,CATEGORY,METHODID,TYPE,SHAPENAME)
     values
     (#{ID},#{WSID},#{ATTRID},#{ATTRNAME},#{ATTRVALUE},#{CATEGORY},#{METHODID},#{TYPE},#{SHAPENAME})
 </script>""")
-fun insert(model:sys_coe_pal_shape_attribute_dto):Unit
+fun Insert(model:sys_coe_pal_shape_attribute_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_shape_attribute
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='WSID!= null'> 
+           WSID,
+        </if>
+        <if test='ATTRID!= null'> 
+           ATTRID,
+        </if>
+        <if test='ATTRNAME!= null'> 
+           ATTRNAME,
+        </if>
+        <if test='ATTRVALUE!= null'> 
+           ATTRVALUE,
+        </if>
+        <if test='CATEGORY!= null'> 
+           CATEGORY,
+        </if>
+        <if test='METHODID!= null'> 
+           METHODID,
+        </if>
+        <if test='TYPE!= null'> 
+           TYPE,
+        </if>
+        <if test='SHAPENAME!= null'> 
+           SHAPENAME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='WSID!= null'> 
+           #{WSID,jdbcType=varchar}，
+        </if>
+        <if test='ATTRID!= null'> 
+           #{ATTRID,jdbcType=varchar}，
+        </if>
+        <if test='ATTRNAME!= null'> 
+           #{ATTRNAME,jdbcType=varchar}，
+        </if>
+        <if test='ATTRVALUE!= null'> 
+           #{ATTRVALUE,jdbcType=varchar}，
+        </if>
+        <if test='CATEGORY!= null'> 
+           #{CATEGORY,jdbcType=varchar}，
+        </if>
+        <if test='METHODID!= null'> 
+           #{METHODID,jdbcType=varchar}，
+        </if>
+        <if test='TYPE!= null'> 
+           #{TYPE,jdbcType=varchar}，
+        </if>
+        <if test='SHAPENAME!= null'> 
+           #{SHAPENAME,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_shape_attribute_dto):Unit
                 
 
 }

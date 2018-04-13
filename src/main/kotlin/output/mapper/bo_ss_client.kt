@@ -235,12 +235,207 @@ fun ConditionalQueryByKey(model:bo_ss_client_dto):bo_ss_client_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_ss_client
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,CCODE,CNAME,OFFADDR,REGADDR,STATUS1,BANK,ACCOUNT,TAXNO,CATTRIBUTE,CREDIT,LIMITRANGE,REGFUND,POSTCODE,TEL,FAX,WWW,REGDATE,GTYPE,RECDATE,BUID,BUNAME,MODDATE,MEMO)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{CCODE},#{CNAME},#{OFFADDR},#{REGADDR},#{STATUS1},#{BANK},#{ACCOUNT},#{TAXNO},#{CATTRIBUTE},#{CREDIT},#{LIMITRANGE},#{REGFUND},#{POSTCODE},#{TEL},#{FAX},#{WWW},#{REGDATE},#{GTYPE},#{RECDATE},#{BUID},#{BUNAME},#{MODDATE},#{MEMO})
 </script>""")
-fun insert(model:bo_ss_client_dto):Unit
+fun Insert(model:bo_ss_client_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_ss_client
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='CCODE!= null'> 
+           CCODE,
+        </if>
+        <if test='CNAME!= null'> 
+           CNAME,
+        </if>
+        <if test='OFFADDR!= null'> 
+           OFFADDR,
+        </if>
+        <if test='REGADDR!= null'> 
+           REGADDR,
+        </if>
+        <if test='STATUS1!= null'> 
+           STATUS1,
+        </if>
+        <if test='BANK!= null'> 
+           BANK,
+        </if>
+        <if test='ACCOUNT!= null'> 
+           ACCOUNT,
+        </if>
+        <if test='TAXNO!= null'> 
+           TAXNO,
+        </if>
+        <if test='CATTRIBUTE!= null'> 
+           CATTRIBUTE,
+        </if>
+        <if test='CREDIT!= null'> 
+           CREDIT,
+        </if>
+        <if test='LIMITRANGE!= null'> 
+           LIMITRANGE,
+        </if>
+        <if test='REGFUND!= null'> 
+           REGFUND,
+        </if>
+        <if test='POSTCODE!= null'> 
+           POSTCODE,
+        </if>
+        <if test='TEL!= null'> 
+           TEL,
+        </if>
+        <if test='FAX!= null'> 
+           FAX,
+        </if>
+        <if test='WWW!= null'> 
+           WWW,
+        </if>
+        <if test='REGDATE!= null'> 
+           REGDATE,
+        </if>
+        <if test='GTYPE!= null'> 
+           GTYPE,
+        </if>
+        <if test='RECDATE!= null'> 
+           RECDATE,
+        </if>
+        <if test='BUID!= null'> 
+           BUID,
+        </if>
+        <if test='BUNAME!= null'> 
+           BUNAME,
+        </if>
+        <if test='MODDATE!= null'> 
+           MODDATE,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='CCODE!= null'> 
+           #{CCODE,jdbcType=varchar}，
+        </if>
+        <if test='CNAME!= null'> 
+           #{CNAME,jdbcType=varchar}，
+        </if>
+        <if test='OFFADDR!= null'> 
+           #{OFFADDR,jdbcType=varchar}，
+        </if>
+        <if test='REGADDR!= null'> 
+           #{REGADDR,jdbcType=varchar}，
+        </if>
+        <if test='STATUS1!= null'> 
+           #{STATUS1,jdbcType=varchar}，
+        </if>
+        <if test='BANK!= null'> 
+           #{BANK,jdbcType=varchar}，
+        </if>
+        <if test='ACCOUNT!= null'> 
+           #{ACCOUNT,jdbcType=varchar}，
+        </if>
+        <if test='TAXNO!= null'> 
+           #{TAXNO,jdbcType=varchar}，
+        </if>
+        <if test='CATTRIBUTE!= null'> 
+           #{CATTRIBUTE,jdbcType=varchar}，
+        </if>
+        <if test='CREDIT!= null'> 
+           #{CREDIT,jdbcType=varchar}，
+        </if>
+        <if test='LIMITRANGE!= null'> 
+           #{LIMITRANGE,jdbcType=decimal}，
+        </if>
+        <if test='REGFUND!= null'> 
+           #{REGFUND,jdbcType=decimal}，
+        </if>
+        <if test='POSTCODE!= null'> 
+           #{POSTCODE,jdbcType=varchar}，
+        </if>
+        <if test='TEL!= null'> 
+           #{TEL,jdbcType=varchar}，
+        </if>
+        <if test='FAX!= null'> 
+           #{FAX,jdbcType=varchar}，
+        </if>
+        <if test='WWW!= null'> 
+           #{WWW,jdbcType=varchar}，
+        </if>
+        <if test='REGDATE!= null'> 
+           #{REGDATE,jdbcType=datetime}，
+        </if>
+        <if test='GTYPE!= null'> 
+           #{GTYPE,jdbcType=varchar}，
+        </if>
+        <if test='RECDATE!= null'> 
+           #{RECDATE,jdbcType=datetime}，
+        </if>
+        <if test='BUID!= null'> 
+           #{BUID,jdbcType=varchar}，
+        </if>
+        <if test='BUNAME!= null'> 
+           #{BUNAME,jdbcType=varchar}，
+        </if>
+        <if test='MODDATE!= null'> 
+           #{MODDATE,jdbcType=datetime}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_ss_client_dto):Unit
                 
 
 }

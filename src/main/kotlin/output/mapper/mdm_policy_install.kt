@@ -73,12 +73,41 @@ fun ConditionalQueryByKey(model:mdm_policy_install_dto):mdm_policy_install_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mdm_policy_install
     (ID,POLICYID,DEVICEID,INSTALLVERSION,INSTALLTIME)
     values
     (#{ID},#{POLICYID},#{DEVICEID},#{INSTALLVERSION},#{INSTALLTIME})
 </script>""")
-fun insert(model:mdm_policy_install_dto):Unit
+fun Insert(model:mdm_policy_install_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mdm_policy_install
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           POLICYID,
+           DEVICEID,
+        <if test='INSTALLVERSION!= null'> 
+           INSTALLVERSION,
+        </if>
+        <if test='INSTALLTIME!= null'> 
+           INSTALLTIME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+           #{POLICYID,jdbcType=char}，
+           #{DEVICEID,jdbcType=char}，
+        <if test='INSTALLVERSION!= null'> 
+           #{INSTALLVERSION,jdbcType=decimal}，
+        </if>
+        <if test='INSTALLTIME!= null'> 
+           #{INSTALLTIME,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mdm_policy_install_dto):Unit
                 
 
 }

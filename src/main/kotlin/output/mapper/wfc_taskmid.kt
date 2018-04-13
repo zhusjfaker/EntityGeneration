@@ -139,12 +139,115 @@ fun ConditionalQueryByKey(model:wfc_taskmid_dto):wfc_taskmid_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfc_taskmid
     (ID,PROCESSINSTID,TASKINSTID,PROCESSDEFID,PROCESSDEFVERID,ACTIVITYDEFID,OWNER,OWNERDEPTID,TARGET,TARGETDEPTID,TARGETCOMPANYID,TARGETROLEID,DISPATCHSTATE,PRIORITY,DUETIME,ORDERINDEX)
     values
     (#{ID},#{PROCESSINSTID},#{TASKINSTID},#{PROCESSDEFID},#{PROCESSDEFVERID},#{ACTIVITYDEFID},#{OWNER},#{OWNERDEPTID},#{TARGET},#{TARGETDEPTID},#{TARGETCOMPANYID},#{TARGETROLEID},#{DISPATCHSTATE},#{PRIORITY},#{DUETIME},#{ORDERINDEX})
 </script>""")
-fun insert(model:wfc_taskmid_dto):Unit
+fun Insert(model:wfc_taskmid_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfc_taskmid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+        <if test='PROCESSDEFVERID!= null'> 
+           PROCESSDEFVERID,
+        </if>
+        <if test='ACTIVITYDEFID!= null'> 
+           ACTIVITYDEFID,
+        </if>
+        <if test='OWNER!= null'> 
+           OWNER,
+        </if>
+        <if test='OWNERDEPTID!= null'> 
+           OWNERDEPTID,
+        </if>
+        <if test='TARGET!= null'> 
+           TARGET,
+        </if>
+        <if test='TARGETDEPTID!= null'> 
+           TARGETDEPTID,
+        </if>
+        <if test='TARGETCOMPANYID!= null'> 
+           TARGETCOMPANYID,
+        </if>
+        <if test='TARGETROLEID!= null'> 
+           TARGETROLEID,
+        </if>
+        <if test='DISPATCHSTATE!= null'> 
+           DISPATCHSTATE,
+        </if>
+        <if test='PRIORITY!= null'> 
+           PRIORITY,
+        </if>
+        <if test='DUETIME!= null'> 
+           DUETIME,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+        <if test='PROCESSDEFVERID!= null'> 
+           #{PROCESSDEFVERID,jdbcType=char}，
+        </if>
+        <if test='ACTIVITYDEFID!= null'> 
+           #{ACTIVITYDEFID,jdbcType=char}，
+        </if>
+        <if test='OWNER!= null'> 
+           #{OWNER,jdbcType=varchar}，
+        </if>
+        <if test='OWNERDEPTID!= null'> 
+           #{OWNERDEPTID,jdbcType=varchar}，
+        </if>
+        <if test='TARGET!= null'> 
+           #{TARGET,jdbcType=varchar}，
+        </if>
+        <if test='TARGETDEPTID!= null'> 
+           #{TARGETDEPTID,jdbcType=varchar}，
+        </if>
+        <if test='TARGETCOMPANYID!= null'> 
+           #{TARGETCOMPANYID,jdbcType=varchar}，
+        </if>
+        <if test='TARGETROLEID!= null'> 
+           #{TARGETROLEID,jdbcType=varchar}，
+        </if>
+        <if test='DISPATCHSTATE!= null'> 
+           #{DISPATCHSTATE,jdbcType=smallint}，
+        </if>
+        <if test='PRIORITY!= null'> 
+           #{PRIORITY,jdbcType=smallint}，
+        </if>
+        <if test='DUETIME!= null'> 
+           #{DUETIME,jdbcType=datetime}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfc_taskmid_dto):Unit
                 
 
 }

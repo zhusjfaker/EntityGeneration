@@ -73,12 +73,41 @@ fun ConditionalQueryByKey(model:orgteam_member_dto):orgteam_member_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into orgteam_member
     (ID,TEAMID,USERID,MEMBERTYPE,ORDERINDEX)
     values
     (#{ID},#{TEAMID},#{USERID},#{MEMBERTYPE},#{ORDERINDEX})
 </script>""")
-fun insert(model:orgteam_member_dto):Unit
+fun Insert(model:orgteam_member_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into orgteam_member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           TEAMID,
+           USERID,
+        <if test='MEMBERTYPE!= null'> 
+           MEMBERTYPE,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+           #{TEAMID,jdbcType=varchar}，
+           #{USERID,jdbcType=varchar}，
+        <if test='MEMBERTYPE!= null'> 
+           #{MEMBERTYPE,jdbcType=smallint}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=decimal}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:orgteam_member_dto):Unit
                 
 
 }

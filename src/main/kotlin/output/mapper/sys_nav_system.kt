@@ -133,12 +133,93 @@ fun ConditionalQueryByKey(model:sys_nav_system_dto):sys_nav_system_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_nav_system
     (ID,SYSTEMNAME,ORDERINDEX,LINKURL,LINKTARGET,ICON16,ICON64,ICON96,NAVDESC,APPID,ISHIDDEN,ISACTIVITY,PORTALLAYOUT,PORTALLOCKED,NOTIFIER)
     values
     (#{ID},#{SYSTEMNAME},#{ORDERINDEX},#{LINKURL},#{LINKTARGET},#{ICON16},#{ICON64},#{ICON96},#{NAVDESC},#{APPID},#{ISHIDDEN},#{ISACTIVITY},#{PORTALLAYOUT},#{PORTALLOCKED},#{NOTIFIER})
 </script>""")
-fun insert(model:sys_nav_system_dto):Unit
+fun Insert(model:sys_nav_system_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_nav_system
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           SYSTEMNAME,
+           ORDERINDEX,
+           LINKURL,
+           LINKTARGET,
+        <if test='ICON16!= null'> 
+           ICON16,
+        </if>
+        <if test='ICON64!= null'> 
+           ICON64,
+        </if>
+        <if test='ICON96!= null'> 
+           ICON96,
+        </if>
+        <if test='NAVDESC!= null'> 
+           NAVDESC,
+        </if>
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='ISHIDDEN!= null'> 
+           ISHIDDEN,
+        </if>
+        <if test='ISACTIVITY!= null'> 
+           ISACTIVITY,
+        </if>
+        <if test='PORTALLAYOUT!= null'> 
+           PORTALLAYOUT,
+        </if>
+        <if test='PORTALLOCKED!= null'> 
+           PORTALLOCKED,
+        </if>
+        <if test='NOTIFIER!= null'> 
+           NOTIFIER
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+           #{SYSTEMNAME,jdbcType=varchar}，
+           #{ORDERINDEX,jdbcType=smallint}，
+           #{LINKURL,jdbcType=varchar}，
+           #{LINKTARGET,jdbcType=varchar}，
+        <if test='ICON16!= null'> 
+           #{ICON16,jdbcType=varchar}，
+        </if>
+        <if test='ICON64!= null'> 
+           #{ICON64,jdbcType=varchar}，
+        </if>
+        <if test='ICON96!= null'> 
+           #{ICON96,jdbcType=varchar}，
+        </if>
+        <if test='NAVDESC!= null'> 
+           #{NAVDESC,jdbcType=varchar}，
+        </if>
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='ISHIDDEN!= null'> 
+           #{ISHIDDEN,jdbcType=smallint}，
+        </if>
+        <if test='ISACTIVITY!= null'> 
+           #{ISACTIVITY,jdbcType=smallint}，
+        </if>
+        <if test='PORTALLAYOUT!= null'> 
+           #{PORTALLAYOUT,jdbcType=varchar}，
+        </if>
+        <if test='PORTALLOCKED!= null'> 
+           #{PORTALLOCKED,jdbcType=varchar}，
+        </if>
+        <if test='NOTIFIER!= null'> 
+           #{NOTIFIER,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_nav_system_dto):Unit
                 
 
 }

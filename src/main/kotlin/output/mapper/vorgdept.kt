@@ -121,12 +121,97 @@ fun ConditionalQueryByKey(model:vorgdept_dto):vorgdept_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into vorgdept
     (ID,DEPARTMENTNAME,UNITID,PARENTDEPARTMENTID,DEPARTMENTNO,LAYER,ORDERINDEX,EXT1,EXT2,EXT3,EXT4,EXT5,ADMINISTRATORS)
     values
     (#{ID},#{DEPARTMENTNAME},#{UNITID},#{PARENTDEPARTMENTID},#{DEPARTMENTNO},#{LAYER},#{ORDERINDEX},#{EXT1},#{EXT2},#{EXT3},#{EXT4},#{EXT5},#{ADMINISTRATORS})
 </script>""")
-fun insert(model:vorgdept_dto):Unit
+fun Insert(model:vorgdept_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into vorgdept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='DEPARTMENTNAME!= null'> 
+           DEPARTMENTNAME,
+        </if>
+        <if test='UNITID!= null'> 
+           UNITID,
+        </if>
+        <if test='PARENTDEPARTMENTID!= null'> 
+           PARENTDEPARTMENTID,
+        </if>
+        <if test='DEPARTMENTNO!= null'> 
+           DEPARTMENTNO,
+        </if>
+        <if test='LAYER!= null'> 
+           LAYER,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5,
+        </if>
+        <if test='ADMINISTRATORS!= null'> 
+           ADMINISTRATORS
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='DEPARTMENTNAME!= null'> 
+           #{DEPARTMENTNAME,jdbcType=varchar}，
+        </if>
+        <if test='UNITID!= null'> 
+           #{UNITID,jdbcType=varchar}，
+        </if>
+        <if test='PARENTDEPARTMENTID!= null'> 
+           #{PARENTDEPARTMENTID,jdbcType=varchar}，
+        </if>
+        <if test='DEPARTMENTNO!= null'> 
+           #{DEPARTMENTNO,jdbcType=varchar}，
+        </if>
+        <if test='LAYER!= null'> 
+           #{LAYER,jdbcType=smallint}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=decimal}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=varchar}，
+        </if>
+        <if test='ADMINISTRATORS!= null'> 
+           #{ADMINISTRATORS,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:vorgdept_dto):Unit
                 
 
 }

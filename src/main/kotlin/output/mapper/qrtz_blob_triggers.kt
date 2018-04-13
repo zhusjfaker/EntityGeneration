@@ -67,12 +67,35 @@ fun ConditionalQueryByKey(model:qrtz_blob_triggers_dto):qrtz_blob_triggers_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_blob_triggers
     (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,BLOB_DATA)
     values
     (#{SCHED_NAME},#{TRIGGER_NAME},#{TRIGGER_GROUP},#{BLOB_DATA})
 </script>""")
-fun insert(model:qrtz_blob_triggers_dto):Unit
+fun Insert(model:qrtz_blob_triggers_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_blob_triggers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           TRIGGER_NAME,
+           TRIGGER_GROUP,
+        <if test='BLOB_DATA!= null'> 
+           BLOB_DATA
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{TRIGGER_NAME,jdbcType=varchar}，
+           #{TRIGGER_GROUP,jdbcType=varchar}，
+        <if test='BLOB_DATA!= null'> 
+           #{BLOB_DATA,jdbcType=blob}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_blob_triggers_dto):Unit
                 
 
 }

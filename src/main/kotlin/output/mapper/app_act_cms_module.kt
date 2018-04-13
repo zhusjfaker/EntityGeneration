@@ -175,12 +175,151 @@ fun ConditionalQueryByKey(model:app_act_cms_module_dto):app_act_cms_module_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_cms_module
     (ID,MODULENAME,MODULETYPE,MODULEDESC,CREATEUSER,SITEID,USEFLAG,MODULESORT,PROCESSID,QUICKADDUSERLIST,PID,CANVISTIOUTERNET,CANUSEDEPUTY,NORMALFLAG,CONTENTTYPE,TITLEPICTURE,SUBPAGE,DETAILPAGE,MODULELINKURL,LINKMODULEFLAG,NAVSHOWFLAG,SHOWTITLEPICFLAG)
     values
     (#{ID},#{MODULENAME},#{MODULETYPE},#{MODULEDESC},#{CREATEUSER},#{SITEID},#{USEFLAG},#{MODULESORT},#{PROCESSID},#{QUICKADDUSERLIST},#{PID},#{CANVISTIOUTERNET},#{CANUSEDEPUTY},#{NORMALFLAG},#{CONTENTTYPE},#{TITLEPICTURE},#{SUBPAGE},#{DETAILPAGE},#{MODULELINKURL},#{LINKMODULEFLAG},#{NAVSHOWFLAG},#{SHOWTITLEPICFLAG})
 </script>""")
-fun insert(model:app_act_cms_module_dto):Unit
+fun Insert(model:app_act_cms_module_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_cms_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='MODULENAME!= null'> 
+           MODULENAME,
+        </if>
+        <if test='MODULETYPE!= null'> 
+           MODULETYPE,
+        </if>
+        <if test='MODULEDESC!= null'> 
+           MODULEDESC,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='SITEID!= null'> 
+           SITEID,
+        </if>
+        <if test='USEFLAG!= null'> 
+           USEFLAG,
+        </if>
+        <if test='MODULESORT!= null'> 
+           MODULESORT,
+        </if>
+        <if test='PROCESSID!= null'> 
+           PROCESSID,
+        </if>
+        <if test='QUICKADDUSERLIST!= null'> 
+           QUICKADDUSERLIST,
+        </if>
+        <if test='PID!= null'> 
+           PID,
+        </if>
+        <if test='CANVISTIOUTERNET!= null'> 
+           CANVISTIOUTERNET,
+        </if>
+        <if test='CANUSEDEPUTY!= null'> 
+           CANUSEDEPUTY,
+        </if>
+        <if test='NORMALFLAG!= null'> 
+           NORMALFLAG,
+        </if>
+        <if test='CONTENTTYPE!= null'> 
+           CONTENTTYPE,
+        </if>
+        <if test='TITLEPICTURE!= null'> 
+           TITLEPICTURE,
+        </if>
+        <if test='SUBPAGE!= null'> 
+           SUBPAGE,
+        </if>
+        <if test='DETAILPAGE!= null'> 
+           DETAILPAGE,
+        </if>
+        <if test='MODULELINKURL!= null'> 
+           MODULELINKURL,
+        </if>
+        <if test='LINKMODULEFLAG!= null'> 
+           LINKMODULEFLAG,
+        </if>
+        <if test='NAVSHOWFLAG!= null'> 
+           NAVSHOWFLAG,
+        </if>
+        <if test='SHOWTITLEPICFLAG!= null'> 
+           SHOWTITLEPICFLAG
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='MODULENAME!= null'> 
+           #{MODULENAME,jdbcType=varchar}，
+        </if>
+        <if test='MODULETYPE!= null'> 
+           #{MODULETYPE,jdbcType=varchar}，
+        </if>
+        <if test='MODULEDESC!= null'> 
+           #{MODULEDESC,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='SITEID!= null'> 
+           #{SITEID,jdbcType=char}，
+        </if>
+        <if test='USEFLAG!= null'> 
+           #{USEFLAG,jdbcType=char}，
+        </if>
+        <if test='MODULESORT!= null'> 
+           #{MODULESORT,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSID!= null'> 
+           #{PROCESSID,jdbcType=char}，
+        </if>
+        <if test='QUICKADDUSERLIST!= null'> 
+           #{QUICKADDUSERLIST,jdbcType=varchar}，
+        </if>
+        <if test='PID!= null'> 
+           #{PID,jdbcType=varchar}，
+        </if>
+        <if test='CANVISTIOUTERNET!= null'> 
+           #{CANVISTIOUTERNET,jdbcType=char}，
+        </if>
+        <if test='CANUSEDEPUTY!= null'> 
+           #{CANUSEDEPUTY,jdbcType=char}，
+        </if>
+        <if test='NORMALFLAG!= null'> 
+           #{NORMALFLAG,jdbcType=char}，
+        </if>
+        <if test='CONTENTTYPE!= null'> 
+           #{CONTENTTYPE,jdbcType=char}，
+        </if>
+        <if test='TITLEPICTURE!= null'> 
+           #{TITLEPICTURE,jdbcType=varchar}，
+        </if>
+        <if test='SUBPAGE!= null'> 
+           #{SUBPAGE,jdbcType=varchar}，
+        </if>
+        <if test='DETAILPAGE!= null'> 
+           #{DETAILPAGE,jdbcType=varchar}，
+        </if>
+        <if test='MODULELINKURL!= null'> 
+           #{MODULELINKURL,jdbcType=varchar}，
+        </if>
+        <if test='LINKMODULEFLAG!= null'> 
+           #{LINKMODULEFLAG,jdbcType=char}，
+        </if>
+        <if test='NAVSHOWFLAG!= null'> 
+           #{NAVSHOWFLAG,jdbcType=char}，
+        </if>
+        <if test='SHOWTITLEPICFLAG!= null'> 
+           #{SHOWTITLEPICFLAG,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_cms_module_dto):Unit
                 
 
 }

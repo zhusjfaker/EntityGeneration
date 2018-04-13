@@ -85,12 +85,61 @@ fun ConditionalQueryByKey(model:mam_install_dto):mam_install_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mam_install
     (ID,APPID,DEVICEID,INSTALLTIME,INSTALLVERSION,CURRENTVERSION,UNINSTALLED)
     values
     (#{ID},#{APPID},#{DEVICEID},#{INSTALLTIME},#{INSTALLVERSION},#{CURRENTVERSION},#{UNINSTALLED})
 </script>""")
-fun insert(model:mam_install_dto):Unit
+fun Insert(model:mam_install_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mam_install
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='DEVICEID!= null'> 
+           DEVICEID,
+        </if>
+        <if test='INSTALLTIME!= null'> 
+           INSTALLTIME,
+        </if>
+        <if test='INSTALLVERSION!= null'> 
+           INSTALLVERSION,
+        </if>
+        <if test='CURRENTVERSION!= null'> 
+           CURRENTVERSION,
+        </if>
+        <if test='UNINSTALLED!= null'> 
+           UNINSTALLED
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='DEVICEID!= null'> 
+           #{DEVICEID,jdbcType=char}，
+        </if>
+        <if test='INSTALLTIME!= null'> 
+           #{INSTALLTIME,jdbcType=datetime}，
+        </if>
+        <if test='INSTALLVERSION!= null'> 
+           #{INSTALLVERSION,jdbcType=varchar}，
+        </if>
+        <if test='CURRENTVERSION!= null'> 
+           #{CURRENTVERSION,jdbcType=varchar}，
+        </if>
+        <if test='UNINSTALLED!= null'> 
+           #{UNINSTALLED,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mam_install_dto):Unit
                 
 
 }

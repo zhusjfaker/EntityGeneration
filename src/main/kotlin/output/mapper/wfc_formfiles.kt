@@ -127,12 +127,103 @@ fun ConditionalQueryByKey(model:wfc_formfiles_dto):wfc_formfiles_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfc_formfiles
     (ID,APPID,PROCESSINSTID,TASKINSTID,BOID,BONAME,BOFIELDNAME,CREATEDATE,CREATEUSER,FILENAME,FILESIZE,REMARK,EXT1,SECURITYLEVEL)
     values
     (#{ID},#{APPID},#{PROCESSINSTID},#{TASKINSTID},#{BOID},#{BONAME},#{BOFIELDNAME},#{CREATEDATE},#{CREATEUSER},#{FILENAME},#{FILESIZE},#{REMARK},#{EXT1},#{SECURITYLEVEL})
 </script>""")
-fun insert(model:wfc_formfiles_dto):Unit
+fun Insert(model:wfc_formfiles_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfc_formfiles
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='BOID!= null'> 
+           BOID,
+        </if>
+        <if test='BONAME!= null'> 
+           BONAME,
+        </if>
+        <if test='BOFIELDNAME!= null'> 
+           BOFIELDNAME,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='FILENAME!= null'> 
+           FILENAME,
+        </if>
+        <if test='FILESIZE!= null'> 
+           FILESIZE,
+        </if>
+        <if test='REMARK!= null'> 
+           REMARK,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='SECURITYLEVEL!= null'> 
+           SECURITYLEVEL
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='BOID!= null'> 
+           #{BOID,jdbcType=char}，
+        </if>
+        <if test='BONAME!= null'> 
+           #{BONAME,jdbcType=varchar}，
+        </if>
+        <if test='BOFIELDNAME!= null'> 
+           #{BOFIELDNAME,jdbcType=varchar}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=datetime}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='FILENAME!= null'> 
+           #{FILENAME,jdbcType=text}，
+        </if>
+        <if test='FILESIZE!= null'> 
+           #{FILESIZE,jdbcType=decimal}，
+        </if>
+        <if test='REMARK!= null'> 
+           #{REMARK,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='SECURITYLEVEL!= null'> 
+           #{SECURITYLEVEL,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfc_formfiles_dto):Unit
                 
 
 }

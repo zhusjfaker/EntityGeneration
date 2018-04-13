@@ -73,12 +73,45 @@ fun ConditionalQueryByKey(model:app_act_mportal_nav_dto):app_act_mportal_nav_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_mportal_nav
     (ID,FUNCTIONID,ORDERNO,CREATEUSER,CREATETIME)
     values
     (#{ID},#{FUNCTIONID},#{ORDERNO},#{CREATEUSER},#{CREATETIME})
 </script>""")
-fun insert(model:app_act_mportal_nav_dto):Unit
+fun Insert(model:app_act_mportal_nav_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_mportal_nav
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='FUNCTIONID!= null'> 
+           FUNCTIONID,
+        </if>
+        <if test='ORDERNO!= null'> 
+           ORDERNO,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+           CREATETIME
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='FUNCTIONID!= null'> 
+           #{FUNCTIONID,jdbcType=char}，
+        </if>
+        <if test='ORDERNO!= null'> 
+           #{ORDERNO,jdbcType=int}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+           #{CREATETIME,jdbcType=datetime}
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_mportal_nav_dto):Unit
                 
 
 }

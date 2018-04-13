@@ -319,12 +319,295 @@ fun ConditionalQueryByKey(model:wfc_process_dto):wfc_process_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfc_process
     (ID,BUSINESSKEY,PROCESSDEFID,PROCESSDEFVERID,CONTROLSTATE,PROCESSGROUPID,PROCESSTITLE,STARTACTIVITYID,STARTTASKINSTID,STARTTIME,PROCESSPROFILEID,PROCESSINSTTYPE,PARENTPROCESSINSTID,PARENTTASKINSTID,SECURITYLAYER,CREATEUSER,CREATETIME,CREATEUSERORGID,CREATEUSERDEPTID,CREATEUSERROLEID,CREATEUSERLOCATION,ENDACTIVITYID,ENDTIME,ISPROCESS,ISSTART,ISEND,ISASYNC,ISEXCEPTION,ISOVERTIME,ISEXISTSUBPROC,COSTTTIME,EXPIRETIME,REMARK,IOBD,IOR,IOS,IOC,EXT1,EXT2,EXT3,REMINDTIMES,EXT4,EXT5,EXT6,EXT7,EXT8)
     values
     (#{ID},#{BUSINESSKEY},#{PROCESSDEFID},#{PROCESSDEFVERID},#{CONTROLSTATE},#{PROCESSGROUPID},#{PROCESSTITLE},#{STARTACTIVITYID},#{STARTTASKINSTID},#{STARTTIME},#{PROCESSPROFILEID},#{PROCESSINSTTYPE},#{PARENTPROCESSINSTID},#{PARENTTASKINSTID},#{SECURITYLAYER},#{CREATEUSER},#{CREATETIME},#{CREATEUSERORGID},#{CREATEUSERDEPTID},#{CREATEUSERROLEID},#{CREATEUSERLOCATION},#{ENDACTIVITYID},#{ENDTIME},#{ISPROCESS},#{ISSTART},#{ISEND},#{ISASYNC},#{ISEXCEPTION},#{ISOVERTIME},#{ISEXISTSUBPROC},#{COSTTTIME},#{EXPIRETIME},#{REMARK},#{IOBD},#{IOR},#{IOS},#{IOC},#{EXT1},#{EXT2},#{EXT3},#{REMINDTIMES},#{EXT4},#{EXT5},#{EXT6},#{EXT7},#{EXT8})
 </script>""")
-fun insert(model:wfc_process_dto):Unit
+fun Insert(model:wfc_process_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfc_process
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='BUSINESSKEY!= null'> 
+           BUSINESSKEY,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+        <if test='PROCESSDEFVERID!= null'> 
+           PROCESSDEFVERID,
+        </if>
+        <if test='CONTROLSTATE!= null'> 
+           CONTROLSTATE,
+        </if>
+        <if test='PROCESSGROUPID!= null'> 
+           PROCESSGROUPID,
+        </if>
+        <if test='PROCESSTITLE!= null'> 
+           PROCESSTITLE,
+        </if>
+        <if test='STARTACTIVITYID!= null'> 
+           STARTACTIVITYID,
+        </if>
+        <if test='STARTTASKINSTID!= null'> 
+           STARTTASKINSTID,
+        </if>
+        <if test='STARTTIME!= null'> 
+           STARTTIME,
+        </if>
+        <if test='PROCESSPROFILEID!= null'> 
+           PROCESSPROFILEID,
+        </if>
+        <if test='PROCESSINSTTYPE!= null'> 
+           PROCESSINSTTYPE,
+        </if>
+        <if test='PARENTPROCESSINSTID!= null'> 
+           PARENTPROCESSINSTID,
+        </if>
+        <if test='PARENTTASKINSTID!= null'> 
+           PARENTTASKINSTID,
+        </if>
+        <if test='SECURITYLAYER!= null'> 
+           SECURITYLAYER,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='CREATEUSERORGID!= null'> 
+           CREATEUSERORGID,
+        </if>
+        <if test='CREATEUSERDEPTID!= null'> 
+           CREATEUSERDEPTID,
+        </if>
+        <if test='CREATEUSERROLEID!= null'> 
+           CREATEUSERROLEID,
+        </if>
+        <if test='CREATEUSERLOCATION!= null'> 
+           CREATEUSERLOCATION,
+        </if>
+        <if test='ENDACTIVITYID!= null'> 
+           ENDACTIVITYID,
+        </if>
+        <if test='ENDTIME!= null'> 
+           ENDTIME,
+        </if>
+        <if test='ISPROCESS!= null'> 
+           ISPROCESS,
+        </if>
+        <if test='ISSTART!= null'> 
+           ISSTART,
+        </if>
+        <if test='ISEND!= null'> 
+           ISEND,
+        </if>
+        <if test='ISASYNC!= null'> 
+           ISASYNC,
+        </if>
+        <if test='ISEXCEPTION!= null'> 
+           ISEXCEPTION,
+        </if>
+        <if test='ISOVERTIME!= null'> 
+           ISOVERTIME,
+        </if>
+        <if test='ISEXISTSUBPROC!= null'> 
+           ISEXISTSUBPROC,
+        </if>
+        <if test='COSTTTIME!= null'> 
+           COSTTTIME,
+        </if>
+        <if test='EXPIRETIME!= null'> 
+           EXPIRETIME,
+        </if>
+        <if test='REMARK!= null'> 
+           REMARK,
+        </if>
+        <if test='IOBD!= null'> 
+           IOBD,
+        </if>
+        <if test='IOR!= null'> 
+           IOR,
+        </if>
+        <if test='IOS!= null'> 
+           IOS,
+        </if>
+        <if test='IOC!= null'> 
+           IOC,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='REMINDTIMES!= null'> 
+           REMINDTIMES,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5,
+        </if>
+        <if test='EXT6!= null'> 
+           EXT6,
+        </if>
+        <if test='EXT7!= null'> 
+           EXT7,
+        </if>
+        <if test='EXT8!= null'> 
+           EXT8
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='BUSINESSKEY!= null'> 
+           #{BUSINESSKEY,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+        <if test='PROCESSDEFVERID!= null'> 
+           #{PROCESSDEFVERID,jdbcType=char}，
+        </if>
+        <if test='CONTROLSTATE!= null'> 
+           #{CONTROLSTATE,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSGROUPID!= null'> 
+           #{PROCESSGROUPID,jdbcType=char}，
+        </if>
+        <if test='PROCESSTITLE!= null'> 
+           #{PROCESSTITLE,jdbcType=varchar}，
+        </if>
+        <if test='STARTACTIVITYID!= null'> 
+           #{STARTACTIVITYID,jdbcType=char}，
+        </if>
+        <if test='STARTTASKINSTID!= null'> 
+           #{STARTTASKINSTID,jdbcType=char}，
+        </if>
+        <if test='STARTTIME!= null'> 
+           #{STARTTIME,jdbcType=datetime}，
+        </if>
+        <if test='PROCESSPROFILEID!= null'> 
+           #{PROCESSPROFILEID,jdbcType=char}，
+        </if>
+        <if test='PROCESSINSTTYPE!= null'> 
+           #{PROCESSINSTTYPE,jdbcType=smallint}，
+        </if>
+        <if test='PARENTPROCESSINSTID!= null'> 
+           #{PARENTPROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='PARENTTASKINSTID!= null'> 
+           #{PARENTTASKINSTID,jdbcType=char}，
+        </if>
+        <if test='SECURITYLAYER!= null'> 
+           #{SECURITYLAYER,jdbcType=smallint}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='CREATEUSERORGID!= null'> 
+           #{CREATEUSERORGID,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSERDEPTID!= null'> 
+           #{CREATEUSERDEPTID,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSERROLEID!= null'> 
+           #{CREATEUSERROLEID,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSERLOCATION!= null'> 
+           #{CREATEUSERLOCATION,jdbcType=varchar}，
+        </if>
+        <if test='ENDACTIVITYID!= null'> 
+           #{ENDACTIVITYID,jdbcType=char}，
+        </if>
+        <if test='ENDTIME!= null'> 
+           #{ENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='ISPROCESS!= null'> 
+           #{ISPROCESS,jdbcType=smallint}，
+        </if>
+        <if test='ISSTART!= null'> 
+           #{ISSTART,jdbcType=smallint}，
+        </if>
+        <if test='ISEND!= null'> 
+           #{ISEND,jdbcType=smallint}，
+        </if>
+        <if test='ISASYNC!= null'> 
+           #{ISASYNC,jdbcType=smallint}，
+        </if>
+        <if test='ISEXCEPTION!= null'> 
+           #{ISEXCEPTION,jdbcType=smallint}，
+        </if>
+        <if test='ISOVERTIME!= null'> 
+           #{ISOVERTIME,jdbcType=smallint}，
+        </if>
+        <if test='ISEXISTSUBPROC!= null'> 
+           #{ISEXISTSUBPROC,jdbcType=smallint}，
+        </if>
+        <if test='COSTTTIME!= null'> 
+           #{COSTTTIME,jdbcType=decimal}，
+        </if>
+        <if test='EXPIRETIME!= null'> 
+           #{EXPIRETIME,jdbcType=decimal}，
+        </if>
+        <if test='REMARK!= null'> 
+           #{REMARK,jdbcType=varchar}，
+        </if>
+        <if test='IOBD!= null'> 
+           #{IOBD,jdbcType=char}，
+        </if>
+        <if test='IOR!= null'> 
+           #{IOR,jdbcType=char}，
+        </if>
+        <if test='IOS!= null'> 
+           #{IOS,jdbcType=char}，
+        </if>
+        <if test='IOC!= null'> 
+           #{IOC,jdbcType=char}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='REMINDTIMES!= null'> 
+           #{REMINDTIMES,jdbcType=smallint}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=varchar}，
+        </if>
+        <if test='EXT6!= null'> 
+           #{EXT6,jdbcType=varchar}，
+        </if>
+        <if test='EXT7!= null'> 
+           #{EXT7,jdbcType=decimal}，
+        </if>
+        <if test='EXT8!= null'> 
+           #{EXT8,jdbcType=decimal}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfc_process_dto):Unit
                 
 
 }

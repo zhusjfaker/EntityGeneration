@@ -61,12 +61,33 @@ fun ConditionalQueryByKey(model:mam_app_category_dto):mam_app_category_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mam_app_category
     (ID,APPID,CATEGORY)
     values
     (#{ID},#{APPID},#{CATEGORY})
 </script>""")
-fun insert(model:mam_app_category_dto):Unit
+fun Insert(model:mam_app_category_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mam_app_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           APPID,
+        <if test='CATEGORY!= null'> 
+           CATEGORY
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+           #{APPID,jdbcType=varchar}，
+        <if test='CATEGORY!= null'> 
+           #{CATEGORY,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mam_app_category_dto):Unit
                 
 
 }

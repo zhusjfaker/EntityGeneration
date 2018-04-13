@@ -109,12 +109,85 @@ fun ConditionalQueryByKey(model:wfc_comment_dto):wfc_comment_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfc_comment
     (ID,PROCESSINSTID,TASKINSTID,CREATEDATE,CREATEUSER,DEPTNAME,POSITIONNAME,ACTIONNAME,ACTIVITYNAME,MSG,FILES)
     values
     (#{ID},#{PROCESSINSTID},#{TASKINSTID},#{CREATEDATE},#{CREATEUSER},#{DEPTNAME},#{POSITIONNAME},#{ACTIONNAME},#{ACTIVITYNAME},#{MSG},#{FILES})
 </script>""")
-fun insert(model:wfc_comment_dto):Unit
+fun Insert(model:wfc_comment_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfc_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='DEPTNAME!= null'> 
+           DEPTNAME,
+        </if>
+        <if test='POSITIONNAME!= null'> 
+           POSITIONNAME,
+        </if>
+        <if test='ACTIONNAME!= null'> 
+           ACTIONNAME,
+        </if>
+        <if test='ACTIVITYNAME!= null'> 
+           ACTIVITYNAME,
+        </if>
+        <if test='MSG!= null'> 
+           MSG,
+        </if>
+        <if test='FILES!= null'> 
+           FILES
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=datetime}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='DEPTNAME!= null'> 
+           #{DEPTNAME,jdbcType=varchar}，
+        </if>
+        <if test='POSITIONNAME!= null'> 
+           #{POSITIONNAME,jdbcType=varchar}，
+        </if>
+        <if test='ACTIONNAME!= null'> 
+           #{ACTIONNAME,jdbcType=varchar}，
+        </if>
+        <if test='ACTIVITYNAME!= null'> 
+           #{ACTIVITYNAME,jdbcType=varchar}，
+        </if>
+        <if test='MSG!= null'> 
+           #{MSG,jdbcType=text}，
+        </if>
+        <if test='FILES!= null'> 
+           #{FILES,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfc_comment_dto):Unit
                 
 
 }

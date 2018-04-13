@@ -109,12 +109,85 @@ fun ConditionalQueryByKey(model:app_act_email_templete_dto):app_act_email_temple
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_email_templete
     (ID,TEMPLATENAME,EMAILTO,COPYTO,EMAIL_TITLE,EMAIL_CONTENT,TEMPLATETYPE,ISDEFAULT,EMAILFROM,FROMNAME,ISVALID)
     values
     (#{ID},#{TEMPLATENAME},#{EMAILTO},#{COPYTO},#{EMAIL_TITLE},#{EMAIL_CONTENT},#{TEMPLATETYPE},#{ISDEFAULT},#{EMAILFROM},#{FROMNAME},#{ISVALID})
 </script>""")
-fun insert(model:app_act_email_templete_dto):Unit
+fun Insert(model:app_act_email_templete_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_email_templete
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TEMPLATENAME!= null'> 
+           TEMPLATENAME,
+        </if>
+        <if test='EMAILTO!= null'> 
+           EMAILTO,
+        </if>
+        <if test='COPYTO!= null'> 
+           COPYTO,
+        </if>
+        <if test='EMAIL_TITLE!= null'> 
+           EMAIL_TITLE,
+        </if>
+        <if test='EMAIL_CONTENT!= null'> 
+           EMAIL_CONTENT,
+        </if>
+        <if test='TEMPLATETYPE!= null'> 
+           TEMPLATETYPE,
+        </if>
+        <if test='ISDEFAULT!= null'> 
+           ISDEFAULT,
+        </if>
+        <if test='EMAILFROM!= null'> 
+           EMAILFROM,
+        </if>
+        <if test='FROMNAME!= null'> 
+           FROMNAME,
+        </if>
+        <if test='ISVALID!= null'> 
+           ISVALID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='TEMPLATENAME!= null'> 
+           #{TEMPLATENAME,jdbcType=varchar}，
+        </if>
+        <if test='EMAILTO!= null'> 
+           #{EMAILTO,jdbcType=varchar}，
+        </if>
+        <if test='COPYTO!= null'> 
+           #{COPYTO,jdbcType=varchar}，
+        </if>
+        <if test='EMAIL_TITLE!= null'> 
+           #{EMAIL_TITLE,jdbcType=varchar}，
+        </if>
+        <if test='EMAIL_CONTENT!= null'> 
+           #{EMAIL_CONTENT,jdbcType=text}，
+        </if>
+        <if test='TEMPLATETYPE!= null'> 
+           #{TEMPLATETYPE,jdbcType=varchar}，
+        </if>
+        <if test='ISDEFAULT!= null'> 
+           #{ISDEFAULT,jdbcType=int}，
+        </if>
+        <if test='EMAILFROM!= null'> 
+           #{EMAILFROM,jdbcType=varchar}，
+        </if>
+        <if test='FROMNAME!= null'> 
+           #{FROMNAME,jdbcType=varchar}，
+        </if>
+        <if test='ISVALID!= null'> 
+           #{ISVALID,jdbcType=int}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_email_templete_dto):Unit
                 
 
 }

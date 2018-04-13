@@ -91,12 +91,67 @@ fun ConditionalQueryByKey(model:mdm_ios_command_dto):mdm_ios_command_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mdm_ios_command
     (ID,COMMAND,DEVICEUDID,STATUS,UPDATETIME,EXT1,EXT2,IOSMDM)
     values
     (#{ID},#{COMMAND},#{DEVICEUDID},#{STATUS},#{UPDATETIME},#{EXT1},#{EXT2},#{IOSMDM})
 </script>""")
-fun insert(model:mdm_ios_command_dto):Unit
+fun Insert(model:mdm_ios_command_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mdm_ios_command
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='COMMAND!= null'> 
+           COMMAND,
+        </if>
+        <if test='DEVICEUDID!= null'> 
+           DEVICEUDID,
+        </if>
+        <if test='STATUS!= null'> 
+           STATUS,
+        </if>
+        <if test='UPDATETIME!= null'> 
+           UPDATETIME,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='IOSMDM!= null'> 
+           IOSMDM
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='COMMAND!= null'> 
+           #{COMMAND,jdbcType=varchar}，
+        </if>
+        <if test='DEVICEUDID!= null'> 
+           #{DEVICEUDID,jdbcType=char}，
+        </if>
+        <if test='STATUS!= null'> 
+           #{STATUS,jdbcType=smallint}，
+        </if>
+        <if test='UPDATETIME!= null'> 
+           #{UPDATETIME,jdbcType=datetime}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='IOSMDM!= null'> 
+           #{IOSMDM,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mdm_ios_command_dto):Unit
                 
 
 }

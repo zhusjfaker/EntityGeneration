@@ -139,12 +139,115 @@ fun ConditionalQueryByKey(model:app_act_cms_board_dto):app_act_cms_board_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_cms_board
     (ID,SITEID,BOARDNAME,BOARDSORT,BOARDWIDTH,WIDGETHEIGHT,BOARDDESC,USEFLAG,SHOWTITLEBARFLAG,TITLEBARCOLOR,TITLEBARICON,TITLEBARBGIMAGE,BOARDTITLEBARBGFLAG,BOARDTITLEBARCONTENT,TITLEBARFONTCOLOR,TITLEBARFONTSIZE)
     values
     (#{ID},#{SITEID},#{BOARDNAME},#{BOARDSORT},#{BOARDWIDTH},#{WIDGETHEIGHT},#{BOARDDESC},#{USEFLAG},#{SHOWTITLEBARFLAG},#{TITLEBARCOLOR},#{TITLEBARICON},#{TITLEBARBGIMAGE},#{BOARDTITLEBARBGFLAG},#{BOARDTITLEBARCONTENT},#{TITLEBARFONTCOLOR},#{TITLEBARFONTSIZE})
 </script>""")
-fun insert(model:app_act_cms_board_dto):Unit
+fun Insert(model:app_act_cms_board_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_cms_board
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='SITEID!= null'> 
+           SITEID,
+        </if>
+        <if test='BOARDNAME!= null'> 
+           BOARDNAME,
+        </if>
+        <if test='BOARDSORT!= null'> 
+           BOARDSORT,
+        </if>
+        <if test='BOARDWIDTH!= null'> 
+           BOARDWIDTH,
+        </if>
+        <if test='WIDGETHEIGHT!= null'> 
+           WIDGETHEIGHT,
+        </if>
+        <if test='BOARDDESC!= null'> 
+           BOARDDESC,
+        </if>
+        <if test='USEFLAG!= null'> 
+           USEFLAG,
+        </if>
+        <if test='SHOWTITLEBARFLAG!= null'> 
+           SHOWTITLEBARFLAG,
+        </if>
+        <if test='TITLEBARCOLOR!= null'> 
+           TITLEBARCOLOR,
+        </if>
+        <if test='TITLEBARICON!= null'> 
+           TITLEBARICON,
+        </if>
+        <if test='TITLEBARBGIMAGE!= null'> 
+           TITLEBARBGIMAGE,
+        </if>
+        <if test='BOARDTITLEBARBGFLAG!= null'> 
+           BOARDTITLEBARBGFLAG,
+        </if>
+        <if test='BOARDTITLEBARCONTENT!= null'> 
+           BOARDTITLEBARCONTENT,
+        </if>
+        <if test='TITLEBARFONTCOLOR!= null'> 
+           TITLEBARFONTCOLOR,
+        </if>
+        <if test='TITLEBARFONTSIZE!= null'> 
+           TITLEBARFONTSIZE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='SITEID!= null'> 
+           #{SITEID,jdbcType=char}，
+        </if>
+        <if test='BOARDNAME!= null'> 
+           #{BOARDNAME,jdbcType=varchar}，
+        </if>
+        <if test='BOARDSORT!= null'> 
+           #{BOARDSORT,jdbcType=varchar}，
+        </if>
+        <if test='BOARDWIDTH!= null'> 
+           #{BOARDWIDTH,jdbcType=char}，
+        </if>
+        <if test='WIDGETHEIGHT!= null'> 
+           #{WIDGETHEIGHT,jdbcType=varchar}，
+        </if>
+        <if test='BOARDDESC!= null'> 
+           #{BOARDDESC,jdbcType=varchar}，
+        </if>
+        <if test='USEFLAG!= null'> 
+           #{USEFLAG,jdbcType=char}，
+        </if>
+        <if test='SHOWTITLEBARFLAG!= null'> 
+           #{SHOWTITLEBARFLAG,jdbcType=char}，
+        </if>
+        <if test='TITLEBARCOLOR!= null'> 
+           #{TITLEBARCOLOR,jdbcType=char}，
+        </if>
+        <if test='TITLEBARICON!= null'> 
+           #{TITLEBARICON,jdbcType=varchar}，
+        </if>
+        <if test='TITLEBARBGIMAGE!= null'> 
+           #{TITLEBARBGIMAGE,jdbcType=varchar}，
+        </if>
+        <if test='BOARDTITLEBARBGFLAG!= null'> 
+           #{BOARDTITLEBARBGFLAG,jdbcType=char}，
+        </if>
+        <if test='BOARDTITLEBARCONTENT!= null'> 
+           #{BOARDTITLEBARCONTENT,jdbcType=text}，
+        </if>
+        <if test='TITLEBARFONTCOLOR!= null'> 
+           #{TITLEBARFONTCOLOR,jdbcType=varchar}，
+        </if>
+        <if test='TITLEBARFONTSIZE!= null'> 
+           #{TITLEBARFONTSIZE,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_cms_board_dto):Unit
                 
 
 }

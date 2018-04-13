@@ -127,12 +127,95 @@ fun ConditionalQueryByKey(model:qrtz_simprop_triggers_dto):qrtz_simprop_triggers
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_simprop_triggers
     (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,STR_PROP_1,STR_PROP_2,STR_PROP_3,INT_PROP_1,INT_PROP_2,LONG_PROP_1,LONG_PROP_2,DEC_PROP_1,DEC_PROP_2,BOOL_PROP_1,BOOL_PROP_2)
     values
     (#{SCHED_NAME},#{TRIGGER_NAME},#{TRIGGER_GROUP},#{STR_PROP_1},#{STR_PROP_2},#{STR_PROP_3},#{INT_PROP_1},#{INT_PROP_2},#{LONG_PROP_1},#{LONG_PROP_2},#{DEC_PROP_1},#{DEC_PROP_2},#{BOOL_PROP_1},#{BOOL_PROP_2})
 </script>""")
-fun insert(model:qrtz_simprop_triggers_dto):Unit
+fun Insert(model:qrtz_simprop_triggers_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_simprop_triggers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           TRIGGER_NAME,
+           TRIGGER_GROUP,
+        <if test='STR_PROP_1!= null'> 
+           STR_PROP_1,
+        </if>
+        <if test='STR_PROP_2!= null'> 
+           STR_PROP_2,
+        </if>
+        <if test='STR_PROP_3!= null'> 
+           STR_PROP_3,
+        </if>
+        <if test='INT_PROP_1!= null'> 
+           INT_PROP_1,
+        </if>
+        <if test='INT_PROP_2!= null'> 
+           INT_PROP_2,
+        </if>
+        <if test='LONG_PROP_1!= null'> 
+           LONG_PROP_1,
+        </if>
+        <if test='LONG_PROP_2!= null'> 
+           LONG_PROP_2,
+        </if>
+        <if test='DEC_PROP_1!= null'> 
+           DEC_PROP_1,
+        </if>
+        <if test='DEC_PROP_2!= null'> 
+           DEC_PROP_2,
+        </if>
+        <if test='BOOL_PROP_1!= null'> 
+           BOOL_PROP_1,
+        </if>
+        <if test='BOOL_PROP_2!= null'> 
+           BOOL_PROP_2
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{TRIGGER_NAME,jdbcType=varchar}，
+           #{TRIGGER_GROUP,jdbcType=varchar}，
+        <if test='STR_PROP_1!= null'> 
+           #{STR_PROP_1,jdbcType=varchar}，
+        </if>
+        <if test='STR_PROP_2!= null'> 
+           #{STR_PROP_2,jdbcType=varchar}，
+        </if>
+        <if test='STR_PROP_3!= null'> 
+           #{STR_PROP_3,jdbcType=varchar}，
+        </if>
+        <if test='INT_PROP_1!= null'> 
+           #{INT_PROP_1,jdbcType=int}，
+        </if>
+        <if test='INT_PROP_2!= null'> 
+           #{INT_PROP_2,jdbcType=int}，
+        </if>
+        <if test='LONG_PROP_1!= null'> 
+           #{LONG_PROP_1,jdbcType=bigint}，
+        </if>
+        <if test='LONG_PROP_2!= null'> 
+           #{LONG_PROP_2,jdbcType=bigint}，
+        </if>
+        <if test='DEC_PROP_1!= null'> 
+           #{DEC_PROP_1,jdbcType=decimal}，
+        </if>
+        <if test='DEC_PROP_2!= null'> 
+           #{DEC_PROP_2,jdbcType=decimal}，
+        </if>
+        <if test='BOOL_PROP_1!= null'> 
+           #{BOOL_PROP_1,jdbcType=varchar}，
+        </if>
+        <if test='BOOL_PROP_2!= null'> 
+           #{BOOL_PROP_2,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_simprop_triggers_dto):Unit
                 
 
 }

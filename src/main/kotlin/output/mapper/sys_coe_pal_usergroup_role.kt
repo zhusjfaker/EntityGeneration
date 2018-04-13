@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:sys_coe_pal_usergroup_role_dto):sys_coe_pal_user
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_usergroup_role
     (ID,GROUPID,ROLEID)
     values
     (#{ID},#{GROUPID},#{ROLEID})
 </script>""")
-fun insert(model:sys_coe_pal_usergroup_role_dto):Unit
+fun Insert(model:sys_coe_pal_usergroup_role_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_usergroup_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='GROUPID!= null'> 
+           GROUPID,
+        </if>
+        <if test='ROLEID!= null'> 
+           ROLEID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='GROUPID!= null'> 
+           #{GROUPID,jdbcType=char}，
+        </if>
+        <if test='ROLEID!= null'> 
+           #{ROLEID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_usergroup_role_dto):Unit
                 
 
 }

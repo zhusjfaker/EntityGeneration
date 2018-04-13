@@ -146,7 +146,9 @@ ${DataManipulation.ConditionalQueryContent(it)}
 
 ${if (!IsHasPrimarykey(it)) "" else DataManipulation.ConditionalQueryByKey(it)}
 
-${DataManipulation.insertContent(it)}
+${DataManipulation.InsertContent(it)}
+
+${DataManipulation.InsertSelectiveContent(it)}
 
 }
 

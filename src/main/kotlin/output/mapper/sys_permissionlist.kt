@@ -79,12 +79,39 @@ fun ConditionalQueryByKey(model:sys_permissionlist_dto):sys_permissionlist_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_permissionlist
     (ID,PERMISSIONID,RESOURCETYPE,RESOURCEID,ACCESSMODE,EXT1)
     values
     (#{ID},#{PERMISSIONID},#{RESOURCETYPE},#{RESOURCEID},#{ACCESSMODE},#{EXT1})
 </script>""")
-fun insert(model:sys_permissionlist_dto):Unit
+fun Insert(model:sys_permissionlist_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_permissionlist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           PERMISSIONID,
+           RESOURCETYPE,
+           RESOURCEID,
+           ACCESSMODE,
+        <if test='EXT1!= null'> 
+           EXT1
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+           #{PERMISSIONID,jdbcType=varchar}，
+           #{RESOURCETYPE,jdbcType=varchar}，
+           #{RESOURCEID,jdbcType=varchar}，
+           #{ACCESSMODE,jdbcType=smallint}，
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_permissionlist_dto):Unit
                 
 
 }

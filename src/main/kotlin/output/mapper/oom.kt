@@ -49,7 +49,7 @@ fun ConditionalQueryByKey(model:oom_dto):oom_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into oom
     ()
     values
     ()
@@ -57,6 +57,8 @@ fun ConditionalQueryByKey(model:oom_dto):oom_dto?
 @Options(keyProperty="ID",useGeneratedKeys=true)
 fun insert(model:oom_dto):Long
                 
+
+
 
 }
 

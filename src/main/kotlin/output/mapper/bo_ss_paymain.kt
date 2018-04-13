@@ -121,12 +121,93 @@ fun ConditionalQueryByKey(model:bo_ss_paymain_dto):bo_ss_paymain_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_ss_paymain
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,UNITID,UCODE,UNAME,CURAMOUNT)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{UNITID},#{UCODE},#{UNAME},#{CURAMOUNT})
 </script>""")
-fun insert(model:bo_ss_paymain_dto):Unit
+fun Insert(model:bo_ss_paymain_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_ss_paymain
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='UNITID!= null'> 
+           UNITID,
+        </if>
+        <if test='UCODE!= null'> 
+           UCODE,
+        </if>
+        <if test='UNAME!= null'> 
+           UNAME,
+        </if>
+        <if test='CURAMOUNT!= null'> 
+           CURAMOUNT
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='UNITID!= null'> 
+           #{UNITID,jdbcType=varchar}，
+        </if>
+        <if test='UCODE!= null'> 
+           #{UCODE,jdbcType=varchar}，
+        </if>
+        <if test='UNAME!= null'> 
+           #{UNAME,jdbcType=varchar}，
+        </if>
+        <if test='CURAMOUNT!= null'> 
+           #{CURAMOUNT,jdbcType=decimal}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_ss_paymain_dto):Unit
                 
 
 }

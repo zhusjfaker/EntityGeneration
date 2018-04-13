@@ -91,12 +91,67 @@ fun ConditionalQueryByKey(model:sys_coe_pal_upfile_dto):sys_coe_pal_upfile_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_upfile
     (ID,PALREPOSITORYID,SHAPEID,FILETYPE,FILENAME,DOWNLOAD,CREATEUSER,CREATETIME)
     values
     (#{ID},#{PALREPOSITORYID},#{SHAPEID},#{FILETYPE},#{FILENAME},#{DOWNLOAD},#{CREATEUSER},#{CREATETIME})
 </script>""")
-fun insert(model:sys_coe_pal_upfile_dto):Unit
+fun Insert(model:sys_coe_pal_upfile_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_upfile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PALREPOSITORYID!= null'> 
+           PALREPOSITORYID,
+        </if>
+        <if test='SHAPEID!= null'> 
+           SHAPEID,
+        </if>
+        <if test='FILETYPE!= null'> 
+           FILETYPE,
+        </if>
+        <if test='FILENAME!= null'> 
+           FILENAME,
+        </if>
+        <if test='DOWNLOAD!= null'> 
+           DOWNLOAD,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PALREPOSITORYID!= null'> 
+           #{PALREPOSITORYID,jdbcType=char}，
+        </if>
+        <if test='SHAPEID!= null'> 
+           #{SHAPEID,jdbcType=varchar}，
+        </if>
+        <if test='FILETYPE!= null'> 
+           #{FILETYPE,jdbcType=char}，
+        </if>
+        <if test='FILENAME!= null'> 
+           #{FILENAME,jdbcType=varchar}，
+        </if>
+        <if test='DOWNLOAD!= null'> 
+           #{DOWNLOAD,jdbcType=smallint}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_upfile_dto):Unit
                 
 
 }

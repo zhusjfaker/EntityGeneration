@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:sys_coe_pal_repository_r_info_dto):sys_coe_pal_r
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_repository_r_info
     (ID,REMOVEUSER,REMOVETIME,WSID,RESOURCEID,REMOVETYPE)
     values
     (#{ID},#{REMOVEUSER},#{REMOVETIME},#{WSID},#{RESOURCEID},#{REMOVETYPE})
 </script>""")
-fun insert(model:sys_coe_pal_repository_r_info_dto):Unit
+fun Insert(model:sys_coe_pal_repository_r_info_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_repository_r_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='REMOVEUSER!= null'> 
+           REMOVEUSER,
+        </if>
+        <if test='REMOVETIME!= null'> 
+           REMOVETIME,
+        </if>
+        <if test='WSID!= null'> 
+           WSID,
+        </if>
+        <if test='RESOURCEID!= null'> 
+           RESOURCEID,
+        </if>
+        <if test='REMOVETYPE!= null'> 
+           REMOVETYPE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='REMOVEUSER!= null'> 
+           #{REMOVEUSER,jdbcType=varchar}，
+        </if>
+        <if test='REMOVETIME!= null'> 
+           #{REMOVETIME,jdbcType=datetime}，
+        </if>
+        <if test='WSID!= null'> 
+           #{WSID,jdbcType=varchar}，
+        </if>
+        <if test='RESOURCEID!= null'> 
+           #{RESOURCEID,jdbcType=varchar}，
+        </if>
+        <if test='REMOVETYPE!= null'> 
+           #{REMOVETYPE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_repository_r_info_dto):Unit
                 
 
 }

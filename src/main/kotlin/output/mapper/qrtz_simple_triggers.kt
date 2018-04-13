@@ -79,12 +79,35 @@ fun ConditionalQueryByKey(model:qrtz_simple_triggers_dto):qrtz_simple_triggers_d
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_simple_triggers
     (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,REPEAT_COUNT,REPEAT_INTERVAL,TIMES_TRIGGERED)
     values
     (#{SCHED_NAME},#{TRIGGER_NAME},#{TRIGGER_GROUP},#{REPEAT_COUNT},#{REPEAT_INTERVAL},#{TIMES_TRIGGERED})
 </script>""")
-fun insert(model:qrtz_simple_triggers_dto):Unit
+fun Insert(model:qrtz_simple_triggers_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_simple_triggers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           TRIGGER_NAME,
+           TRIGGER_GROUP,
+           REPEAT_COUNT,
+           REPEAT_INTERVAL,
+           TIMES_TRIGGERED
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{TRIGGER_NAME,jdbcType=varchar}，
+           #{TRIGGER_GROUP,jdbcType=varchar}，
+           #{REPEAT_COUNT,jdbcType=bigint}，
+           #{REPEAT_INTERVAL,jdbcType=bigint}，
+           #{TIMES_TRIGGERED,jdbcType=bigint}
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_simple_triggers_dto):Unit
                 
 
 }

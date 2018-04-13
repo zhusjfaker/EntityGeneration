@@ -85,12 +85,61 @@ fun ConditionalQueryByKey(model:app_act_cms_data_reply_dto):app_act_cms_data_rep
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_cms_data_reply
     (ID,DATAID,REPLYER,REPLYTIME,REPLYCONTENT,ORGID,REPLYERIP)
     values
     (#{ID},#{DATAID},#{REPLYER},#{REPLYTIME},#{REPLYCONTENT},#{ORGID},#{REPLYERIP})
 </script>""")
-fun insert(model:app_act_cms_data_reply_dto):Unit
+fun Insert(model:app_act_cms_data_reply_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_cms_data_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='DATAID!= null'> 
+           DATAID,
+        </if>
+        <if test='REPLYER!= null'> 
+           REPLYER,
+        </if>
+        <if test='REPLYTIME!= null'> 
+           REPLYTIME,
+        </if>
+        <if test='REPLYCONTENT!= null'> 
+           REPLYCONTENT,
+        </if>
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='REPLYERIP!= null'> 
+           REPLYERIP
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='DATAID!= null'> 
+           #{DATAID,jdbcType=char}，
+        </if>
+        <if test='REPLYER!= null'> 
+           #{REPLYER,jdbcType=varchar}，
+        </if>
+        <if test='REPLYTIME!= null'> 
+           #{REPLYTIME,jdbcType=datetime}，
+        </if>
+        <if test='REPLYCONTENT!= null'> 
+           #{REPLYCONTENT,jdbcType=text}，
+        </if>
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='REPLYERIP!= null'> 
+           #{REPLYERIP,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_cms_data_reply_dto):Unit
                 
 
 }

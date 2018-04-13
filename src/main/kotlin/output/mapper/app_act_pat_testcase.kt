@@ -121,12 +121,97 @@ fun ConditionalQueryByKey(model:app_act_pat_testcase_dto):app_act_pat_testcase_d
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_pat_testcase
     (ID,TESTCASENAME,TESTCASEDESC,PROCESSDEFID,CREATEUSER,CREATETIME,UPDATEUSER,UPDATETIME,EXECUTEUSER,EXECUTETIME,TESTCASESTATUS,DCINFO,ATSTRATEGY)
     values
     (#{ID},#{TESTCASENAME},#{TESTCASEDESC},#{PROCESSDEFID},#{CREATEUSER},#{CREATETIME},#{UPDATEUSER},#{UPDATETIME},#{EXECUTEUSER},#{EXECUTETIME},#{TESTCASESTATUS},#{DCINFO},#{ATSTRATEGY})
 </script>""")
-fun insert(model:app_act_pat_testcase_dto):Unit
+fun Insert(model:app_act_pat_testcase_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_pat_testcase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TESTCASENAME!= null'> 
+           TESTCASENAME,
+        </if>
+        <if test='TESTCASEDESC!= null'> 
+           TESTCASEDESC,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='UPDATETIME!= null'> 
+           UPDATETIME,
+        </if>
+        <if test='EXECUTEUSER!= null'> 
+           EXECUTEUSER,
+        </if>
+        <if test='EXECUTETIME!= null'> 
+           EXECUTETIME,
+        </if>
+        <if test='TESTCASESTATUS!= null'> 
+           TESTCASESTATUS,
+        </if>
+        <if test='DCINFO!= null'> 
+           DCINFO,
+        </if>
+        <if test='ATSTRATEGY!= null'> 
+           ATSTRATEGY
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='TESTCASENAME!= null'> 
+           #{TESTCASENAME,jdbcType=varchar}，
+        </if>
+        <if test='TESTCASEDESC!= null'> 
+           #{TESTCASEDESC,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=varchar}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATETIME!= null'> 
+           #{UPDATETIME,jdbcType=datetime}，
+        </if>
+        <if test='EXECUTEUSER!= null'> 
+           #{EXECUTEUSER,jdbcType=varchar}，
+        </if>
+        <if test='EXECUTETIME!= null'> 
+           #{EXECUTETIME,jdbcType=datetime}，
+        </if>
+        <if test='TESTCASESTATUS!= null'> 
+           #{TESTCASESTATUS,jdbcType=smallint}，
+        </if>
+        <if test='DCINFO!= null'> 
+           #{DCINFO,jdbcType=varchar}，
+        </if>
+        <if test='ATSTRATEGY!= null'> 
+           #{ATSTRATEGY,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_pat_testcase_dto):Unit
                 
 
 }

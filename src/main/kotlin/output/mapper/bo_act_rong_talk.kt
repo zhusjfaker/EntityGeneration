@@ -151,12 +151,123 @@ fun ConditionalQueryByKey(model:bo_act_rong_talk_dto):bo_act_rong_talk_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_act_rong_talk
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,USERID,RECEIVEID,NAME,DIALOG,EXT1,EXT2,EXT3,EXT4,EXT5)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{USERID},#{RECEIVEID},#{NAME},#{DIALOG},#{EXT1},#{EXT2},#{EXT3},#{EXT4},#{EXT5})
 </script>""")
-fun insert(model:bo_act_rong_talk_dto):Unit
+fun Insert(model:bo_act_rong_talk_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_act_rong_talk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='RECEIVEID!= null'> 
+           RECEIVEID,
+        </if>
+        <if test='NAME!= null'> 
+           NAME,
+        </if>
+        <if test='DIALOG!= null'> 
+           DIALOG,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='RECEIVEID!= null'> 
+           #{RECEIVEID,jdbcType=varchar}，
+        </if>
+        <if test='NAME!= null'> 
+           #{NAME,jdbcType=varchar}，
+        </if>
+        <if test='DIALOG!= null'> 
+           #{DIALOG,jdbcType=text}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=text}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=text}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=text}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=text}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_act_rong_talk_dto):Unit
                 
 
 }

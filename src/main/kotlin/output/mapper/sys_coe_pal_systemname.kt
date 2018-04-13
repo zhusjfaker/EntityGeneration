@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:sys_coe_pal_systemname_dto):sys_coe_pal_systemna
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_systemname
     (ID,SYSTEMNAME,ISDEFAULT)
     values
     (#{ID},#{SYSTEMNAME},#{ISDEFAULT})
 </script>""")
-fun insert(model:sys_coe_pal_systemname_dto):Unit
+fun Insert(model:sys_coe_pal_systemname_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_systemname
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='SYSTEMNAME!= null'> 
+           SYSTEMNAME,
+        </if>
+        <if test='ISDEFAULT!= null'> 
+           ISDEFAULT
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='SYSTEMNAME!= null'> 
+           #{SYSTEMNAME,jdbcType=varchar}，
+        </if>
+        <if test='ISDEFAULT!= null'> 
+           #{ISDEFAULT,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_systemname_dto):Unit
                 
 
 }

@@ -139,12 +139,87 @@ fun ConditionalQueryByKey(model:qrtz_triggers_dto):qrtz_triggers_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_triggers
     (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,JOB_NAME,JOB_GROUP,DESCRIPTION,NEXT_FIRE_TIME,PREV_FIRE_TIME,PRIORITY,TRIGGER_STATE,TRIGGER_TYPE,START_TIME,END_TIME,CALENDAR_NAME,MISFIRE_INSTR,JOB_DATA)
     values
     (#{SCHED_NAME},#{TRIGGER_NAME},#{TRIGGER_GROUP},#{JOB_NAME},#{JOB_GROUP},#{DESCRIPTION},#{NEXT_FIRE_TIME},#{PREV_FIRE_TIME},#{PRIORITY},#{TRIGGER_STATE},#{TRIGGER_TYPE},#{START_TIME},#{END_TIME},#{CALENDAR_NAME},#{MISFIRE_INSTR},#{JOB_DATA})
 </script>""")
-fun insert(model:qrtz_triggers_dto):Unit
+fun Insert(model:qrtz_triggers_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_triggers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           TRIGGER_NAME,
+           TRIGGER_GROUP,
+           JOB_NAME,
+           JOB_GROUP,
+        <if test='DESCRIPTION!= null'> 
+           DESCRIPTION,
+        </if>
+        <if test='NEXT_FIRE_TIME!= null'> 
+           NEXT_FIRE_TIME,
+        </if>
+        <if test='PREV_FIRE_TIME!= null'> 
+           PREV_FIRE_TIME,
+        </if>
+        <if test='PRIORITY!= null'> 
+           PRIORITY,
+        </if>
+           TRIGGER_STATE,
+           TRIGGER_TYPE,
+           START_TIME,
+        <if test='END_TIME!= null'> 
+           END_TIME,
+        </if>
+        <if test='CALENDAR_NAME!= null'> 
+           CALENDAR_NAME,
+        </if>
+        <if test='MISFIRE_INSTR!= null'> 
+           MISFIRE_INSTR,
+        </if>
+        <if test='JOB_DATA!= null'> 
+           JOB_DATA
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{TRIGGER_NAME,jdbcType=varchar}，
+           #{TRIGGER_GROUP,jdbcType=varchar}，
+           #{JOB_NAME,jdbcType=varchar}，
+           #{JOB_GROUP,jdbcType=varchar}，
+        <if test='DESCRIPTION!= null'> 
+           #{DESCRIPTION,jdbcType=varchar}，
+        </if>
+        <if test='NEXT_FIRE_TIME!= null'> 
+           #{NEXT_FIRE_TIME,jdbcType=bigint}，
+        </if>
+        <if test='PREV_FIRE_TIME!= null'> 
+           #{PREV_FIRE_TIME,jdbcType=bigint}，
+        </if>
+        <if test='PRIORITY!= null'> 
+           #{PRIORITY,jdbcType=int}，
+        </if>
+           #{TRIGGER_STATE,jdbcType=varchar}，
+           #{TRIGGER_TYPE,jdbcType=varchar}，
+           #{START_TIME,jdbcType=bigint}，
+        <if test='END_TIME!= null'> 
+           #{END_TIME,jdbcType=bigint}，
+        </if>
+        <if test='CALENDAR_NAME!= null'> 
+           #{CALENDAR_NAME,jdbcType=varchar}，
+        </if>
+        <if test='MISFIRE_INSTR!= null'> 
+           #{MISFIRE_INSTR,jdbcType=smallint}，
+        </if>
+        <if test='JOB_DATA!= null'> 
+           #{JOB_DATA,jdbcType=blob}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_triggers_dto):Unit
                 
 
 }

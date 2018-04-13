@@ -169,12 +169,141 @@ fun ConditionalQueryByKey(model:bo_act_sso_log_dto):bo_act_sso_log_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_act_sso_log
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,OPTTYPE,OPTSTATE,SSOID,SSONAME,OPTTIME,USERID,USERNAME,OPTIP,DEPTID,DEPTNAME,COMPANYID,COMPANYNAME)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{OPTTYPE},#{OPTSTATE},#{SSOID},#{SSONAME},#{OPTTIME},#{USERID},#{USERNAME},#{OPTIP},#{DEPTID},#{DEPTNAME},#{COMPANYID},#{COMPANYNAME})
 </script>""")
-fun insert(model:bo_act_sso_log_dto):Unit
+fun Insert(model:bo_act_sso_log_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_act_sso_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='OPTTYPE!= null'> 
+           OPTTYPE,
+        </if>
+        <if test='OPTSTATE!= null'> 
+           OPTSTATE,
+        </if>
+        <if test='SSOID!= null'> 
+           SSOID,
+        </if>
+        <if test='SSONAME!= null'> 
+           SSONAME,
+        </if>
+        <if test='OPTTIME!= null'> 
+           OPTTIME,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='USERNAME!= null'> 
+           USERNAME,
+        </if>
+        <if test='OPTIP!= null'> 
+           OPTIP,
+        </if>
+        <if test='DEPTID!= null'> 
+           DEPTID,
+        </if>
+        <if test='DEPTNAME!= null'> 
+           DEPTNAME,
+        </if>
+        <if test='COMPANYID!= null'> 
+           COMPANYID,
+        </if>
+        <if test='COMPANYNAME!= null'> 
+           COMPANYNAME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='OPTTYPE!= null'> 
+           #{OPTTYPE,jdbcType=varchar}，
+        </if>
+        <if test='OPTSTATE!= null'> 
+           #{OPTSTATE,jdbcType=varchar}，
+        </if>
+        <if test='SSOID!= null'> 
+           #{SSOID,jdbcType=varchar}，
+        </if>
+        <if test='SSONAME!= null'> 
+           #{SSONAME,jdbcType=varchar}，
+        </if>
+        <if test='OPTTIME!= null'> 
+           #{OPTTIME,jdbcType=datetime}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='USERNAME!= null'> 
+           #{USERNAME,jdbcType=varchar}，
+        </if>
+        <if test='OPTIP!= null'> 
+           #{OPTIP,jdbcType=varchar}，
+        </if>
+        <if test='DEPTID!= null'> 
+           #{DEPTID,jdbcType=varchar}，
+        </if>
+        <if test='DEPTNAME!= null'> 
+           #{DEPTNAME,jdbcType=varchar}，
+        </if>
+        <if test='COMPANYID!= null'> 
+           #{COMPANYID,jdbcType=varchar}，
+        </if>
+        <if test='COMPANYNAME!= null'> 
+           #{COMPANYNAME,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_act_sso_log_dto):Unit
                 
 
 }

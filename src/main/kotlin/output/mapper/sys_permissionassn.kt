@@ -67,12 +67,31 @@ fun ConditionalQueryByKey(model:sys_permissionassn_dto):sys_permissionassn_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_permissionassn
     (ID,ASSIGNMENTTYPE,ASSIGNMENTID,PERMISSIONID)
     values
     (#{ID},#{ASSIGNMENTTYPE},#{ASSIGNMENTID},#{PERMISSIONID})
 </script>""")
-fun insert(model:sys_permissionassn_dto):Unit
+fun Insert(model:sys_permissionassn_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_permissionassn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           ASSIGNMENTTYPE,
+           ASSIGNMENTID,
+           PERMISSIONID
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+           #{ASSIGNMENTTYPE,jdbcType=varchar}，
+           #{ASSIGNMENTID,jdbcType=varchar}，
+           #{PERMISSIONID,jdbcType=varchar}
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_permissionassn_dto):Unit
                 
 
 }

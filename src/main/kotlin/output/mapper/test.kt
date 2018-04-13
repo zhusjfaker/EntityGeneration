@@ -55,12 +55,31 @@ fun ConditionalQueryByKey(model:test_dto):test_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into test
     (id,ss2)
     values
     (#{id},#{ss2})
 </script>""")
-fun insert(model:test_dto):Unit
+fun Insert(model:test_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           id,
+        <if test='ss2!= null'> 
+           ss2
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{id,jdbcType=int}，
+        <if test='ss2!= null'> 
+           #{ss2,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:test_dto):Unit
                 
 
 }

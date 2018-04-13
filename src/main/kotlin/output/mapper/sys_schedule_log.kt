@@ -103,12 +103,79 @@ fun ConditionalQueryByKey(model:sys_schedule_log_dto):sys_schedule_log_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_schedule_log
     (ID,SCHEDULE_ID,EXECUTE_TIME,END_TIME,STATUS,LOG_MEMO,EXECUTE_TYPE,LOG_TYPE,LOG_TIME,JOB_GROUP)
     values
     (#{ID},#{SCHEDULE_ID},#{EXECUTE_TIME},#{END_TIME},#{STATUS},#{LOG_MEMO},#{EXECUTE_TYPE},#{LOG_TYPE},#{LOG_TIME},#{JOB_GROUP})
 </script>""")
-fun insert(model:sys_schedule_log_dto):Unit
+fun Insert(model:sys_schedule_log_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_schedule_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='SCHEDULE_ID!= null'> 
+           SCHEDULE_ID,
+        </if>
+        <if test='EXECUTE_TIME!= null'> 
+           EXECUTE_TIME,
+        </if>
+        <if test='END_TIME!= null'> 
+           END_TIME,
+        </if>
+        <if test='STATUS!= null'> 
+           STATUS,
+        </if>
+        <if test='LOG_MEMO!= null'> 
+           LOG_MEMO,
+        </if>
+        <if test='EXECUTE_TYPE!= null'> 
+           EXECUTE_TYPE,
+        </if>
+        <if test='LOG_TYPE!= null'> 
+           LOG_TYPE,
+        </if>
+        <if test='LOG_TIME!= null'> 
+           LOG_TIME,
+        </if>
+        <if test='JOB_GROUP!= null'> 
+           JOB_GROUP
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=decimal}，
+        <if test='SCHEDULE_ID!= null'> 
+           #{SCHEDULE_ID,jdbcType=varchar}，
+        </if>
+        <if test='EXECUTE_TIME!= null'> 
+           #{EXECUTE_TIME,jdbcType=datetime}，
+        </if>
+        <if test='END_TIME!= null'> 
+           #{END_TIME,jdbcType=datetime}，
+        </if>
+        <if test='STATUS!= null'> 
+           #{STATUS,jdbcType=varchar}，
+        </if>
+        <if test='LOG_MEMO!= null'> 
+           #{LOG_MEMO,jdbcType=text}，
+        </if>
+        <if test='EXECUTE_TYPE!= null'> 
+           #{EXECUTE_TYPE,jdbcType=varchar}，
+        </if>
+        <if test='LOG_TYPE!= null'> 
+           #{LOG_TYPE,jdbcType=varchar}，
+        </if>
+        <if test='LOG_TIME!= null'> 
+           #{LOG_TIME,jdbcType=datetime}，
+        </if>
+        <if test='JOB_GROUP!= null'> 
+           #{JOB_GROUP,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_schedule_log_dto):Unit
                 
 
 }

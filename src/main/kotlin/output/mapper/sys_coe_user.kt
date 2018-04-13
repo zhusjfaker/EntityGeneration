@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:sys_coe_user_dto):sys_coe_user_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_user
     (ID,USERID,ISADMIN)
     values
     (#{ID},#{USERID},#{ISADMIN})
 </script>""")
-fun insert(model:sys_coe_user_dto):Unit
+fun Insert(model:sys_coe_user_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='ISADMIN!= null'> 
+           ISADMIN
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='ISADMIN!= null'> 
+           #{ISADMIN,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_user_dto):Unit
                 
 
 }

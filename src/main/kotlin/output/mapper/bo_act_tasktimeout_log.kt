@@ -229,12 +229,201 @@ fun ConditionalQueryByKey(model:bo_act_tasktimeout_log_dto):bo_act_tasktimeout_l
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_act_tasktimeout_log
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,YEAR,MONTH,DAY,HM,PINSTID,TINSTID,TASKTITLE,KPISCORE,EXECMEMO,COMPANYID,COMPANYNAME,DEPTID,DEPTNAME,USERID,USERNAME,ROLEID,ROLENAME,POLICYID,RECORDTIME,PDEFID,TDEFID,ACTIONTYPE)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{YEAR},#{MONTH},#{DAY},#{HM},#{PINSTID},#{TINSTID},#{TASKTITLE},#{KPISCORE},#{EXECMEMO},#{COMPANYID},#{COMPANYNAME},#{DEPTID},#{DEPTNAME},#{USERID},#{USERNAME},#{ROLEID},#{ROLENAME},#{POLICYID},#{RECORDTIME},#{PDEFID},#{TDEFID},#{ACTIONTYPE})
 </script>""")
-fun insert(model:bo_act_tasktimeout_log_dto):Unit
+fun Insert(model:bo_act_tasktimeout_log_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_act_tasktimeout_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='YEAR!= null'> 
+           YEAR,
+        </if>
+        <if test='MONTH!= null'> 
+           MONTH,
+        </if>
+        <if test='DAY!= null'> 
+           DAY,
+        </if>
+        <if test='HM!= null'> 
+           HM,
+        </if>
+        <if test='PINSTID!= null'> 
+           PINSTID,
+        </if>
+        <if test='TINSTID!= null'> 
+           TINSTID,
+        </if>
+        <if test='TASKTITLE!= null'> 
+           TASKTITLE,
+        </if>
+        <if test='KPISCORE!= null'> 
+           KPISCORE,
+        </if>
+        <if test='EXECMEMO!= null'> 
+           EXECMEMO,
+        </if>
+        <if test='COMPANYID!= null'> 
+           COMPANYID,
+        </if>
+        <if test='COMPANYNAME!= null'> 
+           COMPANYNAME,
+        </if>
+        <if test='DEPTID!= null'> 
+           DEPTID,
+        </if>
+        <if test='DEPTNAME!= null'> 
+           DEPTNAME,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='USERNAME!= null'> 
+           USERNAME,
+        </if>
+        <if test='ROLEID!= null'> 
+           ROLEID,
+        </if>
+        <if test='ROLENAME!= null'> 
+           ROLENAME,
+        </if>
+        <if test='POLICYID!= null'> 
+           POLICYID,
+        </if>
+        <if test='RECORDTIME!= null'> 
+           RECORDTIME,
+        </if>
+        <if test='PDEFID!= null'> 
+           PDEFID,
+        </if>
+        <if test='TDEFID!= null'> 
+           TDEFID,
+        </if>
+        <if test='ACTIONTYPE!= null'> 
+           ACTIONTYPE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='YEAR!= null'> 
+           #{YEAR,jdbcType=decimal}，
+        </if>
+        <if test='MONTH!= null'> 
+           #{MONTH,jdbcType=decimal}，
+        </if>
+        <if test='DAY!= null'> 
+           #{DAY,jdbcType=decimal}，
+        </if>
+        <if test='HM!= null'> 
+           #{HM,jdbcType=varchar}，
+        </if>
+        <if test='PINSTID!= null'> 
+           #{PINSTID,jdbcType=varchar}，
+        </if>
+        <if test='TINSTID!= null'> 
+           #{TINSTID,jdbcType=varchar}，
+        </if>
+        <if test='TASKTITLE!= null'> 
+           #{TASKTITLE,jdbcType=varchar}，
+        </if>
+        <if test='KPISCORE!= null'> 
+           #{KPISCORE,jdbcType=decimal}，
+        </if>
+        <if test='EXECMEMO!= null'> 
+           #{EXECMEMO,jdbcType=text}，
+        </if>
+        <if test='COMPANYID!= null'> 
+           #{COMPANYID,jdbcType=varchar}，
+        </if>
+        <if test='COMPANYNAME!= null'> 
+           #{COMPANYNAME,jdbcType=varchar}，
+        </if>
+        <if test='DEPTID!= null'> 
+           #{DEPTID,jdbcType=varchar}，
+        </if>
+        <if test='DEPTNAME!= null'> 
+           #{DEPTNAME,jdbcType=varchar}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='USERNAME!= null'> 
+           #{USERNAME,jdbcType=varchar}，
+        </if>
+        <if test='ROLEID!= null'> 
+           #{ROLEID,jdbcType=varchar}，
+        </if>
+        <if test='ROLENAME!= null'> 
+           #{ROLENAME,jdbcType=varchar}，
+        </if>
+        <if test='POLICYID!= null'> 
+           #{POLICYID,jdbcType=varchar}，
+        </if>
+        <if test='RECORDTIME!= null'> 
+           #{RECORDTIME,jdbcType=datetime}，
+        </if>
+        <if test='PDEFID!= null'> 
+           #{PDEFID,jdbcType=varchar}，
+        </if>
+        <if test='TDEFID!= null'> 
+           #{TDEFID,jdbcType=varchar}，
+        </if>
+        <if test='ACTIONTYPE!= null'> 
+           #{ACTIONTYPE,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_act_tasktimeout_log_dto):Unit
                 
 
 }

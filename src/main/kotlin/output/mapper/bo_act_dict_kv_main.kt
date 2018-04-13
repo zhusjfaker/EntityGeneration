@@ -157,12 +157,121 @@ fun ConditionalQueryByKey(model:bo_act_dict_kv_main_dto):bo_act_dict_kv_main_dto
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_act_dict_kv_main
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,DICTNAME,DICTKEY,APPID,ISCACHE,ISSYS,ISTREE,MEMO,DICTMETA,DICTCATEGORY,COMPONENTSETTING)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{DICTNAME},#{DICTKEY},#{APPID},#{ISCACHE},#{ISSYS},#{ISTREE},#{MEMO},#{DICTMETA},#{DICTCATEGORY},#{COMPONENTSETTING})
 </script>""")
-fun insert(model:bo_act_dict_kv_main_dto):Unit
+fun Insert(model:bo_act_dict_kv_main_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_act_dict_kv_main
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+           CREATEDATE,
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+           UPDATEDATE,
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='DICTNAME!= null'> 
+           DICTNAME,
+        </if>
+        <if test='DICTKEY!= null'> 
+           DICTKEY,
+        </if>
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='ISCACHE!= null'> 
+           ISCACHE,
+        </if>
+        <if test='ISSYS!= null'> 
+           ISSYS,
+        </if>
+        <if test='ISTREE!= null'> 
+           ISTREE,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO,
+        </if>
+        <if test='DICTMETA!= null'> 
+           DICTMETA,
+        </if>
+        <if test='DICTCATEGORY!= null'> 
+           DICTCATEGORY,
+        </if>
+        <if test='COMPONENTSETTING!= null'> 
+           COMPONENTSETTING
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+           #{CREATEDATE,jdbcType=datetime}，
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+           #{UPDATEDATE,jdbcType=datetime}，
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=decimal}，
+        <if test='DICTNAME!= null'> 
+           #{DICTNAME,jdbcType=varchar}，
+        </if>
+        <if test='DICTKEY!= null'> 
+           #{DICTKEY,jdbcType=varchar}，
+        </if>
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='ISCACHE!= null'> 
+           #{ISCACHE,jdbcType=decimal}，
+        </if>
+        <if test='ISSYS!= null'> 
+           #{ISSYS,jdbcType=decimal}，
+        </if>
+        <if test='ISTREE!= null'> 
+           #{ISTREE,jdbcType=decimal}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=varchar}，
+        </if>
+        <if test='DICTMETA!= null'> 
+           #{DICTMETA,jdbcType=text}，
+        </if>
+        <if test='DICTCATEGORY!= null'> 
+           #{DICTCATEGORY,jdbcType=text}，
+        </if>
+        <if test='COMPONENTSETTING!= null'> 
+           #{COMPONENTSETTING,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_act_dict_kv_main_dto):Unit
                 
 
 }

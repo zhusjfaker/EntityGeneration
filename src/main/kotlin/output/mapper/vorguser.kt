@@ -109,12 +109,85 @@ fun ConditionalQueryByKey(model:vorguser_dto):vorguser_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into vorguser
     (ID,USERID,DEPARTMENTID,ROLEID,ISMANAGER,ORDERINDEX,EXT1,EXT2,EXT3,EXT4,EXT5)
     values
     (#{ID},#{USERID},#{DEPARTMENTID},#{ROLEID},#{ISMANAGER},#{ORDERINDEX},#{EXT1},#{EXT2},#{EXT3},#{EXT4},#{EXT5})
 </script>""")
-fun insert(model:vorguser_dto):Unit
+fun Insert(model:vorguser_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into vorguser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='DEPARTMENTID!= null'> 
+           DEPARTMENTID,
+        </if>
+        <if test='ROLEID!= null'> 
+           ROLEID,
+        </if>
+        <if test='ISMANAGER!= null'> 
+           ISMANAGER,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='DEPARTMENTID!= null'> 
+           #{DEPARTMENTID,jdbcType=varchar}，
+        </if>
+        <if test='ROLEID!= null'> 
+           #{ROLEID,jdbcType=varchar}，
+        </if>
+        <if test='ISMANAGER!= null'> 
+           #{ISMANAGER,jdbcType=smallint}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=decimal}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:vorguser_dto):Unit
                 
 
 }

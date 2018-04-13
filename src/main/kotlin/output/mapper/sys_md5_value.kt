@@ -55,12 +55,31 @@ fun ConditionalQueryByKey(model:sys_md5_value_dto):sys_md5_value_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_md5_value
     (ID,V)
     values
     (#{ID},#{V})
 </script>""")
-fun insert(model:sys_md5_value_dto):Unit
+fun Insert(model:sys_md5_value_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_md5_value
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='V!= null'> 
+           V
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+        <if test='V!= null'> 
+           #{V,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_md5_value_dto):Unit
                 
 
 }

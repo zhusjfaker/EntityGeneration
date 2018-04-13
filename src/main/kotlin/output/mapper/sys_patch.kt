@@ -71,12 +71,71 @@ fun ConditionalQuery(model:sys_patch_dto):ArrayList<sys_patch_dto>
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_patch
     (ID,DOWNLOADID,VERSIONID,OPSTATE,OPDATE,MD5DIGEST,ISDEGRADE,RELEASETYPE)
     values
     (#{ID},#{DOWNLOADID},#{VERSIONID},#{OPSTATE},#{OPDATE},#{MD5DIGEST},#{ISDEGRADE},#{RELEASETYPE})
 </script>""")
-fun insert(model:sys_patch_dto):Unit
+fun Insert(model:sys_patch_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_patch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test='ID!= null'> 
+           ID,
+        </if>
+        <if test='DOWNLOADID!= null'> 
+           DOWNLOADID,
+        </if>
+        <if test='VERSIONID!= null'> 
+           VERSIONID,
+        </if>
+        <if test='OPSTATE!= null'> 
+           OPSTATE,
+        </if>
+        <if test='OPDATE!= null'> 
+           OPDATE,
+        </if>
+        <if test='MD5DIGEST!= null'> 
+           MD5DIGEST,
+        </if>
+        <if test='ISDEGRADE!= null'> 
+           ISDEGRADE,
+        </if>
+        <if test='RELEASETYPE!= null'> 
+           RELEASETYPE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test='ID!= null'> 
+           #{ID,jdbcType=char}，
+        </if>
+        <if test='DOWNLOADID!= null'> 
+           #{DOWNLOADID,jdbcType=char}，
+        </if>
+        <if test='VERSIONID!= null'> 
+           #{VERSIONID,jdbcType=varchar}，
+        </if>
+        <if test='OPSTATE!= null'> 
+           #{OPSTATE,jdbcType=varchar}，
+        </if>
+        <if test='OPDATE!= null'> 
+           #{OPDATE,jdbcType=datetime}，
+        </if>
+        <if test='MD5DIGEST!= null'> 
+           #{MD5DIGEST,jdbcType=char}，
+        </if>
+        <if test='ISDEGRADE!= null'> 
+           #{ISDEGRADE,jdbcType=smallint}，
+        </if>
+        <if test='RELEASETYPE!= null'> 
+           #{RELEASETYPE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_patch_dto):Unit
                 
 
 }

@@ -163,12 +163,135 @@ fun ConditionalQueryByKey(model:bo_act_sso_system_dto):bo_act_sso_system_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_act_sso_system
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,SSONAME,MEMO,ICON32,ICON96,LOGINURL,SUBMITTYPE,LOGINTARGET,ISACTIVE,ORDERINDEX,ACCESSKEY,SEC)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{SSONAME},#{MEMO},#{ICON32},#{ICON96},#{LOGINURL},#{SUBMITTYPE},#{LOGINTARGET},#{ISACTIVE},#{ORDERINDEX},#{ACCESSKEY},#{SEC})
 </script>""")
-fun insert(model:bo_act_sso_system_dto):Unit
+fun Insert(model:bo_act_sso_system_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_act_sso_system
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='SSONAME!= null'> 
+           SSONAME,
+        </if>
+        <if test='MEMO!= null'> 
+           MEMO,
+        </if>
+        <if test='ICON32!= null'> 
+           ICON32,
+        </if>
+        <if test='ICON96!= null'> 
+           ICON96,
+        </if>
+        <if test='LOGINURL!= null'> 
+           LOGINURL,
+        </if>
+        <if test='SUBMITTYPE!= null'> 
+           SUBMITTYPE,
+        </if>
+        <if test='LOGINTARGET!= null'> 
+           LOGINTARGET,
+        </if>
+        <if test='ISACTIVE!= null'> 
+           ISACTIVE,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX,
+        </if>
+        <if test='ACCESSKEY!= null'> 
+           ACCESSKEY,
+        </if>
+        <if test='SEC!= null'> 
+           SEC
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='SSONAME!= null'> 
+           #{SSONAME,jdbcType=varchar}，
+        </if>
+        <if test='MEMO!= null'> 
+           #{MEMO,jdbcType=varchar}，
+        </if>
+        <if test='ICON32!= null'> 
+           #{ICON32,jdbcType=varchar}，
+        </if>
+        <if test='ICON96!= null'> 
+           #{ICON96,jdbcType=varchar}，
+        </if>
+        <if test='LOGINURL!= null'> 
+           #{LOGINURL,jdbcType=varchar}，
+        </if>
+        <if test='SUBMITTYPE!= null'> 
+           #{SUBMITTYPE,jdbcType=varchar}，
+        </if>
+        <if test='LOGINTARGET!= null'> 
+           #{LOGINTARGET,jdbcType=varchar}，
+        </if>
+        <if test='ISACTIVE!= null'> 
+           #{ISACTIVE,jdbcType=decimal}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=decimal}，
+        </if>
+        <if test='ACCESSKEY!= null'> 
+           #{ACCESSKEY,jdbcType=varchar}，
+        </if>
+        <if test='SEC!= null'> 
+           #{SEC,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_act_sso_system_dto):Unit
                 
 
 }

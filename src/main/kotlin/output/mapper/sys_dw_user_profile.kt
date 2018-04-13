@@ -76,12 +76,77 @@ fun ConditionalQuery(model:sys_dw_user_profile_dto):ArrayList<sys_dw_user_profil
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_dw_user_profile
     (ID,VIEWID,USERID,PROFILE_TYPE,PROFILE_VAL,WIDTH,ISDISPLAY,ORDERINDEX,PAGE)
     values
     (#{ID},#{VIEWID},#{USERID},#{PROFILE_TYPE},#{PROFILE_VAL},#{WIDTH},#{ISDISPLAY},#{ORDERINDEX},#{PAGE})
 </script>""")
-fun insert(model:sys_dw_user_profile_dto):Unit
+fun Insert(model:sys_dw_user_profile_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_dw_user_profile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test='ID!= null'> 
+           ID,
+        </if>
+        <if test='VIEWID!= null'> 
+           VIEWID,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='PROFILE_TYPE!= null'> 
+           PROFILE_TYPE,
+        </if>
+        <if test='PROFILE_VAL!= null'> 
+           PROFILE_VAL,
+        </if>
+        <if test='WIDTH!= null'> 
+           WIDTH,
+        </if>
+        <if test='ISDISPLAY!= null'> 
+           ISDISPLAY,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX,
+        </if>
+        <if test='PAGE!= null'> 
+           PAGE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test='ID!= null'> 
+           #{ID,jdbcType=char}，
+        </if>
+        <if test='VIEWID!= null'> 
+           #{VIEWID,jdbcType=char}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='PROFILE_TYPE!= null'> 
+           #{PROFILE_TYPE,jdbcType=smallint}，
+        </if>
+        <if test='PROFILE_VAL!= null'> 
+           #{PROFILE_VAL,jdbcType=text}，
+        </if>
+        <if test='WIDTH!= null'> 
+           #{WIDTH,jdbcType=varchar}，
+        </if>
+        <if test='ISDISPLAY!= null'> 
+           #{ISDISPLAY,jdbcType=smallint}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=smallint}，
+        </if>
+        <if test='PAGE!= null'> 
+           #{PAGE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_dw_user_profile_dto):Unit
                 
 
 }

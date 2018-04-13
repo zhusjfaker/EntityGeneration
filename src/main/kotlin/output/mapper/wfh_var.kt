@@ -103,12 +103,79 @@ fun ConditionalQueryByKey(model:wfh_var_dto):wfh_var_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfh_var
     (ID,PROCESSINSTID,VARSCOPE,VARNAME,VALUETYPE,TEXTVALUE,LONGVALUE,DOUBLEVALUE,CREATETIME,UPDATETIME)
     values
     (#{ID},#{PROCESSINSTID},#{VARSCOPE},#{VARNAME},#{VALUETYPE},#{TEXTVALUE},#{LONGVALUE},#{DOUBLEVALUE},#{CREATETIME},#{UPDATETIME})
 </script>""")
-fun insert(model:wfh_var_dto):Unit
+fun Insert(model:wfh_var_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfh_var
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='VARSCOPE!= null'> 
+           VARSCOPE,
+        </if>
+        <if test='VARNAME!= null'> 
+           VARNAME,
+        </if>
+        <if test='VALUETYPE!= null'> 
+           VALUETYPE,
+        </if>
+        <if test='TEXTVALUE!= null'> 
+           TEXTVALUE,
+        </if>
+        <if test='LONGVALUE!= null'> 
+           LONGVALUE,
+        </if>
+        <if test='DOUBLEVALUE!= null'> 
+           DOUBLEVALUE,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='UPDATETIME!= null'> 
+           UPDATETIME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='VARSCOPE!= null'> 
+           #{VARSCOPE,jdbcType=varchar}，
+        </if>
+        <if test='VARNAME!= null'> 
+           #{VARNAME,jdbcType=varchar}，
+        </if>
+        <if test='VALUETYPE!= null'> 
+           #{VALUETYPE,jdbcType=varchar}，
+        </if>
+        <if test='TEXTVALUE!= null'> 
+           #{TEXTVALUE,jdbcType=text}，
+        </if>
+        <if test='LONGVALUE!= null'> 
+           #{LONGVALUE,jdbcType=decimal}，
+        </if>
+        <if test='DOUBLEVALUE!= null'> 
+           #{DOUBLEVALUE,jdbcType=decimal}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='UPDATETIME!= null'> 
+           #{UPDATETIME,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfh_var_dto):Unit
                 
 
 }

@@ -55,12 +55,31 @@ fun ConditionalQueryByKey(model:sys_coe_property_dto):sys_coe_property_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_property
     (PROPERTYKEY,PROPERTYVALUE)
     values
     (#{PROPERTYKEY},#{PROPERTYVALUE})
 </script>""")
-fun insert(model:sys_coe_property_dto):Unit
+fun Insert(model:sys_coe_property_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_property
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           PROPERTYKEY,
+        <if test='PROPERTYVALUE!= null'> 
+           PROPERTYVALUE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{PROPERTYKEY,jdbcType=varchar}，
+        <if test='PROPERTYVALUE!= null'> 
+           #{PROPERTYVALUE,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_property_dto):Unit
                 
 
 }

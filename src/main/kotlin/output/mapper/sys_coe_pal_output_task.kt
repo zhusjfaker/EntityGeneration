@@ -115,12 +115,91 @@ fun ConditionalQueryByKey(model:sys_coe_pal_output_task_dto):sys_coe_pal_output_
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_output_task
     (ID,TEAMID,WSID,PROFILEID,TASKNAME,USERID,CREATETIME,BEGINTIME,ENDTIME,TASKSTATE,THREADID,LANG)
     values
     (#{ID},#{TEAMID},#{WSID},#{PROFILEID},#{TASKNAME},#{USERID},#{CREATETIME},#{BEGINTIME},#{ENDTIME},#{TASKSTATE},#{THREADID},#{LANG})
 </script>""")
-fun insert(model:sys_coe_pal_output_task_dto):Unit
+fun Insert(model:sys_coe_pal_output_task_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_output_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TEAMID!= null'> 
+           TEAMID,
+        </if>
+        <if test='WSID!= null'> 
+           WSID,
+        </if>
+        <if test='PROFILEID!= null'> 
+           PROFILEID,
+        </if>
+        <if test='TASKNAME!= null'> 
+           TASKNAME,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='BEGINTIME!= null'> 
+           BEGINTIME,
+        </if>
+        <if test='ENDTIME!= null'> 
+           ENDTIME,
+        </if>
+        <if test='TASKSTATE!= null'> 
+           TASKSTATE,
+        </if>
+        <if test='THREADID!= null'> 
+           THREADID,
+        </if>
+        <if test='LANG!= null'> 
+           LANG
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='TEAMID!= null'> 
+           #{TEAMID,jdbcType=char}，
+        </if>
+        <if test='WSID!= null'> 
+           #{WSID,jdbcType=char}，
+        </if>
+        <if test='PROFILEID!= null'> 
+           #{PROFILEID,jdbcType=varchar}，
+        </if>
+        <if test='TASKNAME!= null'> 
+           #{TASKNAME,jdbcType=varchar}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='BEGINTIME!= null'> 
+           #{BEGINTIME,jdbcType=datetime}，
+        </if>
+        <if test='ENDTIME!= null'> 
+           #{ENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='TASKSTATE!= null'> 
+           #{TASKSTATE,jdbcType=smallint}，
+        </if>
+        <if test='THREADID!= null'> 
+           #{THREADID,jdbcType=varchar}，
+        </if>
+        <if test='LANG!= null'> 
+           #{LANG,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_output_task_dto):Unit
                 
 
 }

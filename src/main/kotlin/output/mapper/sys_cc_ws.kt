@@ -97,12 +97,69 @@ fun ConditionalQueryByKey(model:sys_cc_ws_dto):sys_cc_ws_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_cc_ws
     (ID,NAME,XMT,STATE,PUBLISHDATE,PUBLISHER,DESCRIPTION,WEBSERVER,ADDRESS)
     values
     (#{ID},#{NAME},#{XMT},#{STATE},#{PUBLISHDATE},#{PUBLISHER},#{DESCRIPTION},#{WEBSERVER},#{ADDRESS})
 </script>""")
-fun insert(model:sys_cc_ws_dto):Unit
+fun Insert(model:sys_cc_ws_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_cc_ws
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='NAME!= null'> 
+           NAME,
+        </if>
+        <if test='XMT!= null'> 
+           XMT,
+        </if>
+        <if test='STATE!= null'> 
+           STATE,
+        </if>
+           PUBLISHDATE,
+        <if test='PUBLISHER!= null'> 
+           PUBLISHER,
+        </if>
+        <if test='DESCRIPTION!= null'> 
+           DESCRIPTION,
+        </if>
+        <if test='WEBSERVER!= null'> 
+           WEBSERVER,
+        </if>
+        <if test='ADDRESS!= null'> 
+           ADDRESS
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=decimal}，
+        <if test='NAME!= null'> 
+           #{NAME,jdbcType=text}，
+        </if>
+        <if test='XMT!= null'> 
+           #{XMT,jdbcType=text}，
+        </if>
+        <if test='STATE!= null'> 
+           #{STATE,jdbcType=decimal}，
+        </if>
+           #{PUBLISHDATE,jdbcType=datetime}，
+        <if test='PUBLISHER!= null'> 
+           #{PUBLISHER,jdbcType=varchar}，
+        </if>
+        <if test='DESCRIPTION!= null'> 
+           #{DESCRIPTION,jdbcType=text}，
+        </if>
+        <if test='WEBSERVER!= null'> 
+           #{WEBSERVER,jdbcType=text}，
+        </if>
+        <if test='ADDRESS!= null'> 
+           #{ADDRESS,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_cc_ws_dto):Unit
                 
 
 }

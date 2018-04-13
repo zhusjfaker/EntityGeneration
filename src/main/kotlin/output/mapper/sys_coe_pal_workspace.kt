@@ -121,12 +121,97 @@ fun ConditionalQueryByKey(model:sys_coe_pal_workspace_dto):sys_coe_pal_workspace
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_workspace
     (ID,WSNAME,WSDM,WSADMIN,WSDESC,WSSTATE,WSORGTYPE,WSTCTYPE,WSBGURL,WSORDERINDEX,WSVER,WSVERSIONUUID,ISUSE)
     values
     (#{ID},#{WSNAME},#{WSDM},#{WSADMIN},#{WSDESC},#{WSSTATE},#{WSORGTYPE},#{WSTCTYPE},#{WSBGURL},#{WSORDERINDEX},#{WSVER},#{WSVERSIONUUID},#{ISUSE})
 </script>""")
-fun insert(model:sys_coe_pal_workspace_dto):Unit
+fun Insert(model:sys_coe_pal_workspace_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_workspace
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='WSNAME!= null'> 
+           WSNAME,
+        </if>
+        <if test='WSDM!= null'> 
+           WSDM,
+        </if>
+        <if test='WSADMIN!= null'> 
+           WSADMIN,
+        </if>
+        <if test='WSDESC!= null'> 
+           WSDESC,
+        </if>
+        <if test='WSSTATE!= null'> 
+           WSSTATE,
+        </if>
+        <if test='WSORGTYPE!= null'> 
+           WSORGTYPE,
+        </if>
+        <if test='WSTCTYPE!= null'> 
+           WSTCTYPE,
+        </if>
+        <if test='WSBGURL!= null'> 
+           WSBGURL,
+        </if>
+        <if test='WSORDERINDEX!= null'> 
+           WSORDERINDEX,
+        </if>
+        <if test='WSVER!= null'> 
+           WSVER,
+        </if>
+        <if test='WSVERSIONUUID!= null'> 
+           WSVERSIONUUID,
+        </if>
+        <if test='ISUSE!= null'> 
+           ISUSE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='WSNAME!= null'> 
+           #{WSNAME,jdbcType=varchar}，
+        </if>
+        <if test='WSDM!= null'> 
+           #{WSDM,jdbcType=varchar}，
+        </if>
+        <if test='WSADMIN!= null'> 
+           #{WSADMIN,jdbcType=varchar}，
+        </if>
+        <if test='WSDESC!= null'> 
+           #{WSDESC,jdbcType=varchar}，
+        </if>
+        <if test='WSSTATE!= null'> 
+           #{WSSTATE,jdbcType=smallint}，
+        </if>
+        <if test='WSORGTYPE!= null'> 
+           #{WSORGTYPE,jdbcType=smallint}，
+        </if>
+        <if test='WSTCTYPE!= null'> 
+           #{WSTCTYPE,jdbcType=smallint}，
+        </if>
+        <if test='WSBGURL!= null'> 
+           #{WSBGURL,jdbcType=varchar}，
+        </if>
+        <if test='WSORDERINDEX!= null'> 
+           #{WSORDERINDEX,jdbcType=smallint}，
+        </if>
+        <if test='WSVER!= null'> 
+           #{WSVER,jdbcType=smallint}，
+        </if>
+        <if test='WSVERSIONUUID!= null'> 
+           #{WSVERSIONUUID,jdbcType=char}，
+        </if>
+        <if test='ISUSE!= null'> 
+           #{ISUSE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_workspace_dto):Unit
                 
 
 }

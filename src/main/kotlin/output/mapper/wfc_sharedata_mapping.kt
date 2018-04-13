@@ -73,12 +73,49 @@ fun ConditionalQueryByKey(model:wfc_sharedata_mapping_dto):wfc_sharedata_mapping
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfc_sharedata_mapping
     (ID,PARENTINSTID,PARENTBOID,SUBINSTID,SUBBOID)
     values
     (#{ID},#{PARENTINSTID},#{PARENTBOID},#{SUBINSTID},#{SUBBOID})
 </script>""")
-fun insert(model:wfc_sharedata_mapping_dto):Unit
+fun Insert(model:wfc_sharedata_mapping_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfc_sharedata_mapping
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PARENTINSTID!= null'> 
+           PARENTINSTID,
+        </if>
+        <if test='PARENTBOID!= null'> 
+           PARENTBOID,
+        </if>
+        <if test='SUBINSTID!= null'> 
+           SUBINSTID,
+        </if>
+        <if test='SUBBOID!= null'> 
+           SUBBOID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PARENTINSTID!= null'> 
+           #{PARENTINSTID,jdbcType=char}，
+        </if>
+        <if test='PARENTBOID!= null'> 
+           #{PARENTBOID,jdbcType=char}，
+        </if>
+        <if test='SUBINSTID!= null'> 
+           #{SUBINSTID,jdbcType=char}，
+        </if>
+        <if test='SUBBOID!= null'> 
+           #{SUBBOID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfc_sharedata_mapping_dto):Unit
                 
 
 }

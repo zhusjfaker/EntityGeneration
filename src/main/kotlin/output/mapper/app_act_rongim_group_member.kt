@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:app_act_rongim_group_member_dto):app_act_rongim_
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_rongim_group_member
     (ID,GROUPID,USERID,ISMANAGER,STOPNOTIFY,ISTOP)
     values
     (#{ID},#{GROUPID},#{USERID},#{ISMANAGER},#{STOPNOTIFY},#{ISTOP})
 </script>""")
-fun insert(model:app_act_rongim_group_member_dto):Unit
+fun Insert(model:app_act_rongim_group_member_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_rongim_group_member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='GROUPID!= null'> 
+           GROUPID,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='ISMANAGER!= null'> 
+           ISMANAGER,
+        </if>
+        <if test='STOPNOTIFY!= null'> 
+           STOPNOTIFY,
+        </if>
+        <if test='ISTOP!= null'> 
+           ISTOP
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='GROUPID!= null'> 
+           #{GROUPID,jdbcType=varchar}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='ISMANAGER!= null'> 
+           #{ISMANAGER,jdbcType=smallint}，
+        </if>
+        <if test='STOPNOTIFY!= null'> 
+           #{STOPNOTIFY,jdbcType=smallint}，
+        </if>
+        <if test='ISTOP!= null'> 
+           #{ISTOP,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_rongim_group_member_dto):Unit
                 
 
 }

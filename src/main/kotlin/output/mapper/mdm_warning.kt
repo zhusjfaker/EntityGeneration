@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:mdm_warning_dto):mdm_warning_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mdm_warning
     (ID,DEVICEID,WARNTIME,WARNTYPE,WARNMSG,HANDLED)
     values
     (#{ID},#{DEVICEID},#{WARNTIME},#{WARNTYPE},#{WARNMSG},#{HANDLED})
 </script>""")
-fun insert(model:mdm_warning_dto):Unit
+fun Insert(model:mdm_warning_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mdm_warning
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='DEVICEID!= null'> 
+           DEVICEID,
+        </if>
+        <if test='WARNTIME!= null'> 
+           WARNTIME,
+        </if>
+        <if test='WARNTYPE!= null'> 
+           WARNTYPE,
+        </if>
+        <if test='WARNMSG!= null'> 
+           WARNMSG,
+        </if>
+        <if test='HANDLED!= null'> 
+           HANDLED
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='DEVICEID!= null'> 
+           #{DEVICEID,jdbcType=char}，
+        </if>
+        <if test='WARNTIME!= null'> 
+           #{WARNTIME,jdbcType=datetime}，
+        </if>
+        <if test='WARNTYPE!= null'> 
+           #{WARNTYPE,jdbcType=smallint}，
+        </if>
+        <if test='WARNMSG!= null'> 
+           #{WARNMSG,jdbcType=varchar}，
+        </if>
+        <if test='HANDLED!= null'> 
+           #{HANDLED,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mdm_warning_dto):Unit
                 
 
 }

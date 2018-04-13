@@ -55,12 +55,27 @@ fun ConditionalQueryByKey(model:qrtz_locks_dto):qrtz_locks_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_locks
     (SCHED_NAME,LOCK_NAME)
     values
     (#{SCHED_NAME},#{LOCK_NAME})
 </script>""")
-fun insert(model:qrtz_locks_dto):Unit
+fun Insert(model:qrtz_locks_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_locks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           LOCK_NAME
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{LOCK_NAME,jdbcType=varchar}
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_locks_dto):Unit
                 
 
 }

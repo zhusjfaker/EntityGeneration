@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:app_act_pat_planremarks_dto):app_act_pat_planrem
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_pat_planremarks
     (ID,PLANID,CREATEUSER,CREATETIME,REMARKS,STYLE)
     values
     (#{ID},#{PLANID},#{CREATEUSER},#{CREATETIME},#{REMARKS},#{STYLE})
 </script>""")
-fun insert(model:app_act_pat_planremarks_dto):Unit
+fun Insert(model:app_act_pat_planremarks_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_pat_planremarks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PLANID!= null'> 
+           PLANID,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='REMARKS!= null'> 
+           REMARKS,
+        </if>
+        <if test='STYLE!= null'> 
+           STYLE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PLANID!= null'> 
+           #{PLANID,jdbcType=char}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='REMARKS!= null'> 
+           #{REMARKS,jdbcType=varchar}，
+        </if>
+        <if test='STYLE!= null'> 
+           #{STYLE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_pat_planremarks_dto):Unit
                 
 
 }

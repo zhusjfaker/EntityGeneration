@@ -55,12 +55,27 @@ fun ConditionalQueryByKey(model:qrtz_paused_trigger_grps_dto):qrtz_paused_trigge
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into qrtz_paused_trigger_grps
     (SCHED_NAME,TRIGGER_GROUP)
     values
     (#{SCHED_NAME},#{TRIGGER_GROUP})
 </script>""")
-fun insert(model:qrtz_paused_trigger_grps_dto):Unit
+fun Insert(model:qrtz_paused_trigger_grps_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into qrtz_paused_trigger_grps
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SCHED_NAME,
+           TRIGGER_GROUP
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SCHED_NAME,jdbcType=varchar}，
+           #{TRIGGER_GROUP,jdbcType=varchar}
+    </trim>
+</script>""")
+fun InsertSelective(model:qrtz_paused_trigger_grps_dto):Unit
                 
 
 }

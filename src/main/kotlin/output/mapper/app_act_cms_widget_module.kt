@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:app_act_cms_widget_module_dto):app_act_cms_widge
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_cms_widget_module
     (ID,WIDGETID,MODULEID)
     values
     (#{ID},#{WIDGETID},#{MODULEID})
 </script>""")
-fun insert(model:app_act_cms_widget_module_dto):Unit
+fun Insert(model:app_act_cms_widget_module_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_cms_widget_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='WIDGETID!= null'> 
+           WIDGETID,
+        </if>
+        <if test='MODULEID!= null'> 
+           MODULEID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='WIDGETID!= null'> 
+           #{WIDGETID,jdbcType=char}，
+        </if>
+        <if test='MODULEID!= null'> 
+           #{MODULEID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_cms_widget_module_dto):Unit
                 
 
 }

@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:app_act_pat_todo_remarks_dto):app_act_pat_todo_r
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_pat_todo_remarks
     (ID,TODOID,CREATEUSER,CREATETIME,REMARKS,STYLE)
     values
     (#{ID},#{TODOID},#{CREATEUSER},#{CREATETIME},#{REMARKS},#{STYLE})
 </script>""")
-fun insert(model:app_act_pat_todo_remarks_dto):Unit
+fun Insert(model:app_act_pat_todo_remarks_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_pat_todo_remarks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TODOID!= null'> 
+           TODOID,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME,
+        </if>
+        <if test='REMARKS!= null'> 
+           REMARKS,
+        </if>
+        <if test='STYLE!= null'> 
+           STYLE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='TODOID!= null'> 
+           #{TODOID,jdbcType=char}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}，
+        </if>
+        <if test='REMARKS!= null'> 
+           #{REMARKS,jdbcType=varchar}，
+        </if>
+        <if test='STYLE!= null'> 
+           #{STYLE,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_pat_todo_remarks_dto):Unit
                 
 
 }

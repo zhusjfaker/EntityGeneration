@@ -109,12 +109,85 @@ fun ConditionalQueryByKey(model:wfc_transition_dto):wfc_transition_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into wfc_transition
     (ID,PROCESSINSTID,TASKINSTID,PROCESSDEFID,SOURCEDEFID,SOURCETYPE,SEQUENCEFLOWDEFID,TARGETDEFID,TARGETTYPE,ISACTIVE,CREATETIME)
     values
     (#{ID},#{PROCESSINSTID},#{TASKINSTID},#{PROCESSDEFID},#{SOURCEDEFID},#{SOURCETYPE},#{SEQUENCEFLOWDEFID},#{TARGETDEFID},#{TARGETTYPE},#{ISACTIVE},#{CREATETIME})
 </script>""")
-fun insert(model:wfc_transition_dto):Unit
+fun Insert(model:wfc_transition_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into wfc_transition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='PROCESSINSTID!= null'> 
+           PROCESSINSTID,
+        </if>
+        <if test='TASKINSTID!= null'> 
+           TASKINSTID,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+        <if test='SOURCEDEFID!= null'> 
+           SOURCEDEFID,
+        </if>
+        <if test='SOURCETYPE!= null'> 
+           SOURCETYPE,
+        </if>
+        <if test='SEQUENCEFLOWDEFID!= null'> 
+           SEQUENCEFLOWDEFID,
+        </if>
+        <if test='TARGETDEFID!= null'> 
+           TARGETDEFID,
+        </if>
+        <if test='TARGETTYPE!= null'> 
+           TARGETTYPE,
+        </if>
+        <if test='ISACTIVE!= null'> 
+           ISACTIVE,
+        </if>
+        <if test='CREATETIME!= null'> 
+           CREATETIME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='PROCESSINSTID!= null'> 
+           #{PROCESSINSTID,jdbcType=char}，
+        </if>
+        <if test='TASKINSTID!= null'> 
+           #{TASKINSTID,jdbcType=char}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+        <if test='SOURCEDEFID!= null'> 
+           #{SOURCEDEFID,jdbcType=char}，
+        </if>
+        <if test='SOURCETYPE!= null'> 
+           #{SOURCETYPE,jdbcType=varchar}，
+        </if>
+        <if test='SEQUENCEFLOWDEFID!= null'> 
+           #{SEQUENCEFLOWDEFID,jdbcType=char}，
+        </if>
+        <if test='TARGETDEFID!= null'> 
+           #{TARGETDEFID,jdbcType=char}，
+        </if>
+        <if test='TARGETTYPE!= null'> 
+           #{TARGETTYPE,jdbcType=varchar}，
+        </if>
+        <if test='ISACTIVE!= null'> 
+           #{ISACTIVE,jdbcType=smallint}，
+        </if>
+        <if test='CREATETIME!= null'> 
+           #{CREATETIME,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:wfc_transition_dto):Unit
                 
 
 }

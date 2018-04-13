@@ -139,12 +139,111 @@ fun ConditionalQueryByKey(model:bo_act_workcalendar_batchsub_dto):bo_act_workcal
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_act_workcalendar_batchsub
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,YEAR,WCTYPE,WCNAME,AMSTARTTIME,AMENDTIME,PMSTARTTIME,PMENDTIME)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{YEAR},#{WCTYPE},#{WCNAME},#{AMSTARTTIME},#{AMENDTIME},#{PMSTARTTIME},#{PMENDTIME})
 </script>""")
-fun insert(model:bo_act_workcalendar_batchsub_dto):Unit
+fun Insert(model:bo_act_workcalendar_batchsub_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_act_workcalendar_batchsub
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='YEAR!= null'> 
+           YEAR,
+        </if>
+        <if test='WCTYPE!= null'> 
+           WCTYPE,
+        </if>
+        <if test='WCNAME!= null'> 
+           WCNAME,
+        </if>
+        <if test='AMSTARTTIME!= null'> 
+           AMSTARTTIME,
+        </if>
+        <if test='AMENDTIME!= null'> 
+           AMENDTIME,
+        </if>
+        <if test='PMSTARTTIME!= null'> 
+           PMSTARTTIME,
+        </if>
+        <if test='PMENDTIME!= null'> 
+           PMENDTIME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='YEAR!= null'> 
+           #{YEAR,jdbcType=decimal}，
+        </if>
+        <if test='WCTYPE!= null'> 
+           #{WCTYPE,jdbcType=varchar}，
+        </if>
+        <if test='WCNAME!= null'> 
+           #{WCNAME,jdbcType=varchar}，
+        </if>
+        <if test='AMSTARTTIME!= null'> 
+           #{AMSTARTTIME,jdbcType=datetime}，
+        </if>
+        <if test='AMENDTIME!= null'> 
+           #{AMENDTIME,jdbcType=datetime}，
+        </if>
+        <if test='PMSTARTTIME!= null'> 
+           #{PMSTARTTIME,jdbcType=datetime}，
+        </if>
+        <if test='PMENDTIME!= null'> 
+           #{PMENDTIME,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_act_workcalendar_batchsub_dto):Unit
                 
 
 }

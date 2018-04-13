@@ -259,12 +259,235 @@ fun ConditionalQueryByKey(model:sys_coe_pal_repository_dto):sys_coe_pal_reposito
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_repository
     (ID,WSID,PLRID,PLNO,PLNAME,PLLEVEL,PLPARENTID,PLORDERINDEX,PLISBOTTOMLEVEL,PLDESC,PLRD,PLRP,PM,PLINPUT,PLOUTPUT,PLEXECTYPE,PLSYSTEMNAME,PLAWSPID,PLDIAGRAMURL,PLCOLOR,PLCATEGORY,PLMETHODID,PLVER,PLVERSIONID,ISUSE,ISPUBLISH,ISSYSTEMFILE,FILEPATH,HISTORYMAXVERSION,VIEWCOUNT,CREATEUSER,MODIFYUSER,CREATEDATE,MODIFYDATE,PLDUTYDEPT,PLDUTYPERSON)
     values
     (#{ID},#{WSID},#{PLRID},#{PLNO},#{PLNAME},#{PLLEVEL},#{PLPARENTID},#{PLORDERINDEX},#{PLISBOTTOMLEVEL},#{PLDESC},#{PLRD},#{PLRP},#{PM},#{PLINPUT},#{PLOUTPUT},#{PLEXECTYPE},#{PLSYSTEMNAME},#{PLAWSPID},#{PLDIAGRAMURL},#{PLCOLOR},#{PLCATEGORY},#{PLMETHODID},#{PLVER},#{PLVERSIONID},#{ISUSE},#{ISPUBLISH},#{ISSYSTEMFILE},#{FILEPATH},#{HISTORYMAXVERSION},#{VIEWCOUNT},#{CREATEUSER},#{MODIFYUSER},#{CREATEDATE},#{MODIFYDATE},#{PLDUTYDEPT},#{PLDUTYPERSON})
 </script>""")
-fun insert(model:sys_coe_pal_repository_dto):Unit
+fun Insert(model:sys_coe_pal_repository_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_repository
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='WSID!= null'> 
+           WSID,
+        </if>
+        <if test='PLRID!= null'> 
+           PLRID,
+        </if>
+        <if test='PLNO!= null'> 
+           PLNO,
+        </if>
+        <if test='PLNAME!= null'> 
+           PLNAME,
+        </if>
+        <if test='PLLEVEL!= null'> 
+           PLLEVEL,
+        </if>
+        <if test='PLPARENTID!= null'> 
+           PLPARENTID,
+        </if>
+        <if test='PLORDERINDEX!= null'> 
+           PLORDERINDEX,
+        </if>
+        <if test='PLISBOTTOMLEVEL!= null'> 
+           PLISBOTTOMLEVEL,
+        </if>
+        <if test='PLDESC!= null'> 
+           PLDESC,
+        </if>
+        <if test='PLRD!= null'> 
+           PLRD,
+        </if>
+        <if test='PLRP!= null'> 
+           PLRP,
+        </if>
+        <if test='PM!= null'> 
+           PM,
+        </if>
+        <if test='PLINPUT!= null'> 
+           PLINPUT,
+        </if>
+        <if test='PLOUTPUT!= null'> 
+           PLOUTPUT,
+        </if>
+        <if test='PLEXECTYPE!= null'> 
+           PLEXECTYPE,
+        </if>
+        <if test='PLSYSTEMNAME!= null'> 
+           PLSYSTEMNAME,
+        </if>
+        <if test='PLAWSPID!= null'> 
+           PLAWSPID,
+        </if>
+        <if test='PLDIAGRAMURL!= null'> 
+           PLDIAGRAMURL,
+        </if>
+        <if test='PLCOLOR!= null'> 
+           PLCOLOR,
+        </if>
+        <if test='PLCATEGORY!= null'> 
+           PLCATEGORY,
+        </if>
+        <if test='PLMETHODID!= null'> 
+           PLMETHODID,
+        </if>
+        <if test='PLVER!= null'> 
+           PLVER,
+        </if>
+        <if test='PLVERSIONID!= null'> 
+           PLVERSIONID,
+        </if>
+        <if test='ISUSE!= null'> 
+           ISUSE,
+        </if>
+        <if test='ISPUBLISH!= null'> 
+           ISPUBLISH,
+        </if>
+        <if test='ISSYSTEMFILE!= null'> 
+           ISSYSTEMFILE,
+        </if>
+        <if test='FILEPATH!= null'> 
+           FILEPATH,
+        </if>
+        <if test='HISTORYMAXVERSION!= null'> 
+           HISTORYMAXVERSION,
+        </if>
+        <if test='VIEWCOUNT!= null'> 
+           VIEWCOUNT,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='MODIFYUSER!= null'> 
+           MODIFYUSER,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='MODIFYDATE!= null'> 
+           MODIFYDATE,
+        </if>
+        <if test='PLDUTYDEPT!= null'> 
+           PLDUTYDEPT,
+        </if>
+        <if test='PLDUTYPERSON!= null'> 
+           PLDUTYPERSON
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='WSID!= null'> 
+           #{WSID,jdbcType=char}，
+        </if>
+        <if test='PLRID!= null'> 
+           #{PLRID,jdbcType=char}，
+        </if>
+        <if test='PLNO!= null'> 
+           #{PLNO,jdbcType=varchar}，
+        </if>
+        <if test='PLNAME!= null'> 
+           #{PLNAME,jdbcType=varchar}，
+        </if>
+        <if test='PLLEVEL!= null'> 
+           #{PLLEVEL,jdbcType=smallint}，
+        </if>
+        <if test='PLPARENTID!= null'> 
+           #{PLPARENTID,jdbcType=varchar}，
+        </if>
+        <if test='PLORDERINDEX!= null'> 
+           #{PLORDERINDEX,jdbcType=smallint}，
+        </if>
+        <if test='PLISBOTTOMLEVEL!= null'> 
+           #{PLISBOTTOMLEVEL,jdbcType=smallint}，
+        </if>
+        <if test='PLDESC!= null'> 
+           #{PLDESC,jdbcType=text}，
+        </if>
+        <if test='PLRD!= null'> 
+           #{PLRD,jdbcType=varchar}，
+        </if>
+        <if test='PLRP!= null'> 
+           #{PLRP,jdbcType=varchar}，
+        </if>
+        <if test='PM!= null'> 
+           #{PM,jdbcType=varchar}，
+        </if>
+        <if test='PLINPUT!= null'> 
+           #{PLINPUT,jdbcType=varchar}，
+        </if>
+        <if test='PLOUTPUT!= null'> 
+           #{PLOUTPUT,jdbcType=varchar}，
+        </if>
+        <if test='PLEXECTYPE!= null'> 
+           #{PLEXECTYPE,jdbcType=smallint}，
+        </if>
+        <if test='PLSYSTEMNAME!= null'> 
+           #{PLSYSTEMNAME,jdbcType=varchar}，
+        </if>
+        <if test='PLAWSPID!= null'> 
+           #{PLAWSPID,jdbcType=char}，
+        </if>
+        <if test='PLDIAGRAMURL!= null'> 
+           #{PLDIAGRAMURL,jdbcType=varchar}，
+        </if>
+        <if test='PLCOLOR!= null'> 
+           #{PLCOLOR,jdbcType=varchar}，
+        </if>
+        <if test='PLCATEGORY!= null'> 
+           #{PLCATEGORY,jdbcType=varchar}，
+        </if>
+        <if test='PLMETHODID!= null'> 
+           #{PLMETHODID,jdbcType=varchar}，
+        </if>
+        <if test='PLVER!= null'> 
+           #{PLVER,jdbcType=smallint}，
+        </if>
+        <if test='PLVERSIONID!= null'> 
+           #{PLVERSIONID,jdbcType=char}，
+        </if>
+        <if test='ISUSE!= null'> 
+           #{ISUSE,jdbcType=smallint}，
+        </if>
+        <if test='ISPUBLISH!= null'> 
+           #{ISPUBLISH,jdbcType=smallint}，
+        </if>
+        <if test='ISSYSTEMFILE!= null'> 
+           #{ISSYSTEMFILE,jdbcType=smallint}，
+        </if>
+        <if test='FILEPATH!= null'> 
+           #{FILEPATH,jdbcType=varchar}，
+        </if>
+        <if test='HISTORYMAXVERSION!= null'> 
+           #{HISTORYMAXVERSION,jdbcType=decimal}，
+        </if>
+        <if test='VIEWCOUNT!= null'> 
+           #{VIEWCOUNT,jdbcType=decimal}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='MODIFYUSER!= null'> 
+           #{MODIFYUSER,jdbcType=varchar}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=datetime}，
+        </if>
+        <if test='MODIFYDATE!= null'> 
+           #{MODIFYDATE,jdbcType=datetime}，
+        </if>
+        <if test='PLDUTYDEPT!= null'> 
+           #{PLDUTYDEPT,jdbcType=varchar}，
+        </if>
+        <if test='PLDUTYPERSON!= null'> 
+           #{PLDUTYPERSON,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_repository_dto):Unit
                 
 
 }

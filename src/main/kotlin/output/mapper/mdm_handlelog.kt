@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:mdm_handlelog_dto):mdm_handlelog_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mdm_handlelog
     (ID,DEVICEID,USERID,HANDLETIME,HANDLETYPE,COMMANDID)
     values
     (#{ID},#{DEVICEID},#{USERID},#{HANDLETIME},#{HANDLETYPE},#{COMMANDID})
 </script>""")
-fun insert(model:mdm_handlelog_dto):Unit
+fun Insert(model:mdm_handlelog_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mdm_handlelog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='DEVICEID!= null'> 
+           DEVICEID,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='HANDLETIME!= null'> 
+           HANDLETIME,
+        </if>
+        <if test='HANDLETYPE!= null'> 
+           HANDLETYPE,
+        </if>
+        <if test='COMMANDID!= null'> 
+           COMMANDID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='DEVICEID!= null'> 
+           #{DEVICEID,jdbcType=char}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='HANDLETIME!= null'> 
+           #{HANDLETIME,jdbcType=datetime}，
+        </if>
+        <if test='HANDLETYPE!= null'> 
+           #{HANDLETYPE,jdbcType=smallint}，
+        </if>
+        <if test='COMMANDID!= null'> 
+           #{COMMANDID,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mdm_handlelog_dto):Unit
                 
 
 }

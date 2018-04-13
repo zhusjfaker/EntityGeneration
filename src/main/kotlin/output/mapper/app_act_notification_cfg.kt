@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:app_act_notification_cfg_dto):app_act_notificati
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_notification_cfg
     (ID,ISCLOSE,ISSTORE)
     values
     (#{ID},#{ISCLOSE},#{ISSTORE})
 </script>""")
-fun insert(model:app_act_notification_cfg_dto):Unit
+fun Insert(model:app_act_notification_cfg_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_notification_cfg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ISCLOSE!= null'> 
+           ISCLOSE,
+        </if>
+        <if test='ISSTORE!= null'> 
+           ISSTORE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ISCLOSE!= null'> 
+           #{ISCLOSE,jdbcType=char}，
+        </if>
+        <if test='ISSTORE!= null'> 
+           #{ISSTORE,jdbcType=char}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_notification_cfg_dto):Unit
                 
 
 }

@@ -127,12 +127,91 @@ fun ConditionalQueryByKey(model:orgrole_dto):orgrole_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into orgrole
     (ID,ROLENAME,ORDERINDEX,CATEGORYNAME,LOOKANDFEEL,ROLENO,ROLEDESC,EXT1,EXT2,EXT3,EXT4,EXT5,CREATEDATE,UPDATEDATE)
     values
     (#{ID},#{ROLENAME},#{ORDERINDEX},#{CATEGORYNAME},#{LOOKANDFEEL},#{ROLENO},#{ROLEDESC},#{EXT1},#{EXT2},#{EXT3},#{EXT4},#{EXT5},#{CREATEDATE},#{UPDATEDATE})
 </script>""")
-fun insert(model:orgrole_dto):Unit
+fun Insert(model:orgrole_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into orgrole
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           ROLENAME,
+           ORDERINDEX,
+           CATEGORYNAME,
+        <if test='LOOKANDFEEL!= null'> 
+           LOOKANDFEEL,
+        </if>
+        <if test='ROLENO!= null'> 
+           ROLENO,
+        </if>
+        <if test='ROLEDESC!= null'> 
+           ROLEDESC,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2,
+        </if>
+        <if test='EXT3!= null'> 
+           EXT3,
+        </if>
+        <if test='EXT4!= null'> 
+           EXT4,
+        </if>
+        <if test='EXT5!= null'> 
+           EXT5,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+           #{ROLENAME,jdbcType=varchar}，
+           #{ORDERINDEX,jdbcType=decimal}，
+           #{CATEGORYNAME,jdbcType=varchar}，
+        <if test='LOOKANDFEEL!= null'> 
+           #{LOOKANDFEEL,jdbcType=varchar}，
+        </if>
+        <if test='ROLENO!= null'> 
+           #{ROLENO,jdbcType=varchar}，
+        </if>
+        <if test='ROLEDESC!= null'> 
+           #{ROLEDESC,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}，
+        </if>
+        <if test='EXT3!= null'> 
+           #{EXT3,jdbcType=varchar}，
+        </if>
+        <if test='EXT4!= null'> 
+           #{EXT4,jdbcType=varchar}，
+        </if>
+        <if test='EXT5!= null'> 
+           #{EXT5,jdbcType=varchar}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=datetime}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=datetime}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:orgrole_dto):Unit
                 
 
 }

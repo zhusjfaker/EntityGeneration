@@ -73,12 +73,49 @@ fun ConditionalQueryByKey(model:mam_recommend_app_dto):mam_recommend_app_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into mam_recommend_app
     (ID,APPID,OSTYPE,DEVICETYPE,ORDERINDEX)
     values
     (#{ID},#{APPID},#{OSTYPE},#{DEVICETYPE},#{ORDERINDEX})
 </script>""")
-fun insert(model:mam_recommend_app_dto):Unit
+fun Insert(model:mam_recommend_app_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into mam_recommend_app
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='OSTYPE!= null'> 
+           OSTYPE,
+        </if>
+        <if test='DEVICETYPE!= null'> 
+           DEVICETYPE,
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           ORDERINDEX
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='OSTYPE!= null'> 
+           #{OSTYPE,jdbcType=smallint}，
+        </if>
+        <if test='DEVICETYPE!= null'> 
+           #{DEVICETYPE,jdbcType=smallint}，
+        </if>
+        <if test='ORDERINDEX!= null'> 
+           #{ORDERINDEX,jdbcType=smallint}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:mam_recommend_app_dto):Unit
                 
 
 }

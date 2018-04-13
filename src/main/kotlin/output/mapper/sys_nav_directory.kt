@@ -133,12 +133,97 @@ fun ConditionalQueryByKey(model:sys_nav_directory_dto):sys_nav_directory_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_nav_directory
     (ID,SYSTEMID,DIRECTORYNAME,ORDERINDEX,LINKURL,LINKTARGET,ICON16,ICON64,ICON96,NAVDESC,APPID,ISACTIVITY,NOTIFIER,EXT1,EXT2)
     values
     (#{ID},#{SYSTEMID},#{DIRECTORYNAME},#{ORDERINDEX},#{LINKURL},#{LINKTARGET},#{ICON16},#{ICON64},#{ICON96},#{NAVDESC},#{APPID},#{ISACTIVITY},#{NOTIFIER},#{EXT1},#{EXT2})
 </script>""")
-fun insert(model:sys_nav_directory_dto):Unit
+fun Insert(model:sys_nav_directory_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_nav_directory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+           SYSTEMID,
+           DIRECTORYNAME,
+           ORDERINDEX,
+        <if test='LINKURL!= null'> 
+           LINKURL,
+        </if>
+        <if test='LINKTARGET!= null'> 
+           LINKTARGET,
+        </if>
+        <if test='ICON16!= null'> 
+           ICON16,
+        </if>
+        <if test='ICON64!= null'> 
+           ICON64,
+        </if>
+        <if test='ICON96!= null'> 
+           ICON96,
+        </if>
+        <if test='NAVDESC!= null'> 
+           NAVDESC,
+        </if>
+        <if test='APPID!= null'> 
+           APPID,
+        </if>
+        <if test='ISACTIVITY!= null'> 
+           ISACTIVITY,
+        </if>
+        <if test='NOTIFIER!= null'> 
+           NOTIFIER,
+        </if>
+        <if test='EXT1!= null'> 
+           EXT1,
+        </if>
+        <if test='EXT2!= null'> 
+           EXT2
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=varchar}，
+           #{SYSTEMID,jdbcType=varchar}，
+           #{DIRECTORYNAME,jdbcType=varchar}，
+           #{ORDERINDEX,jdbcType=smallint}，
+        <if test='LINKURL!= null'> 
+           #{LINKURL,jdbcType=varchar}，
+        </if>
+        <if test='LINKTARGET!= null'> 
+           #{LINKTARGET,jdbcType=varchar}，
+        </if>
+        <if test='ICON16!= null'> 
+           #{ICON16,jdbcType=varchar}，
+        </if>
+        <if test='ICON64!= null'> 
+           #{ICON64,jdbcType=varchar}，
+        </if>
+        <if test='ICON96!= null'> 
+           #{ICON96,jdbcType=varchar}，
+        </if>
+        <if test='NAVDESC!= null'> 
+           #{NAVDESC,jdbcType=varchar}，
+        </if>
+        <if test='APPID!= null'> 
+           #{APPID,jdbcType=varchar}，
+        </if>
+        <if test='ISACTIVITY!= null'> 
+           #{ISACTIVITY,jdbcType=smallint}，
+        </if>
+        <if test='NOTIFIER!= null'> 
+           #{NOTIFIER,jdbcType=varchar}，
+        </if>
+        <if test='EXT1!= null'> 
+           #{EXT1,jdbcType=varchar}，
+        </if>
+        <if test='EXT2!= null'> 
+           #{EXT2,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_nav_directory_dto):Unit
                 
 
 }

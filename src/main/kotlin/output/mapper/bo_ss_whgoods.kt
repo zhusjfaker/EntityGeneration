@@ -139,12 +139,111 @@ fun ConditionalQueryByKey(model:bo_ss_whgoods_dto):bo_ss_whgoods_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into bo_ss_whgoods
     (ID,ORGID,BINDID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,PROCESSDEFID,ISEND,WHID,GOODSID,QUANTRA,QUAN,PRICE,AMOUNT,COMID)
     values
     (#{ID},#{ORGID},#{BINDID},#{CREATEDATE},#{CREATEUSER},#{UPDATEDATE},#{UPDATEUSER},#{PROCESSDEFID},#{ISEND},#{WHID},#{GOODSID},#{QUANTRA},#{QUAN},#{PRICE},#{AMOUNT},#{COMID})
 </script>""")
-fun insert(model:bo_ss_whgoods_dto):Unit
+fun Insert(model:bo_ss_whgoods_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into bo_ss_whgoods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='BINDID!= null'> 
+           BINDID,
+        </if>
+        <if test='CREATEDATE!= null'> 
+           CREATEDATE,
+        </if>
+        <if test='CREATEUSER!= null'> 
+           CREATEUSER,
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           UPDATEDATE,
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           UPDATEUSER,
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           PROCESSDEFID,
+        </if>
+           ISEND,
+        <if test='WHID!= null'> 
+           WHID,
+        </if>
+        <if test='GOODSID!= null'> 
+           GOODSID,
+        </if>
+        <if test='QUANTRA!= null'> 
+           QUANTRA,
+        </if>
+        <if test='QUAN!= null'> 
+           QUAN,
+        </if>
+        <if test='PRICE!= null'> 
+           PRICE,
+        </if>
+        <if test='AMOUNT!= null'> 
+           AMOUNT,
+        </if>
+        <if test='COMID!= null'> 
+           COMID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='BINDID!= null'> 
+           #{BINDID,jdbcType=char}，
+        </if>
+        <if test='CREATEDATE!= null'> 
+           #{CREATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='CREATEUSER!= null'> 
+           #{CREATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='UPDATEDATE!= null'> 
+           #{UPDATEDATE,jdbcType=timestamp}，
+        </if>
+        <if test='UPDATEUSER!= null'> 
+           #{UPDATEUSER,jdbcType=varchar}，
+        </if>
+        <if test='PROCESSDEFID!= null'> 
+           #{PROCESSDEFID,jdbcType=char}，
+        </if>
+           #{ISEND,jdbcType=smallint}，
+        <if test='WHID!= null'> 
+           #{WHID,jdbcType=varchar}，
+        </if>
+        <if test='GOODSID!= null'> 
+           #{GOODSID,jdbcType=varchar}，
+        </if>
+        <if test='QUANTRA!= null'> 
+           #{QUANTRA,jdbcType=decimal}，
+        </if>
+        <if test='QUAN!= null'> 
+           #{QUAN,jdbcType=decimal}，
+        </if>
+        <if test='PRICE!= null'> 
+           #{PRICE,jdbcType=decimal}，
+        </if>
+        <if test='AMOUNT!= null'> 
+           #{AMOUNT,jdbcType=decimal}，
+        </if>
+        <if test='COMID!= null'> 
+           #{COMID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:bo_ss_whgoods_dto):Unit
                 
 
 }

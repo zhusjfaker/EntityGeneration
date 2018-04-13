@@ -61,12 +61,37 @@ fun ConditionalQueryByKey(model:sys_sequence_dto):sys_sequence_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_sequence
     (SEQUENCENAME,SEQUENCEVALUE,CACHESTEP)
     values
     (#{SEQUENCENAME},#{SEQUENCEVALUE},#{CACHESTEP})
 </script>""")
-fun insert(model:sys_sequence_dto):Unit
+fun Insert(model:sys_sequence_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_sequence
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           SEQUENCENAME,
+        <if test='SEQUENCEVALUE!= null'> 
+           SEQUENCEVALUE,
+        </if>
+        <if test='CACHESTEP!= null'> 
+           CACHESTEP
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{SEQUENCENAME,jdbcType=varchar}，
+        <if test='SEQUENCEVALUE!= null'> 
+           #{SEQUENCEVALUE,jdbcType=decimal}，
+        </if>
+        <if test='CACHESTEP!= null'> 
+           #{CACHESTEP,jdbcType=decimal}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_sequence_dto):Unit
                 
 
 }

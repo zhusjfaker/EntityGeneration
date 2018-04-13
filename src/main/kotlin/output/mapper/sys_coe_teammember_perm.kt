@@ -67,12 +67,43 @@ fun ConditionalQueryByKey(model:sys_coe_teammember_perm_dto):sys_coe_teammember_
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_teammember_perm
     (ID,TEAMID,USERID,ACTIONTYPE)
     values
     (#{ID},#{TEAMID},#{USERID},#{ACTIONTYPE})
 </script>""")
-fun insert(model:sys_coe_teammember_perm_dto):Unit
+fun Insert(model:sys_coe_teammember_perm_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_teammember_perm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='TEAMID!= null'> 
+           TEAMID,
+        </if>
+        <if test='USERID!= null'> 
+           USERID,
+        </if>
+        <if test='ACTIONTYPE!= null'> 
+           ACTIONTYPE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='TEAMID!= null'> 
+           #{TEAMID,jdbcType=char}，
+        </if>
+        <if test='USERID!= null'> 
+           #{USERID,jdbcType=varchar}，
+        </if>
+        <if test='ACTIONTYPE!= null'> 
+           #{ACTIONTYPE,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_teammember_perm_dto):Unit
                 
 
 }

@@ -61,12 +61,33 @@ fun ConditionalQueryByKey(model:sys_userprofile_dto):sys_userprofile_dto?
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_userprofile
     (USERID,PROFILEKEY,PROFILEVALUE)
     values
     (#{USERID},#{PROFILEKEY},#{PROFILEVALUE})
 </script>""")
-fun insert(model:sys_userprofile_dto):Unit
+fun Insert(model:sys_userprofile_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_userprofile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           USERID,
+           PROFILEKEY,
+        <if test='PROFILEVALUE!= null'> 
+           PROFILEVALUE
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{USERID,jdbcType=varchar}，
+           #{PROFILEKEY,jdbcType=varchar}，
+        <if test='PROFILEVALUE!= null'> 
+           #{PROFILEVALUE,jdbcType=text}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_userprofile_dto):Unit
                 
 
 }

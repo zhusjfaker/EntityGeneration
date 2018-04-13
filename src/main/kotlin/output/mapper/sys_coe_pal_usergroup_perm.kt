@@ -67,12 +67,43 @@ fun ConditionalQueryByKey(model:sys_coe_pal_usergroup_perm_dto):sys_coe_pal_user
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into sys_coe_pal_usergroup_perm
     (ID,GROUPID,PERMTYPE,RESOURCEID)
     values
     (#{ID},#{GROUPID},#{PERMTYPE},#{RESOURCEID})
 </script>""")
-fun insert(model:sys_coe_pal_usergroup_perm_dto):Unit
+fun Insert(model:sys_coe_pal_usergroup_perm_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into sys_coe_pal_usergroup_perm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='GROUPID!= null'> 
+           GROUPID,
+        </if>
+        <if test='PERMTYPE!= null'> 
+           PERMTYPE,
+        </if>
+        <if test='RESOURCEID!= null'> 
+           RESOURCEID
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='GROUPID!= null'> 
+           #{GROUPID,jdbcType=char}，
+        </if>
+        <if test='PERMTYPE!= null'> 
+           #{PERMTYPE,jdbcType=smallint}，
+        </if>
+        <if test='RESOURCEID!= null'> 
+           #{RESOURCEID,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:sys_coe_pal_usergroup_perm_dto):Unit
                 
 
 }

@@ -79,12 +79,55 @@ fun ConditionalQueryByKey(model:app_act_cms_data_reader_dto):app_act_cms_data_re
 
 
 @Insert("""<script>
-    insert into TStudent
+    insert into app_act_cms_data_reader
     (ID,DATAID,READER,ORGID,READTIME,READERIP)
     values
     (#{ID},#{DATAID},#{READER},#{ORGID},#{READTIME},#{READERIP})
 </script>""")
-fun insert(model:app_act_cms_data_reader_dto):Unit
+fun Insert(model:app_act_cms_data_reader_dto):Unit
+                
+
+
+@Insert("""<script>
+    insert into app_act_cms_data_reader
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+           ID,
+        <if test='DATAID!= null'> 
+           DATAID,
+        </if>
+        <if test='READER!= null'> 
+           READER,
+        </if>
+        <if test='ORGID!= null'> 
+           ORGID,
+        </if>
+        <if test='READTIME!= null'> 
+           READTIME,
+        </if>
+        <if test='READERIP!= null'> 
+           READERIP
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+           #{ID,jdbcType=char}，
+        <if test='DATAID!= null'> 
+           #{DATAID,jdbcType=char}，
+        </if>
+        <if test='READER!= null'> 
+           #{READER,jdbcType=varchar}，
+        </if>
+        <if test='ORGID!= null'> 
+           #{ORGID,jdbcType=varchar}，
+        </if>
+        <if test='READTIME!= null'> 
+           #{READTIME,jdbcType=datetime}，
+        </if>
+        <if test='READERIP!= null'> 
+           #{READERIP,jdbcType=varchar}
+        </if>
+    </trim>
+</script>""")
+fun InsertSelective(model:app_act_cms_data_reader_dto):Unit
                 
 
 }
