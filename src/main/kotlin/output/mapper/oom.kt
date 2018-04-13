@@ -59,6 +59,18 @@ fun insert(model:oom_dto):Long
                 
 
 
+@Insert("""<script>
+    insert into oom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        
+    </trim>
+</script>""")
+@Options(keyProperty="ID",useGeneratedKeys=true)
+fun InsertSelective(model:oom_dto):Long
+                
 
 }
 

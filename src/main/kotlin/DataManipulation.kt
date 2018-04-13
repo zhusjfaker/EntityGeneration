@@ -131,7 +131,7 @@ fun ConditionalQueryByKey(model:${table.table_name + "_dto"}):${table.table_name
     (${table.ColumnList?.filter { it.COLUMN_NAME != key }?.map { "#{" + it.COLUMN_NAME + "}" }?.joinToString(separator = ",")})
 </script>""${'"'})
 @Options(keyProperty="${key}",useGeneratedKeys=true)
-fun insert(model:${table.table_name + "_dto"}):${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == key }?.firstOrNull()?.DATA_TYPE!!)}
+fun insert(model:${table.table_name + "_dto"}):${EntityUtily.TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == key }?.firstOrNull()?.DATA_TYPE!!)}
                 """
             } else {
                 return """
@@ -185,7 +185,7 @@ fun Insert(model:${table.table_name + "_dto"}):Unit
     </trim>
 </script>""${'"'})
 @Options(keyProperty="${key}",useGeneratedKeys=true)
-fun InsertSelective(model:${table.table_name + "_dto"}):${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == key }?.firstOrNull()?.DATA_TYPE!!)}
+fun InsertSelective(model:${table.table_name + "_dto"}):${EntityUtily.TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == key }?.firstOrNull()?.DATA_TYPE!!)}
                 """
 
             } else {
