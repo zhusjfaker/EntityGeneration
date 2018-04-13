@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
     }
 
     /* 生成路径 */
-    var projectpath = "/Users/zhushijie/Desktop/gitlab-company/EntityGeneration/src/main/kotlin/output/"
+    var projectpath = "E:\\git-project\\EntityGenrate\\src\\main\\kotlin\\output\\"
     val packagename = "bpm6"
 
 
@@ -142,7 +142,11 @@ interface ${it.table_name}{
 
 ${GetListALLContent(it)}
 
+${DeleteByPrimaryKey(it)}
 
+${updateByPrimaryKey(it)}
+
+${updateByPrimaryKeySelective(it)}
 }
 
         """)
@@ -174,6 +178,51 @@ fun GetListAll():ArrayList<${table.table_name + "_dto"}>
         """
 }
 
+fun DeleteByPrimaryKey(table:TableEntity):String{
+    var pkId = Primarykey(table)
+    if(!pkId.isNullOrBlank()){
+        return """
+@Delete("DELETE FROM ${table.table_name} WHERE ${pkId}=#{arg0}")
+fun DeleteByPrimaryKey(${pkId}:${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!)})
+        """
+    }
+
+    return ""
+}
+
+fun updateByPrimaryKey(table: TableEntity):String{
+    var pkId = Primarykey(table)
+    if(!pkId.isNullOrBlank()){
+        var str = table.ColumnList?.map { it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+TypeConvert(it.DATA_TYPE)+"}"}?.joinToString(separator = ",\n        ")
+        return """@Update(""${'"'}<script>
+        UPDATE ${table.table_name} SET
+        ${str}
+        WHERE ${pkId}=#{${pkId},jdbcType=${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!)}}
+        </script>""${'"'})
+fun UpdateByPrimaryKey(model:${table.table_name+"_dto"})
+        """
+     }
+    return ""
+}
+// <if test="processInstanceId != null">
+fun updateByPrimaryKeySelective(table:TableEntity):String{
+    var pkId = Primarykey(table)
+    if(!pkId.isNullOrBlank()){
+        var str = table.ColumnList?.map {
+            "<if test=\"${it.COLUMN_NAME} != null\">  "+
+            it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+TypeConvert(it.DATA_TYPE)+"}"
+        }?.joinToString(separator = ",</if>\n        ")
+
+        return """@Update(""${'"'}<script>
+            UPDATE ${table.table_name} SET
+            ${str}
+              WHERE ${pkId}=#{${pkId},jdbcType=${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!)}}
+            </script>""${'"'})
+fun updateByPrimaryKeySelective(model:${table.table_name+"_dto"})
+            """
+    }
+    return ""
+}
 
 /*
   删除文件夹内部所有递归文件
@@ -264,4 +313,20 @@ fun TypeConvert(typelens: String): String {
 
 }
 
+fun Primarykey(table: TableEntity): String? {
+    table.ColumnList?.forEach {
+        if (it.COLUMN_KEY?.trim() == "PRI") {
+            return it.COLUMN_NAME;
+        }
+    }
+    return null
+}
 
+fun IsHasPrimarykey(table: TableEntity): Boolean {
+    table.ColumnList?.forEach {
+        if (it.COLUMN_KEY?.trim() == "PRI") {
+            return true;
+        }
+    }
+    return false
+}
