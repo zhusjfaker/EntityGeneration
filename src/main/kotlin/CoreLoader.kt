@@ -21,7 +21,7 @@ open class CoreLoader {
         ): Unit {
 
             /* 获取数据库 oop描述 */
-            var factory = EntiyFactory.factory
+            var factory = EntiyFactory(driver, url, username, password).build()
             var session = factory!!.openSession(true)
             var table_excute = session.getMapper(Table::class.java)
 
@@ -38,7 +38,7 @@ open class CoreLoader {
             /* 生成数据扩展类 */
 
             /* 生成工厂类 */
-            createFactoryFile(projectpath, packagename)
+            createFactoryFile(projectpath, packagename, driver, url, username, password)
 
             /* 创建mapper repository */
             createMapperFile(projectpath, list, packagename)
@@ -85,7 +85,14 @@ data class ${it.table_name + "_dto"}(
         /*
         创建工厂驱动文件
          */
-        fun createFactoryFile(path: String, packagename: String) {
+        fun createFactoryFile(
+                path: String,
+                packagename: String,
+                driver: String,
+                url: String,
+                username: String,
+                password: String
+        ) {
             /* 生成工厂类 */
             var factory_path = path + "DBFactrory.kt"
             var factoryfile = File(factory_path)
@@ -104,10 +111,10 @@ class EntiyFactory {
 
     companion object {
 
-        val driver = "${EntiyFactory.driver}"
-        val url = "${EntiyFactory.url}"
-        val username = "${EntiyFactory.username}"
-        val password = "${EntiyFactory.password}"
+        val driver = "${driver}"
+        val url = "${url}"
+        val username = "${username}"
+        val password = "${password}"
 
         fun build(): SqlSessionFactory? {
             val dataSource = PooledDataSource(driver, url, username, password);
