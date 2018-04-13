@@ -1,67 +1,70 @@
 package core
 
+import core.*
 import entity.TableEntity
 import mapper.Table
 import java.io.File
 import java.nio.charset.Charset
 
+open class CoreLoader {
 
-fun main(args: Array<String>) {
+    companion object {
 
-    /* 获取数据库 oop描述 */
-    var factory = EntiyFactory.factory
-    var session = factory!!.openSession(true)
-    var table_excute = session.getMapper(Table::class.java)
+        fun GenerateFile(
+                projectpath: String,
+                driver: String,
+                databasename: String,
+                url: String,
+                username: String,
+                password: String,
+                packagename: String
+        ): Unit {
 
-    val databasename = "bpm01"
-    var list = table_excute.GetAllTable(databasename)
-    list.forEach {
-        val col_list = table_excute.GetColumns(it.table_name, databasename)
-        it.ColumnList = col_list
-    }
+            /* 获取数据库 oop描述 */
+            var factory = EntiyFactory(driver, url, username, password).build()
+            var session = factory!!.openSession(true)
+            var table_excute = session.getMapper(Table::class.java)
 
-    /* 生成路径 */
-    var projectpath = "E:\\git-project\\EntityGenrate\\src\\main\\kotlin\\output\\"
-    val packagename = "bpm6"
-
-
-    /* 创建实体文件 并写入字段内容 */
-    writeDtoFile(projectpath, list, packagename)
-
-}
-
-fun writeDtoFile(path: String, list: ArrayList<TableEntity>, packagename: String): Unit {
-    /* 初始化文件夹内容 */
-    deleteFoldFiles(path)
-    /* 生成实体类 */
-    createEntityFile(path, list, packagename)
-    /* 生成数据扩展类 */
-
-    /* 生成工厂类 */
-    createFactoryFile(path, packagename)
-
-    /* 创建mapper repository */
-    createMapperFile(path, list, packagename)
-}
-
-fun createEntityFile(path: String, list: ArrayList<TableEntity>, packagename: String) {
-    /* 生成基础数据类 */
-    var base_entity_path = path + "entity/"
-    File(base_entity_path).mkdir()
-    list.forEach {
-        var filename = it.table_name + "_dto" + ".kt"
-        val file = File(base_entity_path + filename)
-        var column_content = ""
-        var table = it
-        if (it.ColumnList != null && it.ColumnList?.isNotEmpty()!!) {
-            it.ColumnList?.forEach {
-                column_content += "${if (it.COLUMN_KEY != "PRI") "var" else "val"}" +
-                        " ${it.COLUMN_NAME} :${TypeConvert(it.DATA_TYPE)}" +
-                        "${if (it.IS_NULLABLE == "NO") "" else "? = null"}" +
-                        "${if (table.ColumnList?.last() == it) "" else ","}" +
-                        "\n       "
+            var list = table_excute.GetAllTable(databasename)
+            list.forEach {
+                val col_list = table_excute.GetColumns(it.table_name, databasename)
+                it.ColumnList = col_list
             }
-            file.appendText("""
+
+            /* 初始化文件夹内容 */
+            deleteFoldFiles(projectpath)
+            /* 生成实体类 */
+            createEntityFile(projectpath, list, packagename)
+            /* 生成数据扩展类 */
+
+            /* 生成工厂类 */
+            createFactoryFile(projectpath, packagename, driver, url, username, password)
+
+            /* 创建mapper repository */
+            createMapperFile(projectpath, list, packagename)
+        }
+
+        /*
+        创建实体文件
+         */
+        fun createEntityFile(path: String, list: ArrayList<TableEntity>, packagename: String) {
+            /* 生成基础数据类 */
+            var base_entity_path = path + "entity/"
+            File(base_entity_path).mkdir()
+            list.forEach {
+                var filename = it.table_name + "_dto" + ".kt"
+                val file = File(base_entity_path + filename)
+                var column_content = ""
+                var table = it
+                if (it.ColumnList != null && it.ColumnList?.isNotEmpty()!!) {
+                    it.ColumnList?.forEach {
+                        column_content += "${if (it.COLUMN_KEY != "PRI") "var" else "val"}" +
+                                " ${it.COLUMN_NAME} :${EntityUtily.TypeConvert(it.DATA_TYPE)}" +
+                                "${if (it.IS_NULLABLE == "NO") "" else "? = null"}" +
+                                "${if (table.ColumnList?.last() == it) "" else ","}" +
+                                "\n       "
+                    }
+                    file.appendText("""
 
 package ${packagename}.entity
 
@@ -73,18 +76,28 @@ data class ${it.table_name + "_dto"}(
        ${column_content}
 )
         """.trimIndent(), Charset.defaultCharset())
-            file.createNewFile()
+                    file.createNewFile()
+                }
+            }
         }
-    }
-}
 
 
-fun createFactoryFile(path: String, packagename: String) {
-    /* 生成工厂类 */
-    var factory_path = path + "DBFactrory.kt"
-    var factoryfile = File(factory_path)
+        /*
+        创建工厂驱动文件
+         */
+        fun createFactoryFile(
+                path: String,
+                packagename: String,
+                driver: String,
+                url: String,
+                username: String,
+                password: String
+        ) {
+            /* 生成工厂类 */
+            var factory_path = path + "DBFactrory.kt"
+            var factoryfile = File(factory_path)
 
-    factoryfile.appendText("""
+            factoryfile.appendText("""
 package  ${packagename}.factory
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource
@@ -98,10 +111,10 @@ class EntiyFactory {
 
     companion object {
 
-        val driver = "${EntiyFactory.driver}"
-        val url = "${EntiyFactory.url}"
-        val username = "${EntiyFactory.username}"
-        val password = "${EntiyFactory.password}"
+        val driver = "${driver}"
+        val url = "${url}"
+        val username = "${username}"
+        val password = "${password}"
 
         fun build(): SqlSessionFactory? {
             val dataSource = PooledDataSource(driver, url, username, password);
@@ -119,19 +132,21 @@ class EntiyFactory {
 }
 
     """.trimIndent())
-    factoryfile.createNewFile()
+            factoryfile.createNewFile()
 
-}
+        }
 
-
-fun createMapperFile(path: String, list: ArrayList<TableEntity>, packagename: String) {
-    /* 生成基础数据类 */
-    var mapper_path = path + "mapper/"
-    File(mapper_path).mkdir()
-    list.forEach {
-        var filename = it.table_name + ".kt"
-        val file = File(mapper_path + filename)
-        file.appendText("""
+        /*
+        创建mapper文件
+         */
+        fun createMapperFile(path: String, list: ArrayList<TableEntity>, packagename: String) {
+            /* 生成基础数据类 */
+            var mapper_path = path + "mapper/"
+            File(mapper_path).mkdir()
+            list.forEach {
+                var filename = it.table_name + ".kt"
+                val file = File(mapper_path + filename)
+                file.appendText("""
 
 package ${packagename}.mapper
 
@@ -140,193 +155,59 @@ import org.apache.ibatis.annotations.*
 
 interface ${it.table_name}{
 
-${GetListALLContent(it)}
+${DataManipulation.GetListALLContent(it)}
 
-${DeleteByPrimaryKey(it)}
+${DataManipulation.ConditionalQueryContent(it)}
 
-${updateByPrimaryKey(it)}
+${if (!EntityUtily.IsHasPrimarykey(it)) "" else DataManipulation.ConditionalQueryByKey(it)}
 
-${updateByPrimaryKeySelective(it)}
+${DataManipulation.InsertContent(it)}
+
+${DataManipulation.InsertSelectiveContent(it)}
+
+${DataManipulation.DeleteByPrimaryKey(it)}
+
+${DataManipulation.UpdateByPrimaryKey(it)}
+
+${DataManipulation.UpdateByPrimaryKeySelective(it)}
+
 }
 
         """)
-        file.createNewFile()
+                file.createNewFile()
 
-    }
-}
-
-
-fun GetListALLContent(table: TableEntity): String {
-    var result_conent = "";
-
-    table.ColumnList?.forEach {
-        if (table.ColumnList?.last() != it) {
-            result_conent += "Result(property = \"${it.COLUMN_NAME}\", column = \"${it.COLUMN_NAME}\"),\n   "
-        } else {
-            result_conent += "Result(property = \"${it.COLUMN_NAME}\", column = \"${it.COLUMN_NAME}\")"
-        }
-    }
-
-    return """
-@Results(
-   ${result_conent}
-)
-@Select(""${'"'}<script>
-   SELECT * FROM ${table.table_name}
-</script>""${'"'})
-fun GetListAll():ArrayList<${table.table_name + "_dto"}>
-        """
-}
-
-fun DeleteByPrimaryKey(table:TableEntity):String{
-    var pkId = Primarykey(table)
-    if(!pkId.isNullOrBlank()){
-        return """
-@Delete("DELETE FROM ${table.table_name} WHERE ${pkId}=#{arg0}")
-fun DeleteByPrimaryKey(${pkId}:${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!)})
-        """
-    }
-
-    return ""
-}
-
-fun updateByPrimaryKey(table: TableEntity):String{
-    var pkId = Primarykey(table)
-    if(!pkId.isNullOrBlank()){
-        var str = table.ColumnList?.map { it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+TypeConvert(it.DATA_TYPE)+"}"}?.joinToString(separator = ",\n        ")
-        return """@Update(""${'"'}<script>
-        UPDATE ${table.table_name} SET
-        ${str}
-        WHERE ${pkId}=#{${pkId},jdbcType=${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!)}}
-        </script>""${'"'})
-fun UpdateByPrimaryKey(model:${table.table_name+"_dto"})
-        """
-     }
-    return ""
-}
-// <if test="processInstanceId != null">
-fun updateByPrimaryKeySelective(table:TableEntity):String{
-    var pkId = Primarykey(table)
-    if(!pkId.isNullOrBlank()){
-        var str = table.ColumnList?.map {
-            "<if test=\"${it.COLUMN_NAME} != null\">  "+
-            it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+TypeConvert(it.DATA_TYPE)+"}"
-        }?.joinToString(separator = ",</if>\n        ")
-
-        return """@Update(""${'"'}<script>
-            UPDATE ${table.table_name} SET
-            ${str}
-              WHERE ${pkId}=#{${pkId},jdbcType=${TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!)}}
-            </script>""${'"'})
-fun updateByPrimaryKeySelective(model:${table.table_name+"_dto"})
-            """
-    }
-    return ""
-}
-
-/*
-  删除文件夹内部所有递归文件
-*/
-fun deleteFoldFiles(path: String) {
-    var pathdir = File(path)
-    if (pathdir.isDirectory) {
-        pathdir.list().forEach {
-            val file = File(pathdir.absolutePath + "/" + it)
-            if (!file.isDirectory) {
-                file.delete()
-            } else {
-                deleteFoldFiles(file.absolutePath + "/")
-                file.delete()
             }
         }
-    }
-}
 
 
-fun TypeConvert(typelens: String): String {
+        /*
+          删除文件夹内部所有递归文件
+        */
+        fun deleteFoldFiles(path: String) {
+            var pathdir = File(path)
+            if (pathdir.isDirectory) {
+                pathdir.list().forEach {
+                    val file = File(pathdir.absolutePath + "/" + it)
+                    if (!file.isDirectory) {
+                        file.delete()
+                    } else {
+                        deleteFoldFiles(file.absolutePath + "/")
+                        file.delete()
+                    }
+                }
+            }
+        }
 
-    when (typelens) {
-        "varchar" -> {
-            return "String"
-        }
-        "bigint" -> {
-            return "Long"
-        }
-        "longtext" -> {
-            return "String"
-        }
-        "datetime" -> {
-            return "Timestamp"
-        }
-        "int" -> {
-            return "Integer"
-        }
-        "tinyint" -> {
-            return "Integer"
-        }
-        "decimal" -> {
-            return "BigDecimal"
-        }
-        "double" -> {
-            return "Double"
-        }
-        "char" -> {
-            return "String"
-        }
-        "text" -> {
-            return "String"
-        }
-        "smallint" -> {
-            return "Integer"
-        }
-        "blob" -> {
-            return "ByteArray"
-        }
-        "date" -> {
-            return "Date"
-        }
-        "timestamp" -> {
-            return "Timestamp"
-        }
-        "set" -> {
-            return "String"
-        }
-        "enum" -> {
-            return "String"
-        }
-        "longblob" -> {
-            return "ByteArray"
-        }
-        "mediumtext" -> {
-            return "String"
-        }
-        "float" -> {
-            return "Float"
-        }
-        "time" -> {
-            return "Time"
-        }
-        else -> {
-            return "String"
-        }
+
     }
 
 }
 
-fun Primarykey(table: TableEntity): String? {
-    table.ColumnList?.forEach {
-        if (it.COLUMN_KEY?.trim() == "PRI") {
-            return it.COLUMN_NAME;
-        }
-    }
-    return null
-}
 
-fun IsHasPrimarykey(table: TableEntity): Boolean {
-    table.ColumnList?.forEach {
-        if (it.COLUMN_KEY?.trim() == "PRI") {
-            return true;
-        }
-    }
-    return false
-}
+
+
+
+
+
+
+
