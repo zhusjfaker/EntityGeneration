@@ -25,6 +25,7 @@ nbdist/
 
 .DS_Store
 *.iml
-src/main/kotlin/output/*.*
+src/main/kotlin/output/entity/
+src/main/kotlin/output/mapper/
 
 
