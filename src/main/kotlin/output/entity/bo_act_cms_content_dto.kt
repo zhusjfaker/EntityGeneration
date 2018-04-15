@@ -1,0 +1,63 @@
+
+package bpm6.entity
+
+import java.lang.*
+import java.math.*
+import java.sql.*
+
+data class bo_act_cms_content_dto(
+       val ID :String,
+       var ORGID :String? = null,
+       var BINDID :String? = null,
+       var CREATEDATE :Timestamp? = null,
+       var CREATEUSER :String? = null,
+       var UPDATEDATE :Timestamp? = null,
+       var UPDATEUSER :String? = null,
+       var PROCESSDEFID :String? = null,
+       var ISEND :Integer,
+       var MSGTYPE :String? = null,
+       var TITLE :String? = null,
+       var TITLECOLOR :String? = null,
+       var BOLDFLAG :String? = null,
+       var SUMMARY :String? = null,
+       var TITLEPIC :String? = null,
+       var CONTENT :String? = null,
+       var USEOUTERURL :String? = null,
+       var OUTURL :String? = null,
+       var PICTURELIST :String? = null,
+       var ATTACHMENT :String? = null,
+       var ZDFLAG :String? = null,
+       var ZDENDTIME :Timestamp? = null,
+       var ZDBEGINTIME :Timestamp? = null,
+       var COPYFLAG :String? = null,
+       var REPLYFLAG :String? = null,
+       var ISCLOSE :String? = null,
+       var READFLAG :String? = null,
+       var MODULEID :String? = null,
+       var RELEASEDEPARTMENT :String? = null,
+       var SOURCE :String? = null,
+       var MESSAGEID :String? = null,
+       var READSCOPE :String? = null,
+       var READSCOPEDESC :String? = null,
+       var RELEASETIME :Timestamp? = null,
+       var READNUM :BigDecimal? = null,
+       var REPLYNUM :BigDecimal? = null,
+       var SUBMODULE :String? = null,
+       var SUBTITLE :String? = null,
+       var OVERLINE :String? = null,
+       var GJC :String? = null,
+       var AUTHOR :String? = null,
+       var PHOTOGRAPHER :String? = null,
+       var FILENAME :String? = null,
+       var FILEPARAMS :String? = null,
+       var FILEDESC :String? = null,
+       var VIDEOFILE :String? = null,
+       var PLATFORM :String? = null,
+       var PLATFORMBINDID :String? = null,
+       var WORDCOUNT :String? = null,
+       var RECOMMENDFLAG :String? = null,
+       var SORTTIME :Timestamp? = null,
+       var DELETEFLAG :String? = null,
+       var CANCHOOSEFLAG :String? = null
+       
+)
