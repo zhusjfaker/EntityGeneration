@@ -251,6 +251,7 @@ fun UpdateByPrimaryKey(model:${table.table_name+"_dto"})
             }
             return ""
         }
+
         // <if test="processInstanceId != null">
         fun UpdateByPrimaryKeySelective(table:TableEntity):String{
             var pkId = Primarykey(table)
