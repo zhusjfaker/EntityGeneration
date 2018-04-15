@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     /* 创建实体文件 并写入字段内容 */
     CoreLoader.GenerateFile(
             projectpath = "E:\\\\git-project\\\\EntityGenrate\\\\src\\\\main\\\\kotlin\\\\output\\\\",
-            driver = "com.mysql.jdbc.Driver",
+            driver = "com.mysql.cj.jdbc.Driver",
             databasename = "bpm01",
             url = "jdbc:mysql://100.73.17.8:3306/bpm01",
             username = "root",
