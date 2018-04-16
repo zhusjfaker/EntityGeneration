@@ -1,6 +1,5 @@
-package core
+package entity.core.base
 
-import core.*
 import entity.TableEntity
 import mapper.Table
 import java.io.File
@@ -185,6 +184,9 @@ ${DataManipulation.UpdateByPrimaryKeySelective(it)}
         */
         fun deleteFoldFiles(path: String) {
             var pathdir = File(path)
+            if (!pathdir.exists()) {
+                pathdir.mkdir()
+            }
             if (pathdir.isDirectory) {
                 pathdir.list().forEach {
                     val file = File(pathdir.absolutePath + "/" + it)

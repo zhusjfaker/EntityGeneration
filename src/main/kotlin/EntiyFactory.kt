@@ -1,4 +1,4 @@
-package core
+package entity.core.base
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource
 import org.apache.ibatis.mapping.Environment

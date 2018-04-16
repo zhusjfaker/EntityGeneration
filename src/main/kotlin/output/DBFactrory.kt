@@ -11,7 +11,7 @@ class EntiyFactory {
 
     companion object {
 
-        val driver = "com.mysql.cj.jdbc.Driver"
+        val driver = "com.mysql.jdbc.Driver"
         val url = "jdbc:mysql://100.73.17.8:3306/bpm01"
         val username = "root"
         val password = "root123456"

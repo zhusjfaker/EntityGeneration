@@ -8,6 +8,18 @@
     <artifactId>Entity.Generation</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus Repository</name>
+            <url>http://100.73.17.111:8081/nexus/content/repositories/thirdparty/</url>
+        </repository>
+        <repository>
+            <id>gwt-maven</id>
+            <url>https://mvnrepository.com/</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -21,21 +33,31 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.4.6</version>
+            <optional>true</optional>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>mysql</groupId>-->
+            <!--<artifactId>mysql-connector-java</artifactId>-->
+            <!--<version>8.0.8-dmr</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.8-dmr</version>
+            <groupId>bpm.jdbc</groupId>
+            <artifactId>mysql-connector-java-5.1.32-bin</artifactId>
+            <version>5.1.32</version>
+            <optional>true</optional>
+            <classifier>bin</classifier>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
             <version>${kotlin.version}</version>
+            <optional>true</optional>
             <scope>test</scope>
         </dependency>
     </dependencies>

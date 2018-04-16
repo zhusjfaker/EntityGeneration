@@ -1,4 +1,4 @@
-package core
+package entity.core.base
 
 import entity.TableEntity
 
