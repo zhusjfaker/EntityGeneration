@@ -151,6 +151,9 @@ package ${packagename}.mapper
 
 import ${packagename}.entity.*
 import org.apache.ibatis.annotations.*
+import java.lang.*
+import java.math.*
+import java.sql.*
 
 interface ${it.table_name}{
 
