@@ -120,6 +120,7 @@ class EntiyFactory {
             val transactionFactory = JdbcTransactionFactory()
             val environment = Environment("development", transactionFactory, dataSource)
             val config = Configuration(environment)
+            config.addMappers("${packagename}.mapper")
             val sqlSessionFactory = SqlSessionFactoryBuilder().build(config)
             return sqlSessionFactory
         }

@@ -264,7 +264,7 @@ fun UpdateByPrimaryKey(model:${table.table_name + "_dto"})
 
                 return """@Update(""${'"'}<script>
             UPDATE ${table.table_name} SET
-            ${str}
+            ${str + ",</if>\n        "}
               WHERE ${pkId}=#{${pkId},jdbcType=${EntityUtily.JdbcTypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == pkId }?.firstOrNull()?.DATA_TYPE?.toLowerCase()!!)}}
             </script>""${'"'})
 fun UpdateByPrimaryKeySelective(model:${table.table_name + "_dto"})
