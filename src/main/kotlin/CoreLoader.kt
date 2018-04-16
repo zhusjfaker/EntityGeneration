@@ -109,6 +109,10 @@ import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory
 class EntiyFactory {
 
     companion object {
+        fun getInstance() = factory.instance
+    }
+
+    private object factory {
 
         val driver = "${driver}"
         val url = "${url}"
@@ -125,7 +129,7 @@ class EntiyFactory {
             return sqlSessionFactory
         }
 
-        val factory = build()
+        val instance = build()
     }
 
 }
