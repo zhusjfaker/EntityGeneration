@@ -241,7 +241,7 @@ fun DeleteByPrimaryKey(${pkId}:${EntityUtily.TypeConvert(table.ColumnList?.filte
         fun UpdateByPrimaryKey(table: TableEntity): String {
             var pkId = Primarykey(table)
             if (!pkId.isNullOrBlank()) {
-                var str = table.ColumnList?.map { it.COLUMN_NAME + "=#{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE?.toUpperCase() + "}" }?.joinToString(separator = ",\n        ")
+                var str = table.ColumnList?.map { it.COLUMN_NAME + "=#{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE?.toLowerCase()) + "}" }?.joinToString(separator = ",\n        ")
                 return """@Update(""${'"'}<script>
         UPDATE ${table.table_name} SET
         ${str}
