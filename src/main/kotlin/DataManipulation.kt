@@ -240,11 +240,11 @@ fun DeleteByPrimaryKey(${pkId}:${EntityUtily.TypeConvert(table.ColumnList?.filte
         fun UpdateByPrimaryKey(table: TableEntity):String{
             var pkId = Primarykey(table)
             if(!pkId.isNullOrBlank()){
-                var str = table.ColumnList?.map { it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+EntityUtily.TypeConvert(it.DATA_TYPE)+"}"}?.joinToString(separator = ",\n        ")
+                var str = table.ColumnList?.map { it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+it.DATA_TYPE+"}"}?.joinToString(separator = ",\n        ")
                 return """@Update(""${'"'}<script>
         UPDATE ${table.table_name} SET
         ${str}
-        WHERE ${pkId}=#{${pkId},jdbcType=${EntityUtily.TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!)}}
+        WHERE ${pkId}=#{${pkId},jdbcType=${table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!}}
         </script>""${'"'})
 fun UpdateByPrimaryKey(model:${table.table_name+"_dto"})
         """
@@ -258,13 +258,13 @@ fun UpdateByPrimaryKey(model:${table.table_name+"_dto"})
             if(!pkId.isNullOrBlank()){
                 var str = table.ColumnList?.map {
                     "<if test=\"${it.COLUMN_NAME} != null\">  "+
-                            it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+EntityUtily.TypeConvert(it.DATA_TYPE)+"}"
+                            it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+it.DATA_TYPE+"}"
                 }?.joinToString(separator = ",</if>\n        ")
 
                 return """@Update(""${'"'}<script>
             UPDATE ${table.table_name} SET
             ${str}
-              WHERE ${pkId}=#{${pkId},jdbcType=${EntityUtily.TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!)}}
+              WHERE ${pkId}=#{${pkId},jdbcType=${table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE!!}}
             </script>""${'"'})
 fun UpdateByPrimaryKeySelective(model:${table.table_name+"_dto"})
             """
