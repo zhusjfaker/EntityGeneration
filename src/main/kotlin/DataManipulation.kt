@@ -1,6 +1,7 @@
 package entity.core.base
 
 import entity.TableEntity
+import java.sql.JDBCType
 
 class DataManipulation {
     companion object {
@@ -172,14 +173,14 @@ fun Insert(model:${table.table_name + "_dto"}):Unit
                     if (it.IS_NULLABLE == "YES") {
                         "<if test='" + it.COLUMN_NAME + "!= null'> \n" +
                                 "        " + if (table.ColumnList?.last() == it)
-                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE.toUpperCase() + "}\n" + "        </if>"
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}\n" + "        </if>"
                         else
-                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE.toUpperCase() + "}，\n" + "        </if>"
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}，\n" + "        </if>"
                     } else {
                         if (table.ColumnList?.last() == it)
-                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE.toUpperCase() + "}"
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}"
                         else
-                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE.toUpperCase() + "}，"
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}，"
                     }
                 }?.joinToString(separator = "\n        ")}
     </trim>
@@ -208,14 +209,14 @@ fun InsertSelective(model:${table.table_name + "_dto"}):${EntityUtily.TypeConver
                     if (it.IS_NULLABLE == "YES") {
                         "<if test='" + it.COLUMN_NAME + "!= null'> \n" +
                                 "        " + if (table.ColumnList?.last() == it)
-                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE.toUpperCase() + "}\n" + "        </if>"
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}\n" + "        </if>"
                         else
-                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE.toUpperCase() + "}，\n" + "        </if>"
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}，\n" + "        </if>"
                     } else {
                         if (table.ColumnList?.last() == it)
-                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE.toUpperCase() + "}"
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}"
                         else
-                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE.toUpperCase() + "}，"
+                            "   #{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}，"
                     }
                 }?.joinToString(separator = "\n        ")}
     </trim>
@@ -225,48 +226,48 @@ fun InsertSelective(model:${table.table_name + "_dto"}):Unit
             }
         }
 
-        fun DeleteByPrimaryKey(table:TableEntity):String{
+        fun DeleteByPrimaryKey(table: TableEntity): String {
             var pkId = Primarykey(table)
-            if(!pkId.isNullOrBlank()){
+            if (!pkId.isNullOrBlank()) {
                 return """
 @Delete("DELETE FROM ${table.table_name} WHERE ${pkId}=#{arg0}")
-fun DeleteByPrimaryKey(${pkId}:${EntityUtily.TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE?.toUpperCase()!!)})
+fun DeleteByPrimaryKey(${pkId}:${EntityUtily.TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == pkId }?.firstOrNull()?.DATA_TYPE!!)})
         """
             }
 
             return ""
         }
 
-        fun UpdateByPrimaryKey(table: TableEntity):String{
+        fun UpdateByPrimaryKey(table: TableEntity): String {
             var pkId = Primarykey(table)
-            if(!pkId.isNullOrBlank()){
-                var str = table.ColumnList?.map { it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+it.DATA_TYPE?.toUpperCase()+"}"}?.joinToString(separator = ",\n        ")
+            if (!pkId.isNullOrBlank()) {
+                var str = table.ColumnList?.map { it.COLUMN_NAME + "=#{" + it.COLUMN_NAME + ",jdbcType=" + it.DATA_TYPE?.toUpperCase() + "}" }?.joinToString(separator = ",\n        ")
                 return """@Update(""${'"'}<script>
         UPDATE ${table.table_name} SET
         ${str}
-        WHERE ${pkId}=#{${pkId},jdbcType=${table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE?.toUpperCase()!!}}
+        WHERE ${pkId}=#{${pkId},jdbcType=${EntityUtily.JdbcTypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == pkId }?.firstOrNull()?.DATA_TYPE?.toLowerCase()!!)}}
         </script>""${'"'})
-fun UpdateByPrimaryKey(model:${table.table_name+"_dto"})
+fun UpdateByPrimaryKey(model:${table.table_name + "_dto"})
         """
             }
             return ""
         }
 
         // <if test="processInstanceId != null">
-        fun UpdateByPrimaryKeySelective(table:TableEntity):String{
+        fun UpdateByPrimaryKeySelective(table: TableEntity): String {
             var pkId = Primarykey(table)
-            if(!pkId.isNullOrBlank()){
+            if (!pkId.isNullOrBlank()) {
                 var str = table.ColumnList?.map {
-                    "<if test=\"${it.COLUMN_NAME} != null\">  "+
-                            it.COLUMN_NAME +"=#{"+it.COLUMN_NAME+",jdbcType="+it.DATA_TYPE.toUpperCase()+"}"
+                    "<if test=\"${it.COLUMN_NAME} != null\">  " +
+                            it.COLUMN_NAME + "=#{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE.toLowerCase()) + "}"
                 }?.joinToString(separator = ",</if>\n        ")
 
                 return """@Update(""${'"'}<script>
             UPDATE ${table.table_name} SET
             ${str}
-              WHERE ${pkId}=#{${pkId},jdbcType=${table.ColumnList?.filter { it.COLUMN_NAME==pkId }?.firstOrNull()?.DATA_TYPE?.toUpperCase()!!}}
+              WHERE ${pkId}=#{${pkId},jdbcType=${EntityUtily.JdbcTypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == pkId }?.firstOrNull()?.DATA_TYPE?.toLowerCase()!!)}}
             </script>""${'"'})
-fun UpdateByPrimaryKeySelective(model:${table.table_name+"_dto"})
+fun UpdateByPrimaryKeySelective(model:${table.table_name + "_dto"})
             """
             }
             return ""
