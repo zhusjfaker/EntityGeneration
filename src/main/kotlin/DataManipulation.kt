@@ -39,7 +39,7 @@ class DataManipulation {
 @Select(""${'"'}<script>
    SELECT * FROM ${table.table_name}
 </script>""${'"'})
-fun GetListAll():ArrayList<${table.table_name + "_dto"}>
+fun GetListAll():ArrayList<${table.table_name + "_dto"}>?
         """
         }
 
@@ -74,7 +74,7 @@ fun GetListAll():ArrayList<${table.table_name + "_dto"}>
    SELECT * FROM ${table.table_name}
    ${where_str}
 </script>""${'"'})
-fun ConditionalQuery(model:${table.table_name + "_dto"}):ArrayList<${table.table_name + "_dto"}>
+fun ConditionalQuery(model:${table.table_name + "_dto"}):ArrayList<${table.table_name + "_dto"}>?
                 """
         }
 
@@ -113,7 +113,7 @@ fun ConditionalQuery(model:${table.table_name + "_dto"}):ArrayList<${table.table
    SELECT * FROM ${table.table_name}
    ${where_str}
 </script>""${'"'})
-fun ConditionalQueryByKey(model:${table.table_name + "_dto"}):${table.table_name + "_dto"}?
+fun ConditionalQueryByKey(${key}:${EntityUtily.TypeConvert(table.ColumnList?.filter { it.COLUMN_NAME == key }?.firstOrNull()?.DATA_TYPE!!)}):ArrayList<${table.table_name + "_dto"}>?
                 """
         }
 
