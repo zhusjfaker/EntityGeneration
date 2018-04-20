@@ -16,7 +16,8 @@ open class CoreLoader {
                 url: String,
                 username: String,
                 password: String,
-                packagename: String
+                packagename: String,
+                isbpm : Boolean=true
         ): Unit {
 
             /* 获取数据库 oop描述 */
@@ -40,7 +41,7 @@ open class CoreLoader {
             createFactoryFile(projectpath, packagename, driver, url, username, password)
 
             /* 创建mapper repository */
-            createMapperFile(projectpath, list, packagename)
+            createMapperFile(projectpath, list, packagename,isbpm)
         }
 
         /*
@@ -142,7 +143,7 @@ class EntiyFactory {
         /*
         创建mapper文件
          */
-        fun createMapperFile(path: String, list: ArrayList<TableEntity>, packagename: String) {
+        fun createMapperFile(path: String, list: ArrayList<TableEntity>, packagename: String,isbpm:Boolean) {
             /* 生成基础数据类 */
             var mapper_path = path + "mapper/"
             File(mapper_path).mkdir()
@@ -177,6 +178,11 @@ ${DataManipulation.UpdateByPrimaryKey(it)}
 
 ${DataManipulation.UpdateByPrimaryKeySelective(it)}
 
+${if(isbpm) DataManipulation.ConditionalQueryByBindId(it) else ""}
+
+${if(isbpm) DataManipulation.DeleteByBindId(it) else ""}
+
+${if(isbpm) DataManipulation.UpdateByBindId(it) else ""}
 }
 
         """)

@@ -100,10 +100,8 @@ fun ConditionalQuery(model:${table.table_name + "_dto"}):ArrayList<${table.table
 
             var choice = ""
 
-            choice += "   <if test=\"${key}!=null\">\n" +
-                    "      ${key}=#{${key}}\n" +
-                    "   </if> \n"
-            var where_str = "<where>\n${choice}   </where>"
+            choice += "      ${key}=#{${key}}\n"
+            var where_str = "where ${choice} "
 
             return """
 @Results(
@@ -270,6 +268,65 @@ fun UpdateByPrimaryKey(model:${table.table_name + "_dto"})
 fun UpdateByPrimaryKeySelective(model:${table.table_name + "_dto"})
             """
             }
+            return ""
+        }
+
+        /*
+              根据BindId查询
+         */
+        fun ConditionalQueryByBindId(table: TableEntity): String {
+            if (table.ColumnList?.filter { it.COLUMN_NAME.equals("BINDID", true) }!!.size > 0) "" else return ""
+            var result_conent = ""
+
+            table.ColumnList?.forEach {
+                if (table.ColumnList?.last() != it) {
+                    result_conent += "Result(property = \"${it.COLUMN_NAME}\", column = \"${it.COLUMN_NAME}\"),\n   "
+                } else {
+                    result_conent += "Result(property = \"${it.COLUMN_NAME}\", column = \"${it.COLUMN_NAME}\")"
+                }
+            }
+            var where_str = "  where BINDID=#{BINDID}"
+
+            return """
+@Results(
+   ${result_conent}
+)
+@Select(""${'"'}<script>
+   SELECT * FROM ${table.table_name}
+   ${where_str}
+</script>""${'"'})
+fun ConditionalQueryByBindId(BINDID:String):ArrayList<${table.table_name + "_dto"}>?
+                """
+        }
+
+        /*
+               根据bindid删除
+         */
+        fun DeleteByBindId(table: TableEntity): String {
+            if (table.ColumnList?.filter { it.COLUMN_NAME.equals("BINDID", true) }!!.size > 0) "" else return ""
+
+            return """
+@Delete("DELETE FROM ${table.table_name} WHERE BINDID=#{BINDID}")
+fun DeleteByBindId(BINDID:String)
+        """
+        }
+
+        /*
+               根据bindid修改
+         */
+        fun UpdateByBindId(table: TableEntity): String {
+            if (table.ColumnList?.filter { it.COLUMN_NAME.equals("BINDID", true) }!!.size > 0) "" else return ""
+
+
+            var str = table.ColumnList?.map { it.COLUMN_NAME + "=#{" + it.COLUMN_NAME + ",jdbcType=" + EntityUtily.JdbcTypeConvert(it.DATA_TYPE?.toLowerCase()) + "}" }?.joinToString(separator = ",\n        ")
+            return """@Update(""${'"'}<script>
+        UPDATE ${table.table_name} SET
+        ${str}
+        WHERE BINDID=#{BINDID,jdbcType=CHAR}
+        </script>""${'"'})
+fun UpdateByBindId(model:${table.table_name + "_dto"})
+        """
+
             return ""
         }
     }
